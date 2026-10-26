@@ -1,0 +1,33 @@
+{
+  "data": "2026-10-26",
+  "sessione": "breathe",
+  "versione_programma": "1.0",
+  "inizio": "2026-10-26T22:45:46+01:00",
+  "fine": "2026-10-26T22:45:54+01:00",
+  "durata_min": 0,
+  "energia": null,
+  "note": "",
+  "esercizi": [
+    {
+      "id": "cardio-leggero",
+      "previsto": "cardio-leggero",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "alzate-laterali",
+      "previsto": "alzate-laterali",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "crunch-cavo",
+      "previsto": "crunch-cavo",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    }
+  ]
+}
