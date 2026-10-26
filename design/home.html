@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f5fbef;}body{overscroll-behavior:none;font-family:'Space Mono',monospace;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary-container": "#292929", "on-background": "#171d16", "outline": "#747878", "error-container": "#ffdad6", "surface-bright": "#f5fbef", "on-secondary-fixed": "#191d17", "on-error": "#ffffff", "on-tertiary-container": "#92908d", "surface-container-high": "#e4eade", "on-primary-container": "#919090", "on-secondary-fixed-variant": "#444841", "on-secondary-container": "#61665e", "on-secondary": "#ffffff", "surface-dim": "#d6dcd0", "surface-container": "#eaf0e4", "on-surface-variant": "#444748", "on-tertiary-fixed": "#1c1b1a", "inverse-primary": "#c8c6c5", "on-primary-fixed-variant": "#474746", "on-tertiary-fixed-variant": "#484644", "primary-fixed": "#e4e2e1", "tertiary-fixed-dim": "#c9c6c3", "tertiary-container": "#2a2927", "on-primary-fixed": "#1b1c1c", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "background": "#f5fbef", "secondary-container": "#e0e4db", "outline-variant": "#c4c7c7", "inverse-surface": "#2c322a", "inverse-on-surface": "#edf3e7", "on-error-container": "#93000a", "surface-tint": "#5f5e5e", "tertiary-fixed": "#e6e2de", "on-tertiary": "#ffffff", "on-surface": "#171d16", "secondary-fixed-dim": "#c4c8bf", "surface-container-low": "#f0f6e9", "tertiary": "#151513", "primary-fixed-dim": "#c8c6c5", "surface": "#f5fbef", "surface-container-highest": "#dee4d9", "secondary-fixed": "#e0e4db", "secondary": "#5b6059", "on-primary": "#ffffff", "surface-variant": "#dee4d9", "primary": "#141515" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter": "0.75rem", "space-2xl": "2rem", "space-2xs": "0.125rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "space-md": "0.75rem", "margin": "1rem", "space-lg": "1rem" }, fontFamily: { "label-caps-muted": ["Space Mono"], "headline-lg": ["Space Mono"], "body-regular": ["Space Mono"], "label-caps": ["Space Mono"], "caption": ["Space Mono"], "headline-md": ["Space Mono"], "display-numeric": ["Space Mono"], "metric-value": ["Space Mono"], "display-numeric-mobile": ["Space Mono"], "body-bold": ["Space Mono"] }, fontSize: { "label-caps-muted": ["9px", { "lineHeight": "11px", "letterSpacing": "0.14em", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-regular": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.12em", "fontWeight": "700" }], "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-numeric": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.04em", "fontWeight": "400" }], "metric-value": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "display-numeric-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "400" }], "body-bold": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "700" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">CAM://SYS</span><span class="text-on-surface-variant font-caption text-caption">•</span><h1 class="font-headline-md text-headline-md text-on-surface uppercase">Home</h1></div><div class="flex items-center gap-space-md"><div class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase hidden sm:block">LOC_ID:01</div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-14 pb-20 bg-surface px-margin"><div class="flex flex-col w-full gap-space-lg select-none pb-space-xl">
+<!-- Sub-bar & Status line -->
+<div class="flex items-center justify-between border-b border-primary pb-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+<span class="font-label-caps text-label-caps text-primary tracking-widest">LOG://ACTIVE_SYS</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary tracking-widest">CYCLE_04: W-01</span>
+<button aria-label="Menu" class="w-6 h-6 flex flex-col justify-center items-center gap-[3px] p-0.5 hover:opacity-75 transition-opacity">
+<span class="w-4 h-[1px] bg-primary block"></span>
+<span class="w-4 h-[1px] bg-primary block"></span>
+<span class="w-4 h-[1px] bg-primary block"></span>
+</button>
+</div>
+</div>
+<!-- Telemetry Rings & Metric Block -->
+<section class="border border-primary rounded-2xl p-space-md bg-surface flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-[#B0B8B0] pb-space-xs">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase tracking-widest">TELEMETRIA SETTIMANALE</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">SETTIMANA 1</span>
+</div>
+<div class="flex flex-row items-center justify-between gap-space-md">
+<!-- Monochrome Concentric Rings -->
+<div class="relative w-32 h-32 flex-shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" fill="none" viewbox="0 0 120 120">
+<!-- Background tracks -->
+<circle cx="60" cy="60" opacity="0.6" r="48" stroke="#B0B8B0" stroke-dasharray="2 2" stroke-width="1"></circle>
+<circle cx="60" cy="60" opacity="0.6" r="37" stroke="#B0B8B0" stroke-width="1"></circle>
+<circle cx="60" cy="60" opacity="0.6" r="26" stroke="#B0B8B0" stroke-dasharray="3 3" stroke-width="1"></circle>
+<!-- Ring 1: Sessioni (75%) -->
+<circle cx="60" cy="60" r="48" stroke="#292929" stroke-dasharray="301.6" stroke-dashoffset="75.4" stroke-linecap="round" stroke-width="2.5"></circle>
+<!-- Ring 2: Serie (74%) -->
+<circle cx="60" cy="60" r="37" stroke="#292929" stroke-dasharray="232.5" stroke-dashoffset="60.45" stroke-width="1.5"></circle>
+<!-- Ring 3: Cardio (50%) -->
+<circle cx="60" cy="60" r="26" stroke="#292929" stroke-dasharray="4 2" stroke-dashoffset="81.7" stroke-width="1.5"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-display-numeric-mobile text-display-numeric-mobile text-primary leading-none">74</span>
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase tracking-tighter">% TOT</span>
+</div>
+</div>
+<!-- Metric Stack -->
+<div class="flex flex-col flex-1 gap-space-xs border-l border-[#B0B8B0] pl-space-md">
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">SESSIONI</span>
+<div class="flex items-baseline justify-between">
+<span class="font-body-bold text-body-bold text-primary">3 / 4</span>
+<span class="font-caption text-caption text-secondary">75%</span>
+</div>
+<div class="w-full h-[2px] bg-[#B0B8B0] mt-1 relative">
+<div class="h-[2px] bg-primary w-3/4"></div>
+</div>
+</div>
+<div class="flex flex-col mt-1">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">SERIE ACCUMULO</span>
+<div class="flex items-baseline justify-between">
+<span class="font-body-bold text-body-bold text-primary">74 / 100</span>
+<span class="font-caption text-caption text-secondary">74%</span>
+</div>
+<div class="w-full h-[2px] bg-[#B0B8B0] mt-1 relative">
+<div class="h-[2px] bg-primary w-[74%]"></div>
+</div>
+</div>
+<div class="flex flex-col mt-1">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">CARDIO PROTOCOL</span>
+<div class="flex items-baseline justify-between">
+<span class="font-body-bold text-body-bold text-primary">1 / 2</span>
+<span class="font-caption text-caption text-secondary">50%</span>
+</div>
+<div class="w-full h-[2px] bg-[#B0B8B0] mt-1 relative">
+<div class="h-[2px] bg-primary w-1/2"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Coach Telemetry Capsule -->
+<div class="border border-primary rounded-full px-space-md py-space-xs bg-surface flex items-center gap-space-sm mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-primary bg-primary px-1.5 py-0.5 rounded-full uppercase">COACH</span>
+<p class="font-caption text-caption text-primary truncate">
+        Focus sul controllo eccentrico oggi. Ottimo volume settimanale.
+      </p>
+</div>
+</section>
+<!-- Workout Routine Modules Grid -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex justify-between items-center px-1">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase tracking-widest">MODULI D'ALLENAMENTO // CORPO</span>
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">SPLIT 4D</span>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- 1. Armor (Active/Next) -->
+<div class="border border-primary rounded-2xl p-space-md bg-surface flex flex-col justify-between h-44 relative group cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps bg-primary text-on-primary px-1.5 py-0.5 rounded-full tracking-wider">NEXT</span>
+<!-- Precise 1px Shield Line Art -->
+<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" stroke-width="1" viewbox="0 0 32 32">
+<path d="M16 3L6 7V15C6 21.5 10.3 27.5 16 29C21.7 27.5 26 21.5 26 15V7L16 3Z"></path>
+<path d="M16 6V26"></path>
+<path d="M9 13H23"></path>
+<circle cx="16" cy="13" r="2"></circle>
+</svg>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight leading-tight">Armor</h2>
+<p class="font-label-caps-muted text-label-caps-muted text-secondary mt-space-2xs line-clamp-1">PETTO · SCHIENA · TRICIPITI</p>
+</div>
+<div class="border-t border-[#B0B8B0] pt-space-xs flex justify-between items-center text-secondary">
+<span class="font-caption text-caption text-primary">65 MIN</span>
+<span class="font-label-caps-muted text-label-caps-muted">IERI</span>
+</div>
+</div>
+<!-- 2. Roots -->
+<div class="border border-primary rounded-2xl p-space-md bg-surface flex flex-col justify-between h-44 cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">MOD_02</span>
+<!-- Precise 1px Roots / Grid Line Art -->
+<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" stroke-width="1" viewbox="0 0 32 32">
+<line x1="16" x2="16" y1="4" y2="18"></line>
+<line x1="16" x2="8" y1="18" y2="28"></line>
+<line x1="16" x2="24" y1="18" y2="28"></line>
+<line x1="12" x2="14" y1="23" y2="28"></line>
+<line x1="20" x2="18" y1="23" y2="28"></line>
+<circle cx="16" cy="4" r="1.5"></circle>
+<line stroke-dasharray="2 2" x1="6" x2="26" y1="28" y2="28"></line>
+</svg>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight leading-tight">Roots</h2>
+<p class="font-label-caps-muted text-label-caps-muted text-secondary mt-space-2xs line-clamp-1">GAMBE · ADDOME</p>
+</div>
+<div class="border-t border-[#B0B8B0] pt-space-xs flex justify-between items-center text-secondary">
+<span class="font-caption text-caption text-primary">75 MIN</span>
+<span class="font-label-caps-muted text-label-caps-muted">3 GG FA</span>
+</div>
+</div>
+<!-- 3. Guns -->
+<div class="border border-primary rounded-2xl p-space-md bg-surface flex flex-col justify-between h-44 cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">MOD_03</span>
+<!-- Precise 1px Dumbbell Line Art -->
+<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" stroke-width="1" viewbox="0 0 32 32">
+<line stroke-width="1.5" x1="10" x2="22" y1="16" y2="16"></line>
+<rect height="12" rx="0.5" width="3" x="7" y="10"></rect>
+<rect height="8" rx="0.5" width="3" x="4" y="12"></rect>
+<rect height="12" rx="0.5" width="3" x="22" y="10"></rect>
+<rect height="8" rx="0.5" width="3" x="25" y="12"></rect>
+</svg>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight leading-tight">Guns</h2>
+<p class="font-label-caps-muted text-label-caps-muted text-secondary mt-space-2xs line-clamp-1">BICIPITI · TRICIPITI · SPALLE</p>
+</div>
+<div class="border-t border-[#B0B8B0] pt-space-xs flex justify-between items-center text-secondary">
+<span class="font-caption text-caption text-primary">55 MIN</span>
+<span class="font-label-caps-muted text-label-caps-muted">5 GG FA</span>
+</div>
+</div>
+<!-- 4. Wings -->
+<div class="border border-primary rounded-2xl p-space-md bg-surface flex flex-col justify-between h-44 cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">MOD_04</span>
+<!-- Precise 1px V-Taper Wings Line Art -->
+<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" stroke-width="1" viewbox="0 0 32 32">
+<path d="M4 10L16 28L28 10"></path>
+<path d="M7 10L16 22L25 10"></path>
+<line stroke-dasharray="1.5 1.5" x1="16" x2="16" y1="4" y2="28"></line>
+<circle cx="16" cy="4" r="1.5"></circle>
+</svg>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight leading-tight">Wings</h2>
+<p class="font-label-caps-muted text-label-caps-muted text-secondary mt-space-2xs line-clamp-1">SCHIENA · PETTO · BICIPITI</p>
+</div>
+<div class="border-t border-[#B0B8B0] pt-space-xs flex justify-between items-center text-secondary">
+<span class="font-caption text-caption text-primary">60 MIN</span>
+<span class="font-label-caps-muted text-label-caps-muted">6 GG FA</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Metric Rows (Table Section) -->
+<section class="border border-primary rounded-2xl bg-surface divide-y divide-[#B0B8B0] overflow-hidden">
+<!-- Row 1: Cardio Toggle -->
+<div class="p-space-md flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-body-bold text-body-bold text-primary">BREATHE</span>
+<span class="text-secondary font-caption text-caption">· cardio</span>
+</div>
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase mt-0.5">SESSIONE OPZIONALE (LISS / 25M)</span>
+</div>
+<!-- State Toggle Switch -->
+<button aria-pressed="false" class="flex items-center justify-between w-16 h-7 px-1 rounded-full border border-primary bg-surface transition-colors cursor-pointer" id="toggle-breathe">
+<span class="font-label-caps text-label-caps text-secondary pl-1 transition-colors" id="toggle-label">OFF</span>
+<span class="w-5 h-5 rounded-full bg-primary transition-transform transform" id="toggle-knob"></span>
+</button>
+</div>
+<!-- Row 2: Weight Metrics -->
+<div class="p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps-muted text-label-caps-muted text-secondary uppercase">PESO DI STAMATTINA</span>
+<span class="font-label-caps text-label-caps text-primary border border-[#B0B8B0] px-1.5 py-0.5 rounded-full">MEDIA 7G 68,2 kg</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<div class="flex items-baseline gap-1">
+<span class="font-metric-value text-metric-value text-primary font-bold">68,4</span>
+<span class="font-body-regular text-body-regular text-secondary">kg</span>
+</div>
+<div class="flex items-center gap-space-xs text-secondary font-caption text-caption">
+<span>DELTA +0.2</span>
+<span class="font-label-caps-muted text-label-caps-muted">REGOLARE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Telemetry Footer / Diagnostics -->
+<div class="flex items-center justify-between px-1 text-secondary pt-space-xs border-t border-[#B0B8B0]">
+<div class="flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-caps-muted text-label-caps-muted uppercase">SYNC: CLOUD_LOCAL OK</span>
+</div>
+<span class="font-label-caps-muted text-label-caps-muted uppercase">CALIBRATION 2025.REV4</span>
+</div>
+</div>
+<script>
+  // Pill Toggle Interaction
+  const toggleBtn = document.getElementById('toggle-breathe');
+  const toggleLabel = document.getElementById('toggle-label');
+  const toggleKnob = document.getElementById('toggle-knob');
+  let isOn = false;
+
+  toggleBtn.addEventListener('click', () => {
+    isOn = !isOn;
+    if (isOn) {
+      toggleBtn.classList.remove('bg-surface');
+      toggleBtn.classList.add('bg-primary');
+      toggleLabel.textContent = 'ON';
+      toggleLabel.classList.remove('text-secondary', 'pl-1');
+      toggleLabel.classList.add('text-surface', 'pr-1', 'order-2');
+      toggleKnob.classList.remove('bg-primary');
+      toggleKnob.classList.add('bg-surface', 'order-1');
+      toggleBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      toggleBtn.classList.add('bg-surface');
+      toggleBtn.classList.remove('bg-primary');
+      toggleLabel.textContent = 'OFF';
+      toggleLabel.classList.add('text-secondary', 'pl-1');
+      toggleLabel.classList.remove('text-surface', 'pr-1', 'order-2');
+      toggleKnob.classList.add('bg-primary');
+      toggleKnob.classList.remove('bg-surface', 'order-1');
+      toggleBtn.setAttribute('aria-pressed', 'false');
+    }
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-body-bold"><div class="flex justify-around items-center h-16 px-gutter"><a aria-current="page" class="flex flex-col items-center justify-center gap-space-2xs min-w-[44px] min-h-[44px] px-space-sm transition-colors text-primary font-body-bold" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-caps text-label-caps uppercase">HOME</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-w-[44px] min-h-[44px] px-space-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="session-armor" href="#"><span class="material-symbols-outlined text-[20px]">shield</span><span class="font-label-caps text-label-caps uppercase">ARMOR</span></a></div></nav></body></html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f5fbef;}body{overscroll-behavior:none;font-family:'Space Mono',monospace;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary-container": "#292929", "on-background": "#171d16", "outline": "#747878", "error-container": "#ffdad6", "surface-bright": "#f5fbef", "on-secondary-fixed": "#191d17", "on-error": "#ffffff", "on-tertiary-container": "#92908d", "surface-container-high": "#e4eade", "on-primary-container": "#919090", "on-secondary-fixed-variant": "#444841", "on-secondary-container": "#61665e", "on-secondary": "#ffffff", "surface-dim": "#d6dcd0", "surface-container": "#eaf0e4", "on-surface-variant": "#444748", "on-tertiary-fixed": "#1c1b1a", "inverse-primary": "#c8c6c5", "on-primary-fixed-variant": "#474746", "on-tertiary-fixed-variant": "#484644", "primary-fixed": "#e4e2e1", "tertiary-fixed-dim": "#c9c6c3", "tertiary-container": "#2a2927", "on-primary-fixed": "#1b1c1c", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "background": "#f5fbef", "secondary-container": "#e0e4db", "outline-variant": "#c4c7c7", "inverse-surface": "#2c322a", "inverse-on-surface": "#edf3e7", "on-error-container": "#93000a", "surface-tint": "#5f5e5e", "tertiary-fixed": "#e6e2de", "on-tertiary": "#ffffff", "on-surface": "#171d16", "secondary-fixed-dim": "#c4c8bf", "surface-container-low": "#f0f6e9", "tertiary": "#151513", "primary-fixed-dim": "#c8c6c5", "surface": "#f5fbef", "surface-container-highest": "#dee4d9", "secondary-fixed": "#e0e4db", "secondary": "#5b6059", "on-primary": "#ffffff", "surface-variant": "#dee4d9", "primary": "#141515" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter": "0.75rem", "space-2xl": "2rem", "space-2xs": "0.125rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "space-md": "0.75rem", "margin": "1rem", "space-lg": "1rem" }, fontFamily: { "label-caps-muted": ["Space Mono"], "headline-lg": ["Space Mono"], "body-regular": ["Space Mono"], "label-caps": ["Space Mono"], "caption": ["Space Mono"], "headline-md": ["Space Mono"], "display-numeric": ["Space Mono"], "metric-value": ["Space Mono"], "display-numeric-mobile": ["Space Mono"], "body-bold": ["Space Mono"] }, fontSize: { "label-caps-muted": ["9px", { "lineHeight": "11px", "letterSpacing": "0.14em", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-regular": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.12em", "fontWeight": "700" }], "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-numeric": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.04em", "fontWeight": "400" }], "metric-value": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "display-numeric-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "400" }], "body-bold": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "700" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-xs"><button class="w-11 h-11 -ml-space-xs flex items-center justify-center text-on-surface hover:text-on-surface-variant transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-on-surface uppercase">Session Armor</h1></div><div class="flex items-center gap-space-md"><div class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase tracking-wider">REC // LIVE</div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-14 pb-safe bg-surface px-margin"><div class="flex flex-col w-full pb-32">
+<!-- Top Session Meta Bar -->
+<div class="flex items-center justify-between py-space-sm border-b border-primary-container mb-space-md">
+<div class="flex flex-col">
+<div class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">Armor</div>
+<div class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase mt-space-2xs">PETTO · SCHIENA · TRICIPITI</div>
+</div>
+<!-- Precision Ring Metric -->
+<div class="flex items-center gap-space-sm">
+<div class="flex flex-col text-right">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">COMPLETATO</span>
+<span class="font-label-caps text-label-caps text-on-surface">3 / 8 SERIE</span>
+</div>
+<div class="relative w-11 h-11 flex items-center justify-center">
+<svg class="w-11 h-11 -rotate-90" viewbox="0 0 44 44">
+<circle cx="22" cy="22" fill="none" r="19" stroke="#B0B8B0" stroke-width="1"></circle>
+<circle cx="22" cy="22" fill="none" r="19" stroke="#292929" stroke-dasharray="119.38" stroke-dashoffset="74.01" stroke-width="1.5"></circle>
+</svg>
+<span class="absolute font-label-caps text-label-caps text-on-surface font-bold">38%</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Session Readout Ticker -->
+<div class="grid grid-cols-3 gap-gutter mb-space-lg border-b border-outline-variant pb-space-sm">
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">VOLUME TOTALE</span>
+<span class="font-metric-value text-metric-value text-on-surface font-bold">1.482 <span class="text-caption font-normal">KG</span></span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">DURATA RILEVATA</span>
+<span class="font-metric-value text-metric-value text-on-surface font-bold">28:14</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">RECUPERO MEDIO</span>
+<span class="font-metric-value text-metric-value text-on-surface font-bold">01:45</span>
+</div>
+</div>
+<!-- EXERCISE 1 CARD -->
+<div class="bg-surface rounded-2xl border border-primary-container p-space-md mb-space-lg flex flex-col">
+<!-- Header Row -->
+<div class="flex items-start justify-between gap-space-sm pb-space-xs border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">#01 // COMPOUND</span>
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface uppercase">PRIME 90°</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">Panca Piana Bilanciere</div>
+</div>
+<button class="px-space-xs py-space-2xs border border-primary-container rounded font-label-caps text-label-caps text-on-surface uppercase hover:bg-surface-variant transition-colors flex items-center gap-space-2xs">
+<span>[ ALTERNATIVA ]</span>
+</button>
+</div>
+<!-- Technical Cue -->
+<div class="py-space-xs border-b border-outline-variant flex items-center justify-between">
+<p class="font-caption text-caption text-on-surface-variant italic">
+        "Fermo 1s al petto, gomiti a 45°, scapole addotte."
+      </p>
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant">BAR 20KG</span>
+</div>
+<!-- Target & Past Data Stack -->
+<div class="py-space-xs grid grid-cols-2 gap-gutter border-b border-outline-variant">
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">TARGET PARAMETRICO</span>
+<span class="font-body-bold text-body-bold text-on-surface">4 × 6–10 · 42,5 KG</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">ULTIMA SESSIONE</span>
+<span class="font-caption text-caption text-on-surface-variant">10 · 10 · 9 — 40 KG</span>
+</div>
+</div>
+<!-- Sets Instrumentation Table -->
+<div class="flex flex-col w-full mt-space-xs">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-1 py-space-2xs border-b border-outline-variant font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">
+<div class="col-span-1 text-center">SET</div>
+<div class="col-span-4 text-center">CARICO (KG)</div>
+<div class="col-span-3 text-center">REPS</div>
+<div class="col-span-3 text-center">RIR</div>
+<div class="col-span-1 text-center">ST</div>
+</div>
+<!-- ROW 1 (COMPLETED) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-outline-variant items-center text-on-surface-variant">
+<div class="col-span-1 text-center font-label-caps text-label-caps">1</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular text-on-surface font-bold min-w-[36px] text-center">42.5</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular text-on-surface font-bold min-w-[20px] text-center">10</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">0</span>
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">1</span>
+<span class="w-4 h-4 rounded text-center border border-primary-container bg-primary-container text-surface font-label-caps-muted text-label-caps-muted leading-4 font-bold">2</span>
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">3</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[12px]">check</span>
+</div>
+</div>
+</div>
+<!-- ROW 2 (COMPLETED) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-outline-variant items-center text-on-surface-variant">
+<div class="col-span-1 text-center font-label-caps text-label-caps">2</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular text-on-surface font-bold min-w-[36px] text-center">42.5</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular text-on-surface font-bold min-w-[20px] text-center">9</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">0</span>
+<span class="w-4 h-4 rounded text-center border border-primary-container bg-primary-container text-surface font-label-caps-muted text-label-caps-muted leading-4 font-bold">1</span>
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">2</span>
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">3</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[12px]">check</span>
+</div>
+</div>
+</div>
+<!-- ROW 3 (CURRENT ACTIVE) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-primary-container items-center text-on-surface bg-surface-container/50 -mx-space-md px-space-md">
+<div class="col-span-1 text-center font-body-bold text-body-bold">3</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-primary-container flex items-center justify-center text-[10px] text-on-surface hover:bg-surface-variant active:bg-primary-container active:text-surface font-mono">−</button>
+<span class="font-body-bold text-body-bold text-on-surface min-w-[36px] text-center tracking-tight">42.5</span>
+<button class="w-5 h-5 rounded-full border border-primary-container flex items-center justify-center text-[10px] text-on-surface hover:bg-surface-variant active:bg-primary-container active:text-surface font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-primary-container flex items-center justify-center text-[10px] text-on-surface hover:bg-surface-variant active:bg-primary-container active:text-surface font-mono">−</button>
+<span class="font-body-bold text-body-bold text-on-surface min-w-[20px] text-center tracking-tight">8</span>
+<button class="w-5 h-5 rounded-full border border-primary-container flex items-center justify-center text-[10px] text-on-surface hover:bg-surface-variant active:bg-primary-container active:text-surface font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<button class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">0</button>
+<button class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">1</button>
+<button class="w-4 h-4 rounded text-center border border-primary-container bg-primary-container text-surface font-label-caps-muted text-label-caps-muted leading-4 font-bold">2</button>
+<button class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">3</button>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full border border-primary-container flex items-center justify-center animate-pulse">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span>
+</div>
+</div>
+</div>
+<!-- ROW 4 (QUEUED) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-outline-variant items-center text-on-surface-variant opacity-60">
+<div class="col-span-1 text-center font-label-caps text-label-caps">4</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<span class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</span>
+<span class="font-body-regular text-body-regular min-w-[36px] text-center">42.5</span>
+<span class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</span>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<span class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</span>
+<span class="font-body-regular text-body-regular min-w-[20px] text-center">8</span>
+<span class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</span>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<span class="w-4 h-4 text-center font-label-caps-muted text-label-caps-muted leading-4 text-outline-variant">0</span>
+<span class="w-4 h-4 text-center font-label-caps-muted text-label-caps-muted leading-4 text-outline-variant">1</span>
+<span class="w-4 h-4 text-center font-label-caps-muted text-label-caps-muted leading-4 text-outline-variant">2</span>
+<span class="w-4 h-4 text-center font-label-caps-muted text-label-caps-muted leading-4 text-outline-variant">3</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full border border-outline-variant"></div>
+</div>
+</div>
+</div>
+<!-- Status Pill Switch & Qualitative Field -->
+<div class="flex items-center justify-between pt-space-sm mt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">ESERCIZIO TERMINATO:</span>
+<!-- Custom Hardware Pill Toggle (OFF) -->
+<button class="h-6 px-1.5 border border-primary-container rounded-full flex items-center gap-1.5 bg-surface hover:bg-surface-variant transition-all">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant">OFF</span>
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+</button>
+</div>
+<div class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">
+        AUTO-LOG // ON
+      </div>
+</div>
+<div class="mt-space-xs pt-space-xs border-t border-outline-variant flex items-start gap-space-xs">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface uppercase whitespace-nowrap">NOTE:</span>
+<p class="font-caption text-caption text-on-surface-variant leading-tight">
+        RIR 1 percepito sulla seconda serie, presa salda. Curare il blocco scapolare in lockout.
+      </p>
+</div>
+</div>
+<!-- EXERCISE 2 CARD -->
+<div class="bg-surface rounded-2xl border border-primary-container p-space-md mb-space-lg flex flex-col">
+<!-- Header Row -->
+<div class="flex items-start justify-between gap-space-sm pb-space-xs border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">#02 // VERTICAL PULL</span>
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface uppercase">PRESA PRONA</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">Trazioni Zavorrate / Lat Machine</div>
+</div>
+<button class="px-space-xs py-space-2xs border border-primary-container rounded font-label-caps text-label-caps text-on-surface uppercase hover:bg-surface-variant transition-colors flex items-center gap-space-2xs">
+<span>[ ALTERNATIVA ]</span>
+</button>
+</div>
+<!-- Technical Cue -->
+<div class="py-space-xs border-b border-outline-variant flex items-center justify-between">
+<p class="font-caption text-caption text-on-surface-variant italic">
+        "Trazione piena al mento, discesa 2s controllata, zero oscillazioni."
+      </p>
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant">CINTURA + DISCO</span>
+</div>
+<!-- Target & Past Data Stack -->
+<div class="py-space-xs grid grid-cols-2 gap-gutter border-b border-outline-variant">
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">TARGET PARAMETRICO</span>
+<span class="font-body-bold text-body-bold text-on-surface">3 × 5–8 · +12,5 KG</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">ULTIMA SESSIONE</span>
+<span class="font-caption text-caption text-on-surface-variant">7 · 6 · 6 — +10 KG</span>
+</div>
+</div>
+<!-- Sets Instrumentation Table -->
+<div class="flex flex-col w-full mt-space-xs">
+<div class="grid grid-cols-12 gap-1 py-space-2xs border-b border-outline-variant font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">
+<div class="col-span-1 text-center">SET</div>
+<div class="col-span-4 text-center">ZAVORRA (KG)</div>
+<div class="col-span-3 text-center">REPS</div>
+<div class="col-span-3 text-center">RIR</div>
+<div class="col-span-1 text-center">ST</div>
+</div>
+<!-- ROW 1 (COMPLETED) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-outline-variant items-center text-on-surface-variant">
+<div class="col-span-1 text-center font-label-caps text-label-caps">1</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular text-on-surface font-bold min-w-[36px] text-center">+12.5</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular text-on-surface font-bold min-w-[20px] text-center">7</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">0</span>
+<span class="w-4 h-4 rounded text-center border border-primary-container bg-primary-container text-surface font-label-caps-muted text-label-caps-muted leading-4 font-bold">1</span>
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">2</span>
+<span class="w-4 h-4 rounded text-center border border-transparent font-label-caps-muted text-label-caps-muted leading-4">3</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-surface text-[12px]">check</span>
+</div>
+</div>
+</div>
+<!-- ROW 2 (PENDING) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-outline-variant items-center text-on-surface-variant opacity-70">
+<div class="col-span-1 text-center font-label-caps text-label-caps">2</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular min-w-[36px] text-center">+12.5</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular min-w-[20px] text-center">6</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">0</span>
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">1</span>
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">2</span>
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">3</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full border border-outline-variant"></div>
+</div>
+</div>
+<!-- ROW 3 (PENDING) -->
+<div class="grid grid-cols-12 gap-1 py-space-xs border-b border-outline-variant items-center text-on-surface-variant opacity-70">
+<div class="col-span-1 text-center font-label-caps text-label-caps">3</div>
+<div class="col-span-4 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular min-w-[36px] text-center">+12.5</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-space-2xs">
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">−</button>
+<span class="font-body-regular text-body-regular min-w-[20px] text-center">6</span>
+<button class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px] text-on-surface-variant font-mono">+</button>
+</div>
+<div class="col-span-3 flex items-center justify-center gap-0.5">
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">0</span>
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">1</span>
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">2</span>
+<span class="w-4 h-4 rounded text-center border border-outline-variant font-label-caps-muted text-label-caps-muted leading-4">3</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full border border-outline-variant"></div>
+</div>
+</div>
+</div>
+<!-- Toggle & Notes -->
+<div class="flex items-center justify-between pt-space-sm mt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">ESERCIZIO TERMINATO:</span>
+<button class="h-6 px-1.5 border border-primary-container rounded-full flex items-center gap-1.5 bg-surface hover:bg-surface-variant transition-all">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant">OFF</span>
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+</button>
+</div>
+<div class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">
+        LAT OPTION DISPONIBILE
+      </div>
+</div>
+<div class="mt-space-xs pt-space-xs border-t border-outline-variant flex items-start gap-space-xs">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface uppercase whitespace-nowrap">NOTE:</span>
+<p class="font-caption text-caption text-on-surface-variant leading-tight">
+        Se zavorra cede sotto 6 reps, scalare immediatamente a corpo libero RIR 0.
+      </p>
+</div>
+</div>
+<!-- Append Set Action -->
+<button class="w-full py-space-sm border border-primary-container rounded-2xl font-label-caps text-label-caps text-on-surface uppercase flex items-center justify-center gap-space-xs hover:bg-surface-variant transition-colors mb-space-2xl">
+<span>+ AGGIUNGI ESERCIZIO A SESSIONE ARMOR</span>
+</button>
+<!-- STICKY BOTTOM TELEMETRY DOCK -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface border-t border-primary-container pb-safe">
+<div class="max-w-md mx-auto px-margin py-space-sm flex items-center justify-between gap-space-sm">
+<!-- Rest Countdown Readout with 1px Radial Gauge -->
+<div class="flex items-center gap-space-sm">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 48 48">
+<circle cx="24" cy="24" fill="none" r="21" stroke="#B0B8B0" stroke-width="1"></circle>
+<circle cx="24" cy="24" fill="none" id="timer-gauge" r="21" stroke="#292929" stroke-dasharray="131.94" stroke-dashoffset="44.2" stroke-width="1.5"></circle>
+</svg>
+<span class="material-symbols-outlined absolute text-[14px] text-on-surface-variant">hourglass_bottom</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps-muted text-label-caps-muted text-on-surface-variant uppercase">RECUPERO ATTIVO</span>
+<span class="font-metric-value text-metric-value text-on-surface font-bold leading-none tracking-tight" id="timer-display">01:30</span>
+</div>
+</div>
+<!-- Micro Adjusters & External Sync -->
+<div class="flex items-center gap-space-xs">
+<button class="px-space-xs py-space-2xs border border-primary-container rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-variant transition-colors active:bg-primary-container active:text-surface" id="btn-minus">
+          [ −15s ]
+        </button>
+<button class="px-space-xs py-space-2xs border border-primary-container rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-variant transition-colors active:bg-primary-container active:text-surface" id="btn-plus">
+          [ +15s ]
+        </button>
+<button class="px-space-xs py-space-2xs border border-primary-container rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-1 active:bg-primary-container active:text-surface">
+<span class="material-symbols-outlined text-[12px]">alarm</span>
+<span>[ TIMER IPHONE ]</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    let secondsLeft = 90;
+    const initialSeconds = 90;
+    const circumference = 131.94;
+    const timerDisplay = document.getElementById('timer-display');
+    const timerGauge = document.getElementById('timer-gauge');
+    const btnMinus = document.getElementById('btn-minus');
+    const btnPlus = document.getElementById('btn-plus');
+
+    function updateView() {
+      const mins = Math.floor(secondsLeft / 60);
+      const secs = secondsLeft % 60;
+      if (timerDisplay) {
+        timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+      if (timerGauge) {
+        const offset = circumference - (circumference * (secondsLeft / initialSeconds));
+        timerGauge.style.strokeDashoffset = Math.max(0, offset);
+      }
+    }
+
+    if (btnMinus) {
+      btnMinus.addEventListener('click', function() {
+        secondsLeft = Math.max(0, secondsLeft - 15);
+        updateView();
+      });
+    }
+
+    if (btnPlus) {
+      btnPlus.addEventListener('click', function() {
+        secondsLeft += 15;
+        updateView();
+      });
+    }
+
+    setInterval(function() {
+      if (secondsLeft > 0) {
+        secondsLeft--;
+        updateView();
+      }
+    }, 1000);
+  })();
+</script></main></body></html>

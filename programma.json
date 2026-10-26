@@ -1,0 +1,110 @@
+{
+  "versione": "1.0",
+  "aggiornato": "2026-10-26",
+  "messaggio_coach": "Settimana 1 di ripartenza: circa l'80% dei pesi di luglio e RIR 3. Usala per calibrare i macchinari della Fit In e segnare i pesi dove c'è 'calibra'. Dalla settimana 2 pesi pieni e progressione.",
+  "fase": {
+    "tipo": "ripartenza",
+    "dal": "2026-11-02",
+    "al": "2026-11-08",
+    "rir_target": 3,
+    "nota": "~80% dei pesi di luglio, niente progressione automatica questa settimana"
+  },
+  "regole": {
+    "ordine_sessioni": ["armor", "roots", "guns", "wings"],
+    "recupero_sec": { "multi": 120, "iso": 75, "addome": 60, "superset": 90 },
+    "rir_target": { "multi": "1-2", "iso": "1", "addome": "1" },
+    "incremento_kg": { "multi": 2.5, "iso": 1.25, "assistito": 2.5, "corpo_libero": 2.5 },
+    "progressione": "Doppia progressione: si resta sullo stesso carico finché tutte le serie non arrivano a rip_max; poi si sale di incremento_kg (per gli esercizi assistiti si toglie assistenza; per quelli a corpo libero si aggiunge peso con la cintura).",
+    "deload": "Ogni 6-8 settimane o se si stalla su più esercizi: una settimana con serie dimezzate e stessi pesi.",
+    "taglio": "Se la sessione si allunga, tagliare l'ultimo esercizio di isolamento, mai il primo multiarticolare."
+  },
+  "sessioni": [
+    {
+      "id": "armor",
+      "nome": "Armor",
+      "focus": "Petto · Schiena · Tricipiti · Addome",
+      "durata_min": 85,
+      "giorno_suggerito": "Lun o Mar",
+      "opzionale": false,
+      "esercizi": [
+        { "id": "chest-press-inclinata", "nome": "Chest press inclinata", "tipo": "multi", "serie": 4, "rip_min": 6, "rip_max": 10, "unita": "rip", "carico": "kg", "peso_kg": 42.5, "cue": "Scapole indietro e basse, schiena incollata allo schienale per tutta la spinta.", "alternativa": { "id": "panca-inclinata-manubri", "nome": "Panca inclinata manubri" } },
+        { "id": "panca-piana-manubri", "nome": "Panca piana manubri", "tipo": "multi", "serie": 3, "rip_min": 8, "rip_max": 10, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Gomiti a circa 45° dal busto, scendi finché senti il petto in allungamento.", "alternativa": { "id": "chest-press-piana", "nome": "Chest press piana" } },
+        { "id": "trazioni-assistite-larga", "nome": "Trazioni assistite presa larga", "tipo": "multi", "serie": 3, "rip_min": 6, "rip_max": 10, "unita": "rip", "carico": "assistito", "peso_kg": 20, "cue": "Tira i gomiti verso i fianchi e il petto verso la sbarra, senza dondolare.", "alternativa": { "id": "lat-machine-larga", "nome": "Lat machine presa larga" } },
+        { "id": "rematore-manubrio", "nome": "Rematore manubrio a un braccio", "tipo": "multi", "serie": 3, "rip_min": 8, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": 18, "cue": "Tira il manubrio verso l'anca, non verso la spalla. Busto fermo.", "alternativa": { "id": "rematore-macchina", "nome": "Rematore alla macchina" } },
+        { "id": "pec-deck", "nome": "Pec deck", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": 37.5, "cue": "Gomiti leggermente piegati e fissi, stringi un secondo al centro.", "alternativa": { "id": "croci-cavi", "nome": "Croci ai cavi" } },
+        { "id": "dip", "nome": "Dip", "tipo": "multi", "serie": 3, "rip_min": 8, "rip_max": 12, "unita": "rip", "carico": "corpo_libero", "peso_kg": 0, "cue": "Busto un po' in avanti, scendi controllato finché la spalla arriva all'altezza del gomito. A 3×12 pulite aggiungi peso con la cintura.", "alternativa": { "id": "dip-machine", "nome": "Dip machine" } },
+        { "id": "pushdown-corda", "nome": "Pushdown con corda", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": 12.5, "cue": "Gomiti incollati ai fianchi, apri la corda in fondo al movimento.", "alternativa": { "id": "pushdown-barra", "nome": "Pushdown barra" } },
+        { "id": "crunch-declinato", "nome": "Crunch declinato con disco", "tipo": "addome", "serie": 3, "rip_min": 12, "rip_max": 20, "unita": "rip", "carico": "kg", "peso_kg": 5, "cue": "Arrotola la schiena vertebra per vertebra, non tirare con il collo.", "alternativa": { "id": "crunch-cavo", "nome": "Crunch al cavo" } }
+      ]
+    },
+    {
+      "id": "roots",
+      "nome": "Roots",
+      "focus": "Gambe · Addome",
+      "durata_min": 60,
+      "giorno_suggerito": "Mer",
+      "opzionale": false,
+      "esercizi": [
+        { "id": "leg-press", "nome": "Leg press", "tipo": "multi", "serie": 4, "rip_min": 8, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Piedi a larghezza spalle, bacino sempre attaccato al sedile, non bloccare le ginocchia in alto.", "alternativa": { "id": "hack-squat", "nome": "Hack squat" } },
+        { "id": "stacco-rumeno-manubri", "nome": "Stacco rumeno manubri", "tipo": "multi", "serie": 3, "rip_min": 8, "rip_max": 10, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Spingi i fianchi indietro, schiena neutra, manubri vicini alle gambe, ginocchia morbide. Parti leggero.", "alternativa": { "id": "hip-thrust", "nome": "Hip thrust" } },
+        { "id": "leg-curl", "nome": "Leg curl", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Fianchi fermi sul pad, ritorno lento.", "alternativa": null },
+        { "id": "leg-extension", "nome": "Leg extension", "tipo": "iso", "serie": 3, "rip_min": 12, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Pausa di un secondo in alto, scendi controllato.", "alternativa": { "id": "affondi", "nome": "Affondi" } },
+        { "id": "calf-raise", "nome": "Calf raise", "tipo": "iso", "serie": 3, "rip_min": 12, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Allungamento completo in basso, pausa di un secondo in basso e in alto.", "alternativa": { "id": "calf-leg-press", "nome": "Calf alla leg press" } },
+        { "id": "crunch-cavo", "nome": "Crunch al cavo", "tipo": "addome", "serie": 3, "rip_min": 12, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Bacino fermo, porta i gomiti verso le ginocchia arrotondando la schiena.", "alternativa": { "id": "crunch-declinato", "nome": "Crunch declinato con disco" } },
+        { "id": "plank", "nome": "Plank", "tipo": "addome", "serie": 3, "rip_min": 30, "rip_max": 60, "unita": "sec", "carico": "corpo_libero", "peso_kg": 0, "cue": "Glutei contratti, bacino in linea con le spalle, respira.", "alternativa": null }
+      ]
+    },
+    {
+      "id": "guns",
+      "nome": "Guns",
+      "focus": "Bicipiti · Tricipiti · Spalle · Addome",
+      "durata_min": 75,
+      "giorno_suggerito": "Ven",
+      "opzionale": false,
+      "nota_sessione": "Qui l'ultima serie di ogni esercizio può arrivare a cedimento.",
+      "esercizi": [
+        { "id": "curl-manubri", "nome": "Curl manubri in piedi", "tipo": "iso", "serie": 3, "rip_min": 8, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": 12, "cue": "Gomiti fermi ai fianchi, niente slancio con la schiena.", "alternativa": null },
+        { "id": "overhead-cavo", "nome": "Estensioni overhead al cavo (corda)", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Gomiti stretti e puntati in avanti, allunga bene il tricipite dietro la testa.", "alternativa": null },
+        { "id": "curl-scott", "nome": "Curl alla Scott", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": 10, "superset": "s1", "cue": "Scendi controllato senza distendere di scatto, risali senza staccare le braccia dal pad.", "alternativa": null },
+        { "id": "pushdown-barra", "nome": "Pushdown barra", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "superset": "s1", "cue": "Gomiti ai fianchi, estendi completamente in basso.", "alternativa": null },
+        { "id": "curl-inclinata", "nome": "Curl su panca inclinata", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": 10, "superset": "s2", "cue": "Braccia perpendicolari al pavimento e spalle indietro sulla panca.", "alternativa": null },
+        { "id": "estensione-manubrio-testa", "nome": "Estensione manubrio sopra la testa", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": 8, "superset": "s2", "cue": "Gomiti verso il soffitto, scendi dietro la testa e risali senza aprirli.", "alternativa": null },
+        { "id": "hammer-curl", "nome": "Hammer curl", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": 10, "cue": "Polsi neutri con il pollice in alto, gomiti fermi.", "alternativa": null },
+        { "id": "alzate-laterali", "nome": "Alzate laterali", "tipo": "iso", "serie": 4, "rip_min": 12, "rip_max": 20, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Sali fino all'altezza delle spalle con i gomiti leggermente piegati, senza slancio.", "alternativa": { "id": "alzate-laterali-cavo", "nome": "Alzate laterali al cavo" } },
+        { "id": "crunch-declinato", "nome": "Crunch declinato con disco", "tipo": "addome", "serie": 3, "rip_min": 12, "rip_max": 20, "unita": "rip", "carico": "kg", "peso_kg": 5, "cue": "Arrotola la schiena vertebra per vertebra, non tirare con il collo.", "alternativa": { "id": "crunch-cavo", "nome": "Crunch al cavo" } }
+      ]
+    },
+    {
+      "id": "wings",
+      "nome": "Wings",
+      "focus": "Schiena · Petto · Bicipiti · Addome",
+      "durata_min": 80,
+      "giorno_suggerito": "Sab o Dom",
+      "opzionale": false,
+      "esercizi": [
+        { "id": "trazioni-assistite-stretta", "nome": "Trazioni assistite presa stretta/supina", "tipo": "multi", "serie": 4, "rip_min": 6, "rip_max": 10, "unita": "rip", "carico": "assistito", "peso_kg": 12.5, "cue": "Petto alto, tira finché il mento supera la sbarra, scendi fino a braccia quasi tese.", "alternativa": { "id": "lat-machine-stretta", "nome": "Lat machine presa stretta" } },
+        { "id": "pulley-basso", "nome": "Pulley basso", "tipo": "multi", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Busto fermo, tira verso l'ombelico e chiudi le scapole.", "alternativa": { "id": "rematore-macchina", "nome": "Rematore alla macchina" } },
+        { "id": "rematore-macchina", "nome": "Rematore alla macchina", "tipo": "multi", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Petto sul supporto, gomiti indietro, pausa di un secondo con le scapole chiuse.", "alternativa": { "id": "pulley-larga", "nome": "Pulley presa larga" } },
+        { "id": "chest-press-piana", "nome": "Chest press piana", "tipo": "multi", "serie": 3, "rip_min": 8, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Scapole indietro e basse, impugnature all'altezza del petto.", "alternativa": { "id": "panca-piana-manubri", "nome": "Panca piana manubri" } },
+        { "id": "croci-cavi", "nome": "Croci ai cavi", "tipo": "iso", "serie": 3, "rip_min": 12, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Braccia ad arco fisso, chiudi davanti al petto e stringi un secondo.", "alternativa": { "id": "pec-deck", "nome": "Pec deck" } },
+        { "id": "face-pull", "nome": "Face pull", "tipo": "iso", "serie": 3, "rip_min": 12, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Corda all'altezza del viso, tira verso le orecchie aprendo i gomiti.", "alternativa": { "id": "reverse-pec-deck", "nome": "Reverse pec deck" } },
+        { "id": "hammer-cavo", "nome": "Hammer al cavo con corda", "tipo": "iso", "serie": 3, "rip_min": 10, "rip_max": 12, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Gomiti fermi ai fianchi, polsi neutri.", "alternativa": { "id": "hammer-curl", "nome": "Hammer curl manubri" } },
+        { "id": "knee-raise", "nome": "Knee raise alla sbarra", "tipo": "addome", "serie": 3, "rip_min": 10, "rip_max": 15, "unita": "rip", "carico": "corpo_libero", "peso_kg": 0, "cue": "Porta le ginocchia al petto arrotolando il bacino, senza dondolare.", "alternativa": { "id": "sedia-romana", "nome": "Sedia romana" } }
+      ]
+    },
+    {
+      "id": "breathe",
+      "nome": "Breathe",
+      "focus": "Cardio leggero",
+      "durata_min": 40,
+      "giorno_suggerito": "Gio",
+      "opzionale": true,
+      "nota_sessione": "Ritmo a cui riesci a parlare. Cyclette, camminata in salita o corsa lenta.",
+      "esercizi": [
+        { "id": "cardio-leggero", "nome": "Cardio a bassa intensità", "tipo": "cardio", "serie": 1, "rip_min": 30, "rip_max": 40, "unita": "min", "carico": "corpo_libero", "peso_kg": 0, "cue": "Devi riuscire a parlare mentre lo fai.", "alternativa": null },
+        { "id": "alzate-laterali", "nome": "Alzate laterali (facoltative)", "tipo": "iso", "serie": 3, "rip_min": 12, "rip_max": 20, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Sali fino all'altezza delle spalle con i gomiti leggermente piegati, senza slancio.", "alternativa": { "id": "alzate-laterali-cavo", "nome": "Alzate laterali al cavo" } },
+        { "id": "crunch-cavo", "nome": "Crunch al cavo (facoltativo)", "tipo": "addome", "serie": 3, "rip_min": 12, "rip_max": 15, "unita": "rip", "carico": "kg", "peso_kg": null, "cue": "Bacino fermo, porta i gomiti verso le ginocchia arrotondando la schiena.", "alternativa": { "id": "crunch-declinato", "nome": "Crunch declinato con disco" } }
+      ]
+    }
+  ]
+}
