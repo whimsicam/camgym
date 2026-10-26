@@ -1,0 +1,68 @@
+{
+  "data": "2026-10-26",
+  "sessione": "wings",
+  "versione_programma": "1.0",
+  "inizio": "2026-10-26T22:45:16+01:00",
+  "fine": "2026-10-26T22:45:40+01:00",
+  "durata_min": 0,
+  "energia": null,
+  "note": "",
+  "esercizi": [
+    {
+      "id": "trazioni-assistite-stretta",
+      "previsto": "trazioni-assistite-stretta",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "pulley-basso",
+      "previsto": "pulley-basso",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "rematore-macchina",
+      "previsto": "rematore-macchina",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "chest-press-piana",
+      "previsto": "chest-press-piana",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "croci-cavi",
+      "previsto": "croci-cavi",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "face-pull",
+      "previsto": "face-pull",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "hammer-cavo",
+      "previsto": "hammer-cavo",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "knee-raise",
+      "previsto": "knee-raise",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    }
+  ]
+}
