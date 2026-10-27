@@ -388,6 +388,8 @@ const ICONA = {
   check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 12.5l4 4 8-9"/></svg>',
   clessidra: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9"/></svg>',
   sveglia: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l3 2M4 5l3-2M20 5l-3-2"/></svg>',
+  lista: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="5" cy="6" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="5" cy="18" r="1"/><path d="M9 6h11M9 12h11M9 18h11"/></svg>',
+  cestino: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>',
 };
 
 function arco(r, p, c) {
@@ -435,12 +437,23 @@ function statoSync() {
 }
 
 function tabbar(attiva) {
-  const sid = S.cur ? S.cur.sessione : prossimaSessione();
-  const s = sessione(sid);
   return `<nav class="tabbar">
     <button class="tab ${attiva === 'home' ? 'on' : ''}" data-act="home">${ICONA.home}<span>HOME</span></button>
-    ${s ? `<button class="tab ${attiva === 'sessione' ? 'on' : ''}" data-act="apri" data-id="${sid}">${arte(sid, 'tab-art')}<span>${esc(s.nome)}${S.cur ? ' ·&nbsp;IN&nbsp;CORSO' : ''}</span></button>` : ''}
+    <button class="tab ${attiva === 'storico' ? 'on' : ''}" data-act="vai-storico">${ICONA.lista}<span>STORICO</span></button>
   </nav>`;
+}
+
+// Riga "sessione in corso" mostrata in home e nello storico, per riprenderla.
+function bannerInCorso() {
+  if (!S.cur) return '';
+  const s = sessione(S.cur.sessione) || { nome: S.cur.sessione };
+  const { fatte, tot } = contaSerie();
+  return `<button class="card resume" data-act="apri" data-id="${S.cur.sessione}">
+    ${arte(S.cur.sessione, 'art art-s')}
+    <div class="grow"><div class="row-c"><span class="tag">IN CORSO</span><b class="body-b">${esc(s.nome.toUpperCase())}</b></div>
+    <span class="lbl-m">${fatte}/${tot} SERIE · DALLE ${isoLocale(S.cur.inizio).slice(11, 16)}</span></div>
+    <span class="chip ink">RIPRENDI</span>
+  </button>`;
 }
 
 /* ---------- vista: home ---------- */
@@ -466,9 +479,10 @@ function vistaHome() {
     </div>` : '';
 
   const card = (s, i) => {
-    const next = s.id === prossima;
+    const inCorso = S.cur?.sessione === s.id;
+    const next = S.cur ? inCorso : s.id === prossima;
     return `<button class="card mod ${next ? 'next' : ''}" data-act="apri" data-id="${s.id}">
-      <div class="mod-top">${next ? '<span class="tag">NEXT</span>' : `<span class="lbl-m">MOD_${pad(i + 1)}</span>`}${arte(s.id)}</div>
+      <div class="mod-top">${next ? `<span class="tag">${inCorso ? 'IN CORSO' : 'NEXT'}</span>` : `<span class="lbl-m">MOD_${pad(i + 1)}</span>`}${arte(s.id)}</div>
       <div class="mod-mid"><h2 class="h-md">${esc(s.nome)}</h2><p class="lbl-m clamp">${esc(s.focus)}</p></div>
       <div class="mod-foot"><span class="cap">${s.durata_min} MIN</span><span class="lbl-m">${quando(ultimaData(s.id))}</span></div>
     </button>`;
@@ -491,6 +505,8 @@ function vistaHome() {
       <div class="row-c"><span class="dot ${sy.dot}"></span><span class="lbl">LOG://ACTIVE_SYS</span></div>
       <span class="lbl-m">PROG_V${esc(p.versione)} · W-${pad(sett)}</span>
     </div>
+
+    ${bannerInCorso()}
 
     ${S.aggiornato ? `<section class="card banner">
       <div class="row-b"><span class="tag">PROGRAMMA AGGIORNATO</span><span class="lbl-m">V${esc(p.versione)} · ${esc(p.aggiornato || '')}</span></div>
@@ -584,32 +600,64 @@ function testaEsercizio(i, n, lettera) {
 function etichetteColonne(ds) {
   const c = new Set(ds.map(d => d.carico)), u = new Set(ds.map(d => d.unita));
   const kg = ds.every(d => d.tipo === 'cardio') ? '' : c.size > 1 ? 'KG' :
-    c.has('assistito') ? 'ASSIST. (KG)' : c.has('corpo_libero') ? 'ZAVORRA (KG)' : 'CARICO (KG)';
+    c.has('assistito') ? 'ASSIST.' : c.has('corpo_libero') ? 'ZAVORRA' : 'KG';
   const rip = u.size > 1 ? 'RIP' : u.has('sec') ? 'SEC' : u.has('min') ? 'MIN' : 'RIP';
-  return `<div class="set-h"><span>SET</span><span>${kg}</span><span>${rip}</span><span>OK</span></div>`;
+  const rir = ds.every(d => d.tipo === 'cardio') ? '' : 'RIR';
+  return `<div class="set-h"><div class="set-g"><span>SET</span><span>${kg}</span><span>${rip}</span><span>${rir}</span></div><span class="set-h-ok">OK</span></div>`;
 }
 
-function rigaSerie(i, si, etichetta, attiva) {
+// Ogni card ha al massimo una serie "aperta" (quella che si modifica). Nei superset la card è una sola.
+function chiaveCard(i) {
+  const ss = defDi(S.cur.esercizi[i]).superset;
+  return ss ? S.cur.esercizi.findIndex(x => defDi(x).superset === ss) : i;
+}
+function serieAperta(chiave, righe) {
+  const sel = S.cur.sel?.[chiave];
+  if (sel && righe.some(([i, r]) => `${i}:${r}` === sel)) return sel;
+  const r = righe.find(([i, r]) => !S.cur.esercizi[i].serie[r].fatta);
+  return r ? `${r[0]}:${r[1]}` : null;
+}
+
+function rigaSerie(i, si, etichetta, aperta) {
   const e = S.cur.esercizi[i], d = defDi(e), s = e.serie[si];
-  const cls = s.fatta ? 'done' : attiva ? 'active' : 'queued';
   const da = `data-e="${i}" data-s="${si}"`;
-  const kg = d.tipo === 'cardio' ? '<div class="step none">—</div>' : `
-    <div class="step">
-      <button class="sb" data-act="kg" data-d="-1" ${da} aria-label="Meno peso">−</button>
-      <input class="sv" type="text" inputmode="decimal" autocomplete="off" data-in="kg" ${da} value="${s.kg == null ? '' : num(s.kg)}" placeholder="calibra" aria-label="Kg serie ${si + 1}">
-      <button class="sb" data-act="kg" data-d="1" ${da} aria-label="Più peso">+</button>
+  const cardio = d.tipo === 'cardio';
+  const kgTxt = cardio ? '' : s.kg == null ? 'calibra' : num(s.kg);
+  const rirTxt = cardio ? '' : s.rir == null ? '—' : s.rir >= 4 ? '4+' : String(s.rir);
+  const ripU = d.unita === 'sec' ? 'SEC' : d.unita === 'min' ? 'MIN' : 'RIP';
+  const kgU = d.carico === 'assistito' ? 'KG ASSIST.' : d.carico === 'corpo_libero' ? 'KG ZAVORRA' : 'KG';
+
+  if (!aperta) {
+    return `<div class="set ${s.fatta ? 'done' : 'queued'}">
+      <button class="set-g set-sum" data-act="apri-serie" ${da} aria-label="Modifica serie ${etichetta}">
+        <span class="set-n">${etichetta}</span>
+        <span class="${s.kg == null && !cardio ? 'cal' : ''}">${kgTxt}</span>
+        <span>${s.rip ?? ''}</span>
+        <span>${rirTxt}</span>
+      </button>
+      <button class="chk ${s.fatta ? 'on' : ''}" data-act="chk" ${da} aria-pressed="${s.fatta}" aria-label="Serie ${etichetta} fatta">${ICONA.check}</button>
     </div>`;
-  return `<div class="set ${cls}">
-    <span class="set-n">${etichetta}</span>
-    ${kg}
-    <div class="step">
-      <button class="sb" data-act="rip" data-d="-1" ${da} aria-label="Meno ripetizioni">−</button>
-      <span class="sv">${s.rip ?? ''}</span>
-      <button class="sb" data-act="rip" data-d="1" ${da} aria-label="Più ripetizioni">+</button>
+  }
+
+  const box = (act, val, unit, input) => `
+    <div class="box">
+      <button class="bx" data-act="${act}" data-d="-1" ${da} aria-label="Meno">−</button>
+      <div class="bx-v">${input || `<span class="bx-n">${val}</span>`}<span class="lbl-m">${unit}</span></div>
+      <button class="bx" data-act="${act}" data-d="1" ${da} aria-label="Più">+</button>
+    </div>`;
+  const kgInput = `<input class="bx-n" type="text" inputmode="decimal" autocomplete="off" data-in="kg" ${da} value="${s.kg == null ? '' : num(s.kg)}" placeholder="calibra" aria-label="Kg serie ${etichetta}">`;
+
+  return `<div class="set open ${s.fatta ? 'done' : ''}">
+    <div class="row-b open-h"><span class="set-n">SERIE ${etichetta}</span><span class="lbl-m">${s.fatta ? 'FATTA · MODIFICA' : 'IN CORSO'}</span></div>
+    <div class="boxes ${cardio ? 'one' : ''}">
+      ${cardio ? '' : box('kg', '', kgU, kgInput)}
+      ${box('rip', s.rip ?? '', ripU)}
     </div>
-    <button class="chk ${s.fatta ? 'on' : ''}" data-act="chk" ${da} aria-pressed="${s.fatta}" aria-label="Serie ${etichetta} fatta">${ICONA.check}</button>
-    ${d.tipo === 'cardio' ? '' : `<div class="rir"><span class="lbl-m">RIR</span>${[0, 1, 2, 3, 4].map(v =>
-      `<button class="rb ${s.rir === v ? 'on' : ''}" data-act="rir" data-v="${v}" ${da}>${v === 4 ? '4+' : v}</button>`).join('')}</div>`}
+    ${cardio ? '' : `<div class="rir"><span class="lbl-m">RIR</span><div class="rir-g">${[0, 1, 2, 3, 4].map(v =>
+      `<button class="rb ${s.rir === v ? 'on' : ''}" data-act="rir" data-v="${v}" ${da}>${v === 4 ? '4+' : v}</button>`).join('')}</div></div>`}
+    ${s.fatta
+      ? `<div class="open-f"><button class="btn ghost" data-act="chk" ${da}>ANNULLA SERIE</button><button class="btn inv" data-act="chiudi-serie" ${da}>OK</button></div>`
+      : `<button class="btn inv wide-s" data-act="chk" ${da}>${ICONA.check}<span>SERIE FATTA</span></button>`}
   </div>`;
 }
 
@@ -625,10 +673,10 @@ function piedeEsercizio(i, lettera) {
 function cardGruppo(g, nBase) {
   if (!g.superset) {
     const i = g.idx[0], e = S.cur.esercizi[i];
-    const attiva = e.serie.findIndex(s => !s.fatta);
+    const ap = serieAperta(i, e.serie.map((_, si) => [i, si]));
     return `<article class="card ex">
       ${testaEsercizio(i, nBase)}
-      <div class="sets">${etichetteColonne([defDi(e)])}${e.serie.map((_, si) => rigaSerie(i, si, si + 1, si === attiva)).join('')}</div>
+      <div class="sets">${etichetteColonne([defDi(e)])}${e.serie.map((_, si) => rigaSerie(i, si, si + 1, ap === `${i}:${si}`)).join('')}</div>
       ${piedeEsercizio(i)}
     </article>`;
   }
@@ -636,12 +684,12 @@ function cardGruppo(g, nBase) {
   const max = Math.max(...g.idx.map(i => S.cur.esercizi[i].serie.length));
   const righe = [];
   for (let r = 0; r < max; r++) g.idx.forEach((i, k) => { if (S.cur.esercizi[i].serie[r]) righe.push([i, r, L[k]]); });
-  const att = righe.findIndex(([i, r]) => !S.cur.esercizi[i].serie[r].fatta);
+  const ap = serieAperta(g.idx[0], righe);
   const giri = Array.from({ length: max }, (_, r) => g.idx.every(i => !S.cur.esercizi[i].serie[r] || S.cur.esercizi[i].serie[r].fatta)).filter(Boolean).length;
   return `<article class="card ex superset">
     <div class="row-b ss-h"><span class="tag">SUPERSET</span><span class="lbl-m">GIRO ${Math.min(giri + 1, max)}/${max} · RECUPERO ${regole().recupero_sec?.superset || 0}s A FINE GIRO</span></div>
     ${g.idx.map((i, k) => `<div class="ss-m">${testaEsercizio(i, nBase + k, L[k])}</div>`).join('')}
-    <div class="sets">${etichetteColonne(g.idx.map(i => defDi(S.cur.esercizi[i])))}${righe.map(([i, r, l], n) => rigaSerie(i, r, `${r + 1}${l}`, n === att)).join('')}</div>
+    <div class="sets">${etichetteColonne(g.idx.map(i => defDi(S.cur.esercizi[i])))}${righe.map(([i, r, l]) => rigaSerie(i, r, `${r + 1}${l}`, ap === `${i}:${r}`)).join('')}</div>
     ${g.idx.map((i, k) => piedeEsercizio(i, L[k])).join('')}
   </article>`;
 }
@@ -698,6 +746,7 @@ function vistaSessione() {
       <div class="row-b"><button class="btn ghost" data-act="add-no">ANNULLA</button><button class="btn" data-act="add-ok">AGGIUNGI</button></div>
     </section>` : `<button class="btn wide" data-act="add">+ AGGIUNGI ESERCIZIO A SESSIONE ${esc(s.nome.toUpperCase())}</button>`}
     <button class="btn wide inv" data-act="chiudi">CHIUDI SESSIONE</button>
+    <button class="link" data-act="abbandona">Elimina questa sessione senza salvarla</button>
   </main>
   ${dock()}
   ${tabbar('sessione')}`;
@@ -731,8 +780,103 @@ function vistaChiusura() {
     </section>
     <button class="btn wide inv" data-act="salva">SALVA</button>
     <button class="btn wide" data-act="torna">TORNA ALLA SESSIONE</button>
-    <button class="link" data-act="abbandona">Abbandona sessione senza salvare</button>
+    <button class="link" data-act="abbandona">Elimina questa sessione senza salvarla</button>
   </main>`;
+}
+
+/* ---------- vista: storico ---------- */
+
+const GIORNI = ['DOM', 'LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB'];
+
+function nomeEsercizio(x) {
+  if (x.nome) return x.nome;
+  for (const s of sessioni()) for (const e of s.esercizi) {
+    if (e.id === x.id) return e.nome;
+    if (e.alternativa?.id === x.id) return e.alternativa.nome;
+  }
+  return x.id;
+}
+function defEsercizio(x) {
+  for (const s of sessioni()) for (const e of s.esercizi) if (e.id === x.previsto || e.id === x.id) return e;
+  return null;
+}
+
+function serieTxt(x) {
+  const d = defEsercizio(x);
+  const u = d?.unita === 'sec' ? '″' : d?.unita === 'min' ? '′' : '';
+  return (x.serie || []).map(s => {
+    const kg = s.kg == null || d?.tipo === 'cardio' ? '' : d?.carico === 'assistito' ? `−${num(s.kg)}` : num(s.kg);
+    return `${kg ? kg + '×' : ''}${s.rip ?? '?'}${u}${s.rir != null ? `<i>@${s.rir >= 4 ? '4+' : s.rir}</i>` : ''}`;
+  }).join(' · ');
+}
+
+function vistaStorico() {
+  const voci = Object.entries(S.logs).sort((a, b) => tempoLog(b[1]) - tempoLog(a[1]));
+  const inCoda = new Set(S.coda.filter(x => x.tipo === 'log').map(x => x.nome));
+  const settimane = [];
+  for (const [nome, l] of voci) {
+    const lun = dataLocale(lunedi(parseData(l.data)));
+    let w = settimane[settimane.length - 1];
+    if (!w || w.lun !== lun) settimane.push(w = { lun, voci: [] });
+    w.voci.push([nome, l]);
+  }
+  const ord = ordine();
+
+  const riga = ([nome, l]) => {
+    const s = sessione(l.sessione) || { nome: l.sessione };
+    const ss = (l.esercizi || []).reduce((a, e) => a + (e.serie?.length || 0), 0);
+    const aperto = S.logAperto === nome;
+    const d = parseData(l.data);
+    const ora = (l.inizio || '').slice(11, 16);
+    let vol = 0;
+    for (const x of l.esercizi || []) {
+      const def = defEsercizio(x);
+      if (def && (def.unita !== 'rip' || def.carico === 'assistito')) continue;
+      for (const z of x.serie || []) if (z.kg) vol += z.kg * (z.rip || 0);
+    }
+    return `<div class="log ${aperto ? 'open' : ''}">
+      <button class="log-h" data-act="log" data-f="${esc(nome)}">
+        ${arte(l.sessione, 'art art-s')}
+        <div class="grow"><div class="row-c"><b class="body-b">${esc(String(s.nome).toUpperCase())}</b>${inCoda.has(nome) ? '<span class="chip">IN CODA</span>' : ''}</div>
+        <span class="lbl-m">${GIORNI[d.getDay()]} ${ggmm(l.data)}${ora ? ' · ' + ora : ''} · ${l.durata_min ?? '—'} MIN · ${ss} SERIE</span></div>
+        <span class="log-x">${aperto ? '−' : '+'}</span>
+      </button>
+      ${aperto ? `<div class="log-b">
+        <div class="metrics in">
+          <div><span class="lbl-m">VOLUME</span><span class="metric">${num(Math.round(vol))} <small>KG</small></span></div>
+          <div><span class="lbl-m">DURATA</span><span class="metric">${l.durata_min ?? '—'} <small>MIN</small></span></div>
+          <div><span class="lbl-m">ENERGIA</span><span class="metric">${l.energia ?? '—'}<small>${l.energia ? '/5' : ''}</small></span></div>
+        </div>
+        ${(l.esercizi || []).map(x => `<div class="log-e ${x.serie?.length ? '' : 'skip'}">
+          <div class="row-b"><span class="body-b">${esc(nomeEsercizio(x))}</span><span class="lbl-m">${x.serie?.length ? `${x.serie.length} SERIE` : 'SALTATO'}</span></div>
+          ${x.serie?.length ? `<div class="cap log-s">${serieTxt(x)}</div>` : ''}
+          ${x.note ? `<div class="cap muted">“${esc(x.note)}”</div>` : ''}
+        </div>`).join('')}
+        ${l.note ? `<p class="cap log-n"><span class="lbl-m">NOTE</span> ${esc(l.note)}</p>` : ''}
+        <button class="btn danger" data-act="log-elimina" data-f="${esc(nome)}">${ICONA.cestino}<span>ELIMINA SESSIONE</span></button>
+      </div>` : ''}
+    </div>`;
+  };
+
+  return `
+  <header class="top">
+    <div class="top-l"><span class="lbl">CAM://LOG</span><span class="muted">•</span><h1 class="h-md">STORICO</h1></div>
+    <span class="lbl-m">${voci.length} SESSIONI</span>
+  </header>
+  <main class="wrap">
+    ${bannerInCorso()}
+    ${!voci.length ? `<section class="card"><div class="lbl">NESSUNA SESSIONE</div><p class="cap muted">Le sessioni salvate compaiono qui, dalla più recente.</p></section>` : ''}
+    ${settimane.map(w => {
+      const fine = parseData(w.lun); fine.setDate(fine.getDate() + 6);
+      const nPrinc = w.voci.filter(([, l]) => ord.includes(l.sessione)).length;
+      return `<section class="week">
+        <div class="row-b px"><span class="lbl-m">SETTIMANA ${ggmm(w.lun)} – ${ggmm(dataLocale(fine))}</span><span class="lbl">${nPrinc} / ${ord.length}</span></div>
+        <div class="card table">${w.voci.map(riga).join('')}</div>
+      </section>`;
+    }).join('')}
+    ${voci.length ? `<p class="cap muted center">Tocca una sessione per vedere il dettaglio o eliminarla.</p>` : ''}
+  </main>
+  ${tabbar('storico')}`;
 }
 
 /* ---------- vista: impostazioni ---------- */
@@ -783,6 +927,7 @@ function render() {
   app.innerHTML = S.vista === 'sessione' ? vistaSessione()
     : S.vista === 'chiusura' ? vistaChiusura()
     : S.vista === 'impostazioni' ? vistaImpostazioni()
+    : S.vista === 'storico' ? vistaStorico()
     : vistaHome();
   document.querySelectorAll('.ex-note textarea').forEach(autoAltezza);
 }
@@ -823,6 +968,18 @@ document.addEventListener('click', ev => {
   const e = S.cur?.esercizi[i];
   switch (act) {
     case 'home': vai('home'); break;
+    case 'vai-storico': vai('storico'); break;
+    case 'log': S.logAperto = S.logAperto === b.dataset.f ? null : b.dataset.f; render(); break;
+    case 'log-elimina': {
+      const l = S.logs[b.dataset.f];
+      if (!l) return;
+      const n = sessione(l.sessione)?.nome || l.sessione;
+      if (!confirm(`Eliminare la sessione ${n} del ${ggmm(l.data)}? Viene tolta anche dal repo e non si può recuperare.`)) return;
+      eliminaLog(b.dataset.f);
+      break;
+    }
+    case 'apri-serie': S.cur.sel = { ...(S.cur.sel || {}), [chiaveCard(i)]: `${i}:${si}` }; salvaCur(); render(); break;
+    case 'chiudi-serie': if (S.cur.sel) delete S.cur.sel[chiaveCard(i)]; salvaCur(); render(); break;
     case 'impostazioni': S.impMsg = ''; vai('impostazioni'); break;
     case 'apri': apriSessione(b.dataset.id); break;
     case 'storico': S.storico = !S.storico; render(); break;
@@ -849,10 +1006,15 @@ document.addEventListener('click', ev => {
       const s = e.serie[si];
       s.fatta = !s.fatta;
       s.t = s.fatta ? Date.now() : null;
+      S.cur.sel = S.cur.sel || {};
       if (s.fatta) {
         if (e.serie.every(x => x.fatta)) e.fatto = true;
         const rec = recuperoDopo(i, si);
         if (rec) avviaTimer(rec);
+        delete S.cur.sel[chiaveCard(i)];            // si passa alla serie successiva
+      } else {
+        e.fatto = false;
+        S.cur.sel[chiaveCard(i)] = `${i}:${si}`;    // la serie annullata resta aperta
       }
       salvaCur(); render(); break;
     }
@@ -975,6 +1137,18 @@ function salvaSessione() {
   sincronizza();
 }
 
+// Elimina una sessione salvata: subito dal telefono, dal repo appena c'è rete.
+function eliminaLog(nome) {
+  delete S.logs[nome];
+  scrivi(K.logs, S.logs);
+  S.coda.push({ tipo: 'elimina', nome, path: `logs/${nome}`, msg: `elimina log: ${nome.replace(/\.json$/, '')}` });
+  scrivi(K.coda, S.coda);
+  S.logAperto = null;
+  render();
+  toast(syncPronto() ? 'Sessione eliminata · sincronizzazione…' : 'Sessione eliminata dal telefono');
+  sincronizza();
+}
+
 function salvaPeso() {
   const el = document.getElementById('peso-in');
   const kg = parseNum(el.value);
@@ -1057,7 +1231,22 @@ async function scriviRemoto(path, dati, msg, sha) {
   return gh(percorso(path), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 }
 
+async function eliminaRemoto(path, msg) {
+  const sha = await shaRemoto(path);
+  if (!sha) return; // già assente
+  const r = await gh(percorso(path), {
+    method: 'DELETE', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg, sha, branch: cfg().branch || 'main' }),
+  });
+  if (!r.ok && r.status !== 404) throw new Error(`GitHub ${r.status}`);
+}
+
+const eliminazioneInCoda = nome => S.coda.some(x => x.tipo === 'elimina' && x.nome === nome);
+
 async function inviaElemento(it) {
+  if (it.tipo === 'elimina') { await eliminaRemoto(it.path, it.msg); return; }
+  // sessione eliminata prima ancora di essere caricata: non serve caricarla
+  if (it.tipo === 'log' && !S.logs[it.nome] && eliminazioneInCoda(it.nome)) return;
   if (it.tipo === 'peso') {
     const r = await scriviRemoto(it.path, it.dati, it.msg, await shaRemoto(it.path));
     if (!r.ok) throw new Error(`GitHub ${r.status}`);
@@ -1088,15 +1277,26 @@ async function scaricaRemoto() {
     if (!r.ok) throw new Error(`GitHub ${r.status}`);
     const lista = await r.json();
     if (!Array.isArray(lista)) continue;
+    const remoti = new Set();
     for (const f of lista) {
       if (f.type !== 'file' || !f.name.endsWith('.json')) continue;
       const chiave = dir === 'logs' ? f.name : f.name.replace(/\.json$/, '');
+      remoti.add(chiave);
       const locale = dir === 'logs' ? S.logs : S.peso;
       if (locale[chiave]) continue;
+      if (dir === 'logs' && eliminazioneInCoda(chiave)) continue;
       const dati = await leggiFileRemoto(f.path).catch(() => null);
       if (!dati) continue;
       locale[chiave] = dati;
       nuovi++;
+    }
+    // Il repo è la fonte: un log sparito dal repo (eliminato da un altro dispositivo o da Claude)
+    // sparisce anche qui, salvo che sia ancora in coda per essere caricato.
+    if (dir === 'logs') {
+      const daCaricare = new Set(S.coda.filter(x => x.tipo === 'log').map(x => x.nome));
+      for (const k of Object.keys(S.logs)) {
+        if (!remoti.has(k) && !daCaricare.has(k)) { delete S.logs[k]; nuovi++; }
+      }
     }
   }
   if (nuovi) { scrivi(K.logs, S.logs); scrivi(K.peso, S.peso); }
@@ -1112,8 +1312,9 @@ async function sincronizza(manuale = false) {
   if (S.vista === 'home') render();
   try {
     while (S.coda.length) {
-      await inviaElemento(S.coda[0]);
-      S.coda.shift();
+      const it = S.coda[0];
+      await inviaElemento(it);
+      S.coda = S.coda.filter(x => x !== it);   // per identità: la coda può cambiare durante l'invio
       scrivi(K.coda, S.coda);
     }
     await scaricaRemoto();
@@ -1124,7 +1325,7 @@ async function sincronizza(manuale = false) {
     if (manuale) toast(`Sync non riuscita: ${S.sync.msg}`);
   } finally {
     syncInCorso = false;
-    if (S.vista === 'home' || S.vista === 'impostazioni') render();
+    if (S.vista === 'home' || S.vista === 'impostazioni' || S.vista === 'storico') render();
   }
 }
 

@@ -2,7 +2,7 @@
    File statici: risposta dalla cache e aggiornamento in background.
    programma.json: sempre dalla rete, la cache solo se offline. */
 
-const CACHE = 'camgym-v1';
+const CACHE = 'camgym-v2';
 const STATICI = [
   './', 'index.html', 'app.js', 'style.css', 'manifest.webmanifest',
   'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png',
