@@ -1,0 +1,74 @@
+{
+  "data": "2026-10-27",
+  "sessione": "armor",
+  "versione_programma": "1.0",
+  "inizio": "2026-10-27T11:58:56+01:00",
+  "fine": "2026-10-27T11:59:25+01:00",
+  "durata_min": 0,
+  "energia": null,
+  "note": "",
+  "esercizi": [
+    {
+      "id": "chest-press-inclinata",
+      "previsto": "chest-press-inclinata",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "panca-piana-manubri",
+      "previsto": "panca-piana-manubri",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "trazioni-assistite-larga",
+      "previsto": "trazioni-assistite-larga",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "rematore-manubrio",
+      "previsto": "rematore-manubrio",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "pec-deck",
+      "previsto": "pec-deck",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "dip",
+      "previsto": "dip",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "pushdown-corda",
+      "previsto": "pushdown-corda",
+      "fatto": false,
+      "serie": [
+        {
+          "kg": 12.5,
+          "rip": 15,
+          "rir": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "crunch-declinato",
+      "previsto": "crunch-declinato",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    }
+  ]
+}
