@@ -1,0 +1,186 @@
+{
+  "data": "2026-11-03",
+  "sessione": "armor",
+  "versione_programma": "1.0",
+  "inizio": "2026-11-03T20:04:03+01:00",
+  "fine": "2026-11-03T22:17:00+01:00",
+  "durata_min": 133,
+  "energia": 3,
+  "note": "Non ho fatto tutti gli esercizi che erano listati qui perché alcuni non sapevo cosa fossero o come farli. Quelli che ho fatto invece penso di averli fatti sotto target dato che sono 3 settimane a riposo. Ho per sbaglio lasciato scorrere il tempo senza fermarlo, direi che tempo di allenamento sia 1h30min",
+  "esercizi": [
+    {
+      "id": "chest-press-inclinata",
+      "previsto": "chest-press-inclinata",
+      "fatto": true,
+      "serie": [
+        {
+          "kg": 42.5,
+          "rip": 12,
+          "rir": 3
+        },
+        {
+          "kg": 42.5,
+          "rip": 12,
+          "rir": 3
+        },
+        {
+          "kg": 42.5,
+          "rip": 10,
+          "rir": 1
+        },
+        {
+          "kg": 42.5,
+          "rip": 10,
+          "rir": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "panca-piana-manubri",
+      "previsto": "panca-piana-manubri",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "trazioni-assistite-larga",
+      "previsto": "trazioni-assistite-larga",
+      "fatto": true,
+      "serie": [
+        {
+          "kg": 20,
+          "rip": 10,
+          "rir": 3
+        },
+        {
+          "kg": 20,
+          "rip": 8,
+          "rir": 3
+        },
+        {
+          "kg": 20,
+          "rip": 8,
+          "rir": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "rematore-manubrio",
+      "previsto": "rematore-manubrio",
+      "fatto": false,
+      "serie": [
+        {
+          "kg": 18,
+          "rip": 12,
+          "rir": 3
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "croci-cavi",
+      "previsto": "pec-deck",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "dip",
+      "previsto": "dip",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "pushdown-corda",
+      "previsto": "pushdown-corda",
+      "fatto": true,
+      "serie": [
+        {
+          "kg": 12.5,
+          "rip": 9,
+          "rir": 1
+        },
+        {
+          "kg": 10,
+          "rip": 8,
+          "rir": 1
+        },
+        {
+          "kg": 10,
+          "rip": 10,
+          "rir": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "crunch-declinato",
+      "previsto": "crunch-declinato",
+      "fatto": false,
+      "serie": [
+        {
+          "kg": 5,
+          "rip": 15,
+          "rir": 2
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "extra-pectoral-machine",
+      "previsto": null,
+      "fatto": true,
+      "serie": [
+        {
+          "kg": 37.5,
+          "rip": 8,
+          "rir": 3
+        },
+        {
+          "kg": 35,
+          "rip": 8,
+          "rir": 0
+        },
+        {
+          "kg": 35,
+          "rip": 8,
+          "rir": 3
+        },
+        {
+          "kg": 35,
+          "rip": 6,
+          "rir": 3
+        }
+      ],
+      "note": "",
+      "nome": "Pectoral machine"
+    },
+    {
+      "id": "extra-manubrio-sopra-la-testa-da-8kg-e-tirato-su-con-gomito-a-90-e-poi-aperto-per-allenare-tricipiti",
+      "previsto": null,
+      "fatto": true,
+      "serie": [
+        {
+          "kg": 8,
+          "rip": 8,
+          "rir": 2
+        },
+        {
+          "kg": 8,
+          "rip": 10,
+          "rir": 3
+        },
+        {
+          "kg": 8,
+          "rip": 6,
+          "rir": 3
+        }
+      ],
+      "note": "",
+      "nome": "Manubrio sopra la testa da 8kg e tirato su con gomito a 90 e poi aperto per allenare tricipiti"
+    }
+  ]
+}
