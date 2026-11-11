@@ -1,0 +1,72 @@
+{
+  "data": "2026-11-10",
+  "sessione": "roots",
+  "versione_programma": "1.1",
+  "inizio": "2026-11-10T23:02:26+01:00",
+  "fine": "2026-11-10T23:02:51+01:00",
+  "durata_min": 0,
+  "energia": null,
+  "note": "",
+  "esercizi": [
+    {
+      "id": "leg-press",
+      "previsto": "leg-press",
+      "fatto": false,
+      "serie": [
+        {
+          "kg": null,
+          "rip": 12,
+          "rir": 2
+        },
+        {
+          "kg": 5,
+          "rip": 12,
+          "rir": 2
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "stacco-rumeno-manubri",
+      "previsto": "stacco-rumeno-manubri",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "leg-curl",
+      "previsto": "leg-curl",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "leg-extension",
+      "previsto": "leg-extension",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "calf-raise",
+      "previsto": "calf-raise",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "crunch-cavo",
+      "previsto": "crunch-cavo",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    },
+    {
+      "id": "plank",
+      "previsto": "plank",
+      "fatto": false,
+      "serie": [],
+      "note": ""
+    }
+  ]
+}
