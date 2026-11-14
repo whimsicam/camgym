@@ -381,7 +381,7 @@
   }
 
   // mare: acqua trasparente sopra i fondali colorati, schiuma lungo la riva
-  var water = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: "#2BB3C7", roughness: 0.2, metalness: 0.05, transparent: true, opacity: 0.6, depthWrite: false }));
+  var water = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: "#2BB3C7", roughness: 0.2, metalness: 0.05, transparent: true, opacity: 0.5, depthWrite: false }));
   water.rotation.x = -Math.PI / 2; water.receiveShadow = true; water.renderOrder = 1; scene.add(water);
   var deep = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: "#1F5F7E", roughness: 1 })); deep.rotation.x = -Math.PI / 2; deep.position.y = -2.55; scene.add(deep);
   var matFoam = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide });
@@ -955,7 +955,7 @@
 
   // ===================== LUCE, CIELO, METEO =====================
   var PAL = {
-    day: { sky: C("#8FD0D8"), water: C("#2AA6BF"), sun: C("#FFF1D6"), hemi: C("#FFFFFF"), ground: C("#A9C6A0") },
+    day: { sky: C("#8FD0D8"), water: C("#1F8FAE"), sun: C("#FFF1D6"), hemi: C("#FFFFFF"), ground: C("#A9C6A0") },
     dusk: { sky: C("#F0A583"), water: C("#B87F9E"), sun: C("#FF9A5C"), hemi: C("#FFD2B8"), ground: C("#7C6E86") },
     night: { sky: C("#0F1733"), water: C("#1C2F6B"), sun: C("#9FB4FF"), hemi: C("#6377C0"), ground: C("#1B2340") }
   };
@@ -1000,7 +1000,7 @@
   function resize() { W = window.innerWidth || 1; H = window.innerHeight || 1; renderer.setSize(W, H, false); project(); }
   function placeCamera(dt) {
     if (yawGoal != null) { cam.yaw += (yawGoal - cam.yaw) * Math.min(1, dt * 6); if (Math.abs(yawGoal - cam.yaw) < 0.002) { cam.yaw = yawGoal; yawGoal = null; } }
-    if (count() === 0 && Math.abs(vel.x) + Math.abs(vel.y) > 4) { pan(vel.x * dt, vel.y * dt); var kv = Math.exp(-dt * 4.5); vel.x *= kv; vel.y *= kv; }
+    if (count() === 0 && Math.abs(vel.x) + Math.abs(vel.y) > 4) { pan(vel.x * dt, vel.y * dt); var kv = Math.exp(-dt * 6); vel.x *= kv; vel.y *= kv; }
     if (focus) { var k = Math.min(1, dt * 4); cam.target.x += (focus.x - cam.target.x) * k; cam.target.z += (focus.z - cam.target.z) * k; cam.target.y += ((focus.y || 1.4) - cam.target.y) * k; cam.zoom += (focus.zoom - cam.zoom) * k; project(); if (Math.abs(focus.x - cam.target.x) + Math.abs(focus.z - cam.target.z) + Math.abs(focus.zoom - cam.zoom) < 0.02) focus = null; }
     var d = 150; camera.position.set(cam.target.x + Math.sin(cam.yaw) * Math.sin(cam.pitch) * d, cam.target.y + Math.cos(cam.pitch) * d, cam.target.z + Math.cos(cam.yaw) * Math.sin(cam.pitch) * d); camera.lookAt(cam.target);
   }
@@ -1016,7 +1016,7 @@
   canvas.addEventListener("pointermove", function (e) {
     if (!pointers[e.pointerId]) return; var prev = pointers[e.pointerId]; pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
     if (count() === 1 && drag) { var dx = e.clientX - prev.x, dy = e.clientY - prev.y; drag.moved += Math.abs(dx) + Math.abs(dy);
-      if (drag.moved > 6) { if (drag.rot) { cam.yaw -= dx * 0.006; cam.pitch = Math.max(0.5, Math.min(1.25, cam.pitch - dy * 0.004)); } else { pan(dx, dy); var now = performance.now(), ms = Math.max(8, now - lastMove); vel.x = vel.x * 0.3 + dx / ms * 700; vel.y = vel.y * 0.3 + dy / ms * 700; lastMove = now; } } }
+      if (drag.moved > 6) { if (drag.rot) { cam.yaw -= dx * 0.006; cam.pitch = Math.max(0.5, Math.min(1.25, cam.pitch - dy * 0.004)); } else { pan(dx, dy); var now = performance.now(), ms = Math.max(8, now - lastMove); vel.x = vel.x * 0.3 + dx / ms * 500; vel.y = vel.y * 0.3 + dy / ms * 500; lastMove = now; } } }
     else if (count() === 2) { var k = Object.keys(pointers), a = pointers[k[0]], b = pointers[k[1]], dist = Math.hypot(a.x - b.x, a.y - b.y), ang = Math.atan2(b.y - a.y, b.x - a.x), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
       if (pinch) { zoomAt(dist / pinch.d, mx, my); pan(mx - pinch.x, my - pinch.y); var da = ang - pinch.a; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI; cam.yaw += da; }
       pinch = { d: dist, x: mx, y: my, a: ang }; }
