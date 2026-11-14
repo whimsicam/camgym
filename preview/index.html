@@ -57,6 +57,8 @@
   .tag { position: absolute; left: 0; top: 0; pointer-events: auto; padding: 3px 9px; font-size: 12px; gap: 6px; box-shadow: 0 3px 10px rgba(20, 40, 50, .18); white-space: nowrap; will-change: transform; }
   .tag .dot { width: 7px; height: 7px; }
   .tag.quiet { opacity: .88; }
+  .tags.far .tag .app { display: none; }
+  .tags.far .tag { padding: 2px 7px; font-size: 11px; }
 
   .card { position: fixed; left: 16px; bottom: 16px; width: min(420px, calc(100% - 32px)); max-height: calc(100% - 110px); overflow: auto; display: grid; gap: 10px; padding: 14px 16px 16px; }
   .card header { display: flex; gap: 12px; align-items: center; }
@@ -127,11 +129,11 @@
       look: { kind: "pig", body: "#F4A6BC", belly: "#FBD3DE", acc: "scarf", accColor: "#F2B705" } },
     { id: "study", name: "Panda", app: "CAM Study", kind: "site", color: "#1E8C93", x: -11.5, z: -5.5, r: 3.0, h: 3.2, build: "books", url: CONFIG.sites + "camstudy/",
       look: { kind: "panda", body: "#F7F5EF", belly: "#FFFFFF", dark: "#2B2B2E", acc: "glasses", pack: "#1E8C93" } },
-    { id: "gym", name: "Orso", app: "CAM Gym", kind: "site", color: "#E8506A", x: -12.5, z: 4.5, r: 3.1, h: 2.2, build: "gym", url: CONFIG.sites + "camgym/",
+    { id: "gym", name: "Orso", app: "CAM Gym", kind: "site", color: "#E8506A", x: -12.5, z: 4.5, r: 3.1, h: 2.2, bface: 1.05, arcH: 1.0, build: "gym", url: CONFIG.sites + "camgym/",
       look: { kind: "bear", body: "#A9714B", belly: "#E5C9A6", acc: "headband", accColor: "#E8506A" } },
-    { id: "kitchen", name: "Gatto", app: "CAM Kitchen", kind: "site", color: "#7B57C9", x: -5.5, z: 11, r: 3.1, h: 1.2, build: "teapot", url: CONFIG.sites + "camkitchen/",
+    { id: "kitchen", name: "Gatto", app: "CAM Kitchen", kind: "site", color: "#7B57C9", x: -5.5, z: 11, r: 3.1, h: 1.2, bface: 0.17, arcC: -1.3, arcH: 0.65, build: "teapot", url: CONFIG.sites + "camkitchen/",
       look: { kind: "cat", body: "#F0A04B", belly: "#FBE6C8", acc: "chef", apron: "#7B57C9" } },
-    { id: "fuoricampo", name: "Volpe", app: "fuoriCAMpo", kind: "claude", color: "#2F6FDE", x: 6, z: 11, r: 3.2, h: 1.0, build: "stadium", url: CONFIG.claudeProjects,
+    { id: "fuoricampo", name: "Volpe", app: "fuoriCAMpo", kind: "claude", color: "#2F6FDE", x: 6, z: 11, r: 3.2, h: 1.0, bface: -0.87, arcC: 1.3, arcH: 0.65, build: "stadium", url: CONFIG.claudeProjects,
       look: { kind: "fox", body: "#E8743B", belly: "#FFF4E6", acc: "scarf", accColor: "#2F6FDE" },
       msg: { text: "Prima della prossima giornata ti preparo la formazione.", src: "esempio" } },
     { id: "okyko", name: "Rana", app: "Okyko", kind: "claude", color: "#4E9E5E", x: 7, z: -16, r: 3.0, h: 2.4, build: "garden", url: CONFIG.claudeProjects,
@@ -178,8 +180,8 @@
   function seasonNow() { var m = romeParts(new Date()).month; return m >= 3 && m <= 5 ? "primavera" : m >= 6 && m <= 8 ? "estate" : m >= 9 && m <= 11 ? "autunno" : "inverno"; }
 
   var WX = {
-    sereno: { label: "Sereno", clouds: 5, grey: 0, rain: 0, snow: 0, fog: 0 },
-    nuvoloso: { label: "Poco nuvoloso", clouds: 10, grey: .25, rain: 0, snow: 0, fog: 0 },
+    sereno: { label: "Sereno", clouds: 3, grey: 0, rain: 0, snow: 0, fog: 0 },
+    nuvoloso: { label: "Poco nuvoloso", clouds: 8, grey: .25, rain: 0, snow: 0, fog: 0 },
     coperto: { label: "Coperto", clouds: 18, grey: .75, rain: 0, snow: 0, fog: 0 },
     pioggia: { label: "Pioggia", clouds: 18, grey: .9, rain: 1, snow: 0, fog: .25 },
     temporale: { label: "Temporale", clouds: 18, grey: 1, rain: 1.6, snow: 0, fog: .3, storm: true },
@@ -332,7 +334,7 @@
       var mx = (ax + bx + cx) / 3, mz = (az + bz + cz) / 3, hC = (ah + bh + ch) / 3; terrain(mx, mz, info);
       var ux = bx - ax, uy = bh - ah, uz = bz - az, vx = cx - ax, vy = ch - ah, vz = cz - az, nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx; ny = ny / Math.sqrt(nx * nx + ny * ny + nz * nz);
       var kd = hC < -0.02 ? 0 : info.plaza > 0.75 ? 5 : (ny < 0.8 && hC > 0.4) ? 3 : hC < 0.36 ? 1 : info.path > 0.5 ? 4 : info.pond > 0.6 ? 1 : 2;
-      tKind[n] = kd; tN[n] = noise(mx * 0.45 + 7, mz * 0.45 + 3) * 0.7 + hash(Math.floor(mx * 2), Math.floor(mz * 2)) * 0.3; tH[n] = hC; n++;
+      tKind[n] = kd; tN[n] = kd === 0 ? noise(mx * 0.2 + 7, mz * 0.2 + 3) : noise(mx * 0.45 + 7, mz * 0.45 + 3) * 0.7 + hash(Math.floor(mx * 2), Math.floor(mz * 2)) * 0.3; tH[n] = hC; n++;
     }
     for (var j = 0; j < TN; j++) for (var i = 0; i < TN; i++) {
       var x0 = -TS / 2 + i * CELL, z0 = -TS / 2 + j * CELL, x1 = x0 + CELL, z1 = z0 + CELL, r = TN + 1;
@@ -353,7 +355,7 @@
     var g = GRASS[season], winter = season === "inverno";
     for (var n = 0; n < NT; n++) {
       var k = tKind[n], v = tN[n], h = tH[n];
-      if (k === 0) { var dp = -h; tc.copy(cBed0).lerp(cBed1, sm(0, 1.1, dp)).lerp(cBed2, sm(1.0, 2.5, dp)); if (dp > 0.8 && v > 0.66) tc.lerp(v > 0.78 ? cReefB : cReefA, 0.75); }
+      if (k === 0) { var dp = -h; tc.copy(cBed0).lerp(cBed1, sm(0, 1.1, dp)).lerp(cBed2, sm(1.0, 2.5, dp)); if (dp > 0.7) tc.lerp(v > 0.74 ? cReefB : cReefA, sm(0.58, 0.68, v) * sm(0.7, 1.2, dp) * 0.7); }
       else if (k === 1) { tc.copy(cSandA).lerp(cSandB, v); if (h < 0.14) tc.lerp(cWet, 0.6); }
       else if (k === 2) { tc.copy(g[0]).lerp(g[1], v); if (winter && v > 0.74) tc.lerp(C("#C9D3B8"), 0.6); }
       else if (k === 3) { tc.copy(cRockA).lerp(cRockB, v); if (winter) tc.lerp(cSnow, 0.35); }
@@ -430,7 +432,7 @@
   (function () {
     var tries = 0, placed = 0;
     while (placed < 170 && tries < 6000) { tries++; var x = sr(-27, 27), z = sr(-27, 27), h = freeSpot(x, z, 1.25); if (h == null) continue; var kd = rnd(); tree(x, z, kd < 0.3 ? "pine" : kd < 0.45 ? "poplar" : "leaf", sr(0.8, 1.35), h); placed++; }
-    AGENTS.forEach(function (a) { if (a.build === "treehouse" || a.build === "stadium") return; var f = Math.atan2(PLAZA.x - a.x, PLAZA.z - a.z); [f + Math.PI - 0.95, f + Math.PI + 0.95].forEach(function (an) { var kd = rnd(); tree(a.x + Math.sin(an) * (a.r - 0.25), a.z + Math.cos(an) * (a.r - 0.25), kd < 0.4 ? "pine" : "leaf", sr(0.9, 1.2), a.h); }); });
+    AGENTS.forEach(function (a) { if (a.build === "treehouse" || a.build === "stadium") return; var f = Math.atan2(PLAZA.x - a.x, PLAZA.z - a.z), bf = a.bface != null ? a.bface : f, ac = f + (a.arcC || 0); [bf + Math.PI - 0.55, bf + Math.PI + 0.55].forEach(function (an) { if (Math.abs(Math.atan2(Math.sin(an - f), Math.cos(an - f))) < 0.5 || Math.abs(Math.atan2(Math.sin(an - ac), Math.cos(an - ac))) < (a.arcH || 1.2) + 0.25) return; var kd = rnd(); tree(a.x + Math.sin(an) * (a.r - 0.25), a.z + Math.cos(an) * (a.r - 0.25), kd < 0.4 ? "pine" : "leaf", sr(0.9, 1.2), a.h); }); });
     for (var i = 0; i < 46; i++) { x = sr(-27, 27); z = sr(-27, 27); h = freeSpot(x, z, 0.8); if (h == null) continue; var n = 2 + Math.floor(rnd() * 3); for (var j = 0; j < n; j++) rocksI.push({ x: x + sr(-0.5, 0.5), y: h + 0.12, z: z + sr(-0.5, 0.5), s: sr(0.5, 1.4), sy: sr(0.4, 0.9), ry: sr(0, 6), c: pickOf(["#9A9284", "#B3A998", "#857D70", "#C4B9A6"]) }); }
     for (i = 0; i < 16; i++) { var a = i / 16 * 6.28 + sr(-0.1, 0.1), dd = coast(a) + sr(0.3, 3.5); rocksI.push({ x: Math.cos(a) * dd, y: -0.15, z: Math.sin(a) * dd, s: sr(1.2, 2.6), sy: sr(0.7, 1.3), ry: sr(0, 6), c: pickOf(["#8C8478", "#A39A8B", "#7B7468"]) }); }
     var info = {};
@@ -467,9 +469,9 @@
 
   // ===================== EDIFICI =====================
   var pick = [], clockHands = [];
-  AGENTS.forEach(function (a) { a.home = { x: a.x, z: a.z }; a.face = Math.atan2(PLAZA.x - a.x, PLAZA.z - a.z); });
+  AGENTS.forEach(function (a) { a.home = { x: a.x, z: a.z }; a.face = Math.atan2(PLAZA.x - a.x, PLAZA.z - a.z); a.arc = a.face + (a.arcC || 0); a.arcH = a.arcH || 1.2; });
   function zone(a) {
-    var g = G(world, a.x, a.h, a.z, a.face); g.userData.agent = a; pick.push(g);
+    var g = G(world, a.x, a.h, a.z, a.bface != null ? a.bface : a.face); g.userData.agent = a; pick.push(g);
     var s = G(g, -1.15, 0, a.r - 0.75, 0.35); add(s, cyl(0.035, 0.045, 0.9, 6), mat(WOOD_D), 0, 0.45, 0); add(s, cyl(0.26, 0.26, 0.04, 16), mat("#FFFFFF", { flatShading: false }), 0, 1.0, -0.01).rotation.x = Math.PI / 2; add(s, cyl(0.21, 0.21, 0.06, 16), smat(a.color), 0, 1.0, 0).rotation.x = Math.PI / 2;
     return g;
   }
@@ -708,7 +710,7 @@
 
   // ---------- cielo e mare: nuvole, mongolfiera, gabbiani, pesci, squali, veliero ----------
   var clouds = [], matCloud = new THREE.MeshStandardMaterial({ color: "#FFFFFF", roughness: 1 });
-  for (var ci = 0; ci < 18; ci++) { var cg = new THREE.Group(), cn = 3 + Math.floor(rnd() * 3); for (var ck = 0; ck < cn; ck++) { var cm = add(cg, ball(sr(0.9, 1.5), 12), matCloud, (ck - (cn - 1) / 2) * 1.35, sr(0, 0.35), sr(-0.5, 0.5)); cm.receiveShadow = false; cm.scale.y = 0.7; } add(cg, ball(1.15, 12), matCloud, 0, 0.7, 0).receiveShadow = false; cg.scale.setScalar(sr(0.9, 1.5)); cg.position.set(sr(-44, 44), sr(11, 15), sr(-34, 34)); cg.userData.v = sr(0.25, 0.6); scene.add(cg); clouds.push(cg); }
+  for (var ci = 0; ci < 18; ci++) { var cg = new THREE.Group(), cn = 3 + Math.floor(rnd() * 3); for (var ck = 0; ck < cn; ck++) { var cm = add(cg, ball(sr(0.9, 1.5), 12), matCloud, (ck - (cn - 1) / 2) * 1.35, sr(0, 0.35), sr(-0.5, 0.5)); cm.receiveShadow = false; cm.scale.y = 0.7; } add(cg, ball(1.15, 12), matCloud, 0, 0.7, 0).receiveShadow = false; cg.scale.setScalar(ci < 8 ? sr(0.45, 0.75) : sr(0.7, 1.15)); cg.position.set(sr(-44, 44), sr(11, 15), sr(-34, 34)); cg.userData.v = sr(0.25, 0.6); scene.add(cg); clouds.push(cg); }
   (function () {
     var bl = G(scene, 0, 0, 0), cA = "#E8506A", cB = "#FBF8EE";
     for (var q = 0; q < 10; q++) add(bl, new THREE.SphereGeometry(1.5, 10, 12, q * Math.PI / 5, Math.PI / 5), smat(q % 2 ? cA : cB), 0, 0, 0).scale.y = 1.15;
@@ -772,7 +774,7 @@
     if (L.acc === "glasses") { [-1, 1].forEach(function (s) { add(head, torus(0.085, 0.014, 6, 16), smat("#1E8C93"), s * 0.125, 0.03, 0.31, true); }); add(head, box(0.08, 0.014, 0.014), smat("#1E8C93"), 0, 0.03, 0.31, true); }
     if (L.pack) { add(body, box(0.3, 0.3, 0.14), mat(L.pack), 0, 0.44, -0.28); add(body, box(0.2, 0.12, 0.05), mat("#17656B"), 0, 0.4, -0.36); }
     if (L.acc === "headband") add(head, torus(0.31, 0.035, 6, 20), smat(L.accColor), 0, 0.12, 0).rotation.x = Math.PI / 2 - 0.08;
-    if (L.acc === "chef") { add(head, cyl(0.17, 0.16, 0.16, 14), smat("#FFFFFF"), 0, 0.33, 0); add(head, ball(0.21, 12), smat("#FFFFFF"), 0, 0.5, 0).scale.y = 0.7; add(body, box(0.3, 0.26, 0.03), mat(L.apron), 0, 0.33, 0.255, true); top = 1.55; }
+    if (L.acc === "chef") { add(head, cyl(0.17, 0.16, 0.16, 14), smat("#FFFFFF"), 0, 0.33, 0); add(head, ball(0.21, 12), smat("#FFFFFF"), 0, 0.5, 0).scale.y = 0.7; add(body, box(0.26, 0.2, 0.03), mat(L.apron), 0, 0.42, 0.262, true); top = 1.55; }
     if (L.acc === "leaf") { var lf = add(head, ball(0.24, 10), smat("#4E9E5E"), 0.02, 0.36, 0); lf.scale.set(1, 0.14, 0.7); lf.rotation.z = 0.2; add(head, cyl(0.012, 0.012, 0.14, 5), smat("#3F8F5B"), -0.2, 0.34, 0).rotation.z = 1.1; top = 1.4; }
     if (k === "rabbit") top = 1.75;
     var puffM = new THREE.MeshStandardMaterial({ color: "#FFFFFF", transparent: true, opacity: 0 }), puff = add(g, ball(0.07, 8), puffM, 0, 0.78, 0.4, true);
@@ -786,13 +788,13 @@
   function plan(a) {
     var roll = Math.random();
     if (a.at === "home" && roll < 0.2) { ringWalk(a, a.home, a.face, a.r - 0.6); a.queue.push(ringPoint(PLAZA, a.face + Math.PI, PLAZA.r - 0.5)); a.queue.push(ringPoint(PLAZA, a.face + Math.PI + rr(-0.4, 0.4), rr(1.7, 2.3))); a.at = "plaza"; }
-    else if (a.at === "plaza" && roll < 0.3) { ringWalk(a, PLAZA, a.face + Math.PI, 2.2); a.queue.push(ringPoint(PLAZA, a.face + Math.PI, PLAZA.r - 0.5)); a.queue.push(ringPoint(a.home, a.face, a.r - 0.5)); a.queue.push(ringPoint(a.home, a.face + rr(-0.5, 0.5), a.r - 0.8)); a.at = "home"; }
-    else if (a.at === "home") ringWalk(a, a.home, a.face + rr(-1.2, 1.2), rr(a.r - 1.05, a.r - 0.5));
+    else if (a.at === "plaza" && roll < 0.3) { ringWalk(a, PLAZA, a.face + Math.PI, 2.2); a.queue.push(ringPoint(PLAZA, a.face + Math.PI, PLAZA.r - 0.5)); a.queue.push(ringPoint(a.home, a.face, a.r - 0.5)); a.at = "home"; }
+    else if (a.at === "home") ringWalk(a, a.home, a.arc + rr(-a.arcH, a.arcH), rr(a.r - 1.05, a.r - 0.5));
     else ringWalk(a, PLAZA, angleOf(PLAZA, a.pos) + rr(-1.3, 1.3), rr(1.6, 2.4));
   }
   AGENTS.forEach(function (a, i) {
     makeMascot(a);
-    a.pos = ringPoint(a.home, a.face + rr(-1.0, 1.0), a.r - 0.7); a.heading = a.face; a.queue = []; a.at = "home"; a.wait = rr(0.5, 4); a.phase = i * 1.7; a.walk = 0; a.blink = rr(1, 4);
+    a.pos = ringPoint(a.home, a.arc + rr(-a.arcH, a.arcH) * 0.8, a.r - 0.7); a.heading = a.face; a.queue = []; a.at = "home"; a.wait = rr(0.5, 4); a.phase = i * 1.7; a.walk = 0; a.blink = rr(1, 4);
     a.m.g.position.set(a.pos.x, heightAt(a.pos.x, a.pos.z), a.pos.z); a.m.g.rotation.y = a.heading;
   });
   var selRing = new THREE.Mesh(torus(0.7, 0.04, 6, 30), new THREE.MeshBasicMaterial({ color: "#FFFFFF" })); selRing.rotation.x = Math.PI / 2; selRing.visible = false; scene.add(selRing);
@@ -887,7 +889,7 @@
 
   // ===================== INTERFACCIA =====================
   var tagsBox = $("tags");
-  AGENTS.forEach(function (a) { var b = el("button", "tag"); b.type = "button"; b.appendChild(el("span", "dot")); b.appendChild(el("span", null, a.kind === "mayor" ? a.name : a.name + " · " + a.app)); b.addEventListener("click", function () { openCard(a); }); tagsBox.appendChild(b); a.tag = b; });
+  AGENTS.forEach(function (a) { var b = el("button", "tag"); b.type = "button"; b.appendChild(el("span", "dot")); b.appendChild(el("span", null, a.name)); if (a.kind !== "mayor") b.appendChild(el("span", "app", "· " + a.app)); b.addEventListener("click", function () { openCard(a); }); tagsBox.appendChild(b); a.tag = b; });
   function refreshTags() {
     var w = waiting(); waitingCount = w.length;
     AGENTS.forEach(function (a) { a.unread = a.kind !== "mayor" && unread(a); var on = a.kind === "mayor" ? w.length > 0 : a.unread; a.tag.firstChild.hidden = !on; a.tag.classList.toggle("quiet", !on); a.tag.setAttribute("aria-label", a.name + (on ? ", ha qualcosa da dirti" : "")); if (notes[a.id]) notes[a.id].visible = a.unread; });
@@ -957,7 +959,7 @@
   }
 
   // ===================== CICLO =====================
-  var last = performance.now(), statusT = 0, clockT = 99;
+  var last = performance.now(), statusT = 0, clockT = 99, wasFar = null;
   function frame(now) {
     var dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
     placeCamera(dt);
@@ -972,7 +974,7 @@
     }
     clockT += dt; if (clockT > 20) { clockT = 0; var p = romeParts(new Date()); clockHands.forEach(function (h) { h[0].rotation.z = -((p.hour % 12) + p.minute / 60) / 12 * 2 * Math.PI; h[1].rotation.z = -p.minute / 60 * 2 * Math.PI; }); }
     statusT += dt; if (statusT > 15) { statusT = 0; setStatus(); refreshTags(); var c2 = isCold(); if (c2 !== cold) cold = c2; }
-    renderer.render(scene, camera); placeTags();
+    renderer.render(scene, camera); placeTags(); var far = cam.zoom < 1.9; if (far !== wasFar) { wasFar = far; tagsBox.classList.toggle("far", far); }
     requestAnimationFrame(frame);
   }
   window.__camworld = { S: S, cam: cam, AGENTS: AGENTS, apply: function () { renderTune(); applyWeather(); applySeason(); }, project: project, resize: resize, info: function () { return renderer.info.render; } };
