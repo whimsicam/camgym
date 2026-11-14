@@ -120,30 +120,33 @@
   };
   // x, z = centro della zona; r = raggio; h = quota del terrazzo. look = animale e accessori.
   var AGENTS = [
-    { id: "sindaco", name: "Il Sindaco", app: "Municipio di CAM World", kind: "mayor", color: "#8A6A4A", x: -2.5, z: -11.5, r: 3.2, h: 4.4, build: "treehouse", url: CONFIG.claudeApp,
+    { id: "sindaco", name: "Il Sindaco", app: "Municipio di CAM World", kind: "mayor", color: "#8A6A4A", x: -2.5, z: -11.5, r: 3.2, h: 2.7, bs: 1.12, build: "treehouse", url: CONFIG.claudeApp,
       look: { kind: "owl", body: "#8A6A4A", belly: "#EBDDBE", acc: "tophat" } },
-    { id: "warren", name: "Warren", app: "Chronicam", kind: "site", color: "#3D4250", x: 9, z: -8, r: 3.0, h: 3.0, build: "clock", url: CONFIG.sites + "chronicam-edizione/",
+    { id: "warren", name: "Warren", app: "Chronicam", kind: "site", color: "#3D4250", x: 9, z: -8, r: 3.4, h: 1.9, build: "clock", url: CONFIG.sites + "chronicam-edizione/",
       look: { kind: "rabbit", body: "#3D4250", belly: "#D9DCE3", acc: "scarf", accColor: "#D8482F" },
       msg: { text: "Ho una novità pronta su Chronicam. Passa quando vuoi.", src: "esempio" } },
-    { id: "piggy", name: "Piggy", app: "CAM Cash", kind: "site", color: "#F2B705", x: 12.5, z: 2, r: 3.1, h: 2.0, build: "piggy", url: CONFIG.sites + "camcash-sito/", rule: "cash",
+    { id: "piggy", name: "Piggy", app: "CAM Cash", kind: "site", color: "#F2B705", x: 12.5, z: 2, r: 3.3, h: 1.5, build: "piggy", url: CONFIG.sites + "camcash-sito/", rule: "cash",
       look: { kind: "pig", body: "#F4A6BC", belly: "#FBD3DE", acc: "scarf", accColor: "#F2B705" } },
-    { id: "study", name: "Panda", app: "CAM Study", kind: "site", color: "#1E8C93", x: -11.5, z: -5.5, r: 3.0, h: 3.2, build: "books", url: CONFIG.sites + "camstudy/",
+    { id: "study", name: "Panda", app: "CAM Study", kind: "site", color: "#1E8C93", x: -11.5, z: -5.5, r: 3.4, h: 2.1, build: "books", url: CONFIG.sites + "camstudy/",
       look: { kind: "panda", body: "#F7F5EF", belly: "#FFFFFF", dark: "#2B2B2E", acc: "glasses", pack: "#1E8C93" } },
-    { id: "gym", name: "Orso", app: "CAM Gym", kind: "site", color: "#E8506A", x: -12.5, z: 4.5, r: 3.1, h: 2.2, bface: 1.05, arcH: 1.0, build: "gym", url: CONFIG.sites + "camgym/",
+    { id: "gym", name: "Orso", app: "CAM Gym", kind: "site", color: "#E8506A", x: -12.5, z: 4.5, r: 3.5, h: 1.6, bface: 1.05, arcH: 1.0, build: "gym", url: CONFIG.sites + "camgym/",
       look: { kind: "bear", body: "#A9714B", belly: "#E5C9A6", acc: "headband", accColor: "#E8506A" } },
-    { id: "kitchen", name: "Gatto", app: "CAM Kitchen", kind: "site", color: "#7B57C9", x: -5.5, z: 11, r: 3.1, h: 1.2, bface: 0.17, arcC: -1.3, arcH: 0.65, build: "teapot", url: CONFIG.sites + "camkitchen/",
+    { id: "kitchen", name: "Gatto", app: "CAM Kitchen", kind: "site", color: "#7B57C9", x: -5.5, z: 11, r: 3.5, h: 1.2, bface: 0.17, arcC: -1.3, arcH: 0.65, build: "teapot", url: CONFIG.sites + "camkitchen/",
       look: { kind: "cat", body: "#F0A04B", belly: "#FBE6C8", acc: "chef", apron: "#7B57C9" } },
-    { id: "fuoricampo", name: "Volpe", app: "fuoriCAMpo", kind: "claude", color: "#2F6FDE", x: 6, z: 11, r: 3.2, h: 1.0, bface: -0.87, arcC: 1.3, arcH: 0.65, build: "stadium", url: CONFIG.claudeProjects,
+    { id: "fuoricampo", name: "Volpe", app: "fuoriCAMpo", kind: "claude", color: "#2F6FDE", x: 6, z: 11, r: 3.3, h: 1.1, bs: 1.05, bface: -0.87, arcC: 1.3, arcH: 0.65, build: "stadium", url: CONFIG.claudeProjects,
       look: { kind: "fox", body: "#E8743B", belly: "#FFF4E6", acc: "scarf", accColor: "#2F6FDE" },
       msg: { text: "Prima della prossima giornata ti preparo la formazione.", src: "esempio" } },
-    { id: "okyko", name: "Rana", app: "Okyko", kind: "claude", color: "#4E9E5E", x: 7, z: -16, r: 3.0, h: 2.4, build: "garden", url: CONFIG.claudeProjects,
+    { id: "okyko", name: "Rana", app: "Okyko", kind: "claude", color: "#4E9E5E", x: 7, z: -16, r: 3.4, h: 1.7, build: "garden", url: CONFIG.claudeProjects,
       look: { kind: "frog", body: "#7CCB6A", belly: "#D8F0B8", acc: "leaf" },
       msg: { text: "Controlla il terriccio del bonsai: se in superficie è asciutto, oggi si annaffia.", src: "esempio" } }
   ];
-  var PLAZA = { x: 0, z: 0, r: 3.6, h: 1.5 };
-  var LIGHT = { x: 20.5, z: 10.5, r: 2.2, h: 1.8 };
+  var PLAZA = { x: 0, z: 0, r: 3.6, h: 1.3 };
+  var LIGHT = { x: 20.5, z: 10.5, r: 2.2, h: 1.5 };
   var POND = { x: 9.25, z: 6.5, r: 1.9, level: 0.72 };
   var POOL = { x: 2.0, z: -11.0, r: 1.15, level: 0.74 };
+  var LAKE = { x: 1.0, z: -21.2, r: 2.7, level: 0.6 }, PONDS = [POND, POOL, LAKE], PAD = { x: 14, z: 16.5 };
+  // ruscello: dalla cascata al lago, dal lago al mare (x, z, quota dell'acqua)
+  var STREAM = [[2.5, -12.0, 0.74], [1.8, -14.2, 0.7], [2.1, -16.6, 0.66], [1.5, -18.7, 0.6], [0.6, -23.6, 0.6], [0.9, -25.6, 0.3], [0.4, -27.6, 0.02], [0.3, -29.5, -0.3]];
   var MEADOW = { x: -7.5, z: 6.5 }, CAMP = { x: 1.5, z: 7.6 }, MILL = { x: -17, z: 12 };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -299,11 +302,11 @@
   // ===================== TERRENO: isola organica a terrazze =====================
   var DISCS = [{ x: PLAZA.x, z: PLAZA.z, r: PLAZA.r, h: PLAZA.h, plaza: true }, { x: LIGHT.x, z: LIGHT.z, r: LIGHT.r, h: LIGHT.h }];
   AGENTS.forEach(function (a) { DISCS.push({ x: a.x, z: a.z, r: a.r, h: a.h }); });
-  var BUMPS = [[16, -14, 1.5, 2.6], [MILL.x, MILL.z, 1.7, 2.6], [0, 19.5, 0.9, 2.4], [-20, -3, 1.2, 2.8], [18.5, -4, 1.1, 2.4], [-13, -15, 1.4, 2.6], [-1, -19.5, 0.9, 2.4], [14, 16.5, 0.8, 2.2]];
+  var BUMPS = [[16, -14, 1.5, 2.6], [MILL.x, MILL.z, 1.7, 2.6], [0, 19.5, 0.9, 2.4], [-20, -3, 1.2, 2.8], [18.5, -4, 1.1, 2.4], [-13, -15, 1.4, 2.6], [14, 16.5, 0.8, 2.2]];
   var PATHS = [];
   function rimPath(A, B) { var dx = B.x - A.x, dz = B.z - A.z, L = Math.sqrt(dx * dx + dz * dz); PATHS.push({ ax: A.x + dx / L * (A.r - 0.3), az: A.z + dz / L * (A.r - 0.3), ah: A.h, bx: B.x - dx / L * (B.r - 0.3), bz: B.z - dz / L * (B.r - 0.3), bh: B.h }); }
   AGENTS.forEach(function (a) { rimPath(a, PLAZA); });
-  rimPath(AGENTS[2], LIGHT);
+  rimPath(AGENTS[2], LIGHT); rimPath(AGENTS[0], AGENTS[7]);
   function coast(a) { return 27 + 1.8 * Math.sin(a * 3 + 1) + 1.1 * Math.sin(a * 5 + 2.3) + 0.6 * Math.sin(a * 9 + 0.5); }
   function terrain(x, z, info) {
     var d = Math.sqrt(x * x + z * z), R0 = coast(Math.atan2(z, x)), h, i, k, dx, dz, dd;
@@ -312,13 +315,14 @@
     var land = sm(R0 - 1, R0 - 4.5, d);
     if (land > 0) for (i = 0; i < BUMPS.length; i++) { dx = x - BUMPS[i][0]; dz = z - BUMPS[i][1]; dd = dx * dx + dz * dz; var s2 = BUMPS[i][3] * BUMPS[i][3]; if (dd < s2 * 9) h += BUMPS[i][2] * Math.exp(-dd / (2 * s2)) * land; }
     var zone = 0, plaza = 0, path = 0, pond = 0;
-    for (i = 0; i < DISCS.length; i++) { var D = DISCS[i]; dx = x - D.x; dz = z - D.z; dd = dx * dx + dz * dz; var ro = D.r + 1.4; if (dd < ro * ro) { k = sm(ro, D.r, Math.sqrt(dd)); h += (D.h - h) * k; if (k > zone) zone = k; if (D.plaza && k > plaza) plaza = k; } }
+    for (i = 0; i < DISCS.length; i++) { var D = DISCS[i]; dx = x - D.x; dz = z - D.z; dd = dx * dx + dz * dz; var ro = D.r + 2.0; if (dd < ro * ro) { k = sm(ro, D.r, Math.sqrt(dd)); h += (D.h - h) * k; if (k > zone) zone = k; if (D.plaza && k > plaza) plaza = k; } }
     for (i = 0; i < PATHS.length; i++) {
       var P = PATHS[i], ex = P.bx - P.ax, ez = P.bz - P.az, u = ((x - P.ax) * ex + (z - P.az) * ez) / (ex * ex + ez * ez); u = u < 0 ? 0 : u > 1 ? 1 : u;
       dx = P.ax + ex * u - x; dz = P.az + ez * u - z; dd = dx * dx + dz * dz;
       if (dd < 2.6) { k = sm(1.6, 0.8, Math.sqrt(dd)); h += (P.ah + (P.bh - P.ah) * sm(0, 1, u) - h) * k; if (k > path) path = k; }
     }
-    [POND, POOL].forEach(function (Q) { dx = x - Q.x; dz = z - Q.z; dd = Math.sqrt(dx * dx + dz * dz); if (dd < Q.r + 0.7) { k = sm(Q.r + 0.7, Q.r - 0.5, dd); h += (Q.level - 0.5 - h) * k; if (k > pond) pond = k; } });
+    PONDS.forEach(function (Q) { dx = x - Q.x; dz = z - Q.z; dd = Math.sqrt(dx * dx + dz * dz); if (dd < Q.r + 0.7) { k = sm(Q.r + 0.7, Q.r - 0.5, dd); h += (Q.level - 0.5 - h) * k; if (k > pond) pond = k; } });
+    for (i = 0; i < STREAM.length - 1; i++) { var A = STREAM[i], B = STREAM[i + 1]; ex = B[0] - A[0]; ez = B[1] - A[1]; u = ((x - A[0]) * ex + (z - A[1]) * ez) / (ex * ex + ez * ez); u = u < 0 ? 0 : u > 1 ? 1 : u; dx = A[0] + ex * u - x; dz = A[1] + ez * u - z; dd = dx * dx + dz * dz; if (dd < 1.0) { k = sm(1.0, 0.35, Math.sqrt(dd)); h += (A[2] + (B[2] - A[2]) * u - 0.22 - h) * k; if (k > pond) pond = k; } }
     if (info) { info.zone = zone; info.plaza = plaza; info.path = path; info.pond = pond; }
     return h;
   }
@@ -333,7 +337,7 @@
       var o = n * 9; tPos[o] = ax; tPos[o + 1] = ah; tPos[o + 2] = az; tPos[o + 3] = bx; tPos[o + 4] = bh; tPos[o + 5] = bz; tPos[o + 6] = cx; tPos[o + 7] = ch; tPos[o + 8] = cz;
       var mx = (ax + bx + cx) / 3, mz = (az + bz + cz) / 3, hC = (ah + bh + ch) / 3; terrain(mx, mz, info);
       var ux = bx - ax, uy = bh - ah, uz = bz - az, vx = cx - ax, vy = ch - ah, vz = cz - az, nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx; ny = ny / Math.sqrt(nx * nx + ny * ny + nz * nz);
-      var kd = hC < -0.02 ? 0 : info.plaza > 0.75 ? 5 : (ny < 0.8 && hC > 0.4) ? 3 : hC < 0.36 ? 1 : info.path > 0.5 ? 4 : info.pond > 0.6 ? 1 : 2;
+      var kd = hC < -0.02 ? 0 : info.plaza > 0.75 ? 5 : info.pond > 0.55 ? 1 : info.zone > 0.93 ? 6 : (ny < 0.8 && hC > 0.4) ? 3 : hC < 0.36 ? 1 : info.path > 0.5 ? 4 : 2;
       tKind[n] = kd; tN[n] = kd === 0 ? noise(mx * 0.2 + 7, mz * 0.2 + 3) : noise(mx * 0.45 + 7, mz * 0.45 + 3) * 0.7 + hash(Math.floor(mx * 2), Math.floor(mz * 2)) * 0.3; tH[n] = hC; n++;
     }
     for (var j = 0; j < TN; j++) for (var i = 0; i < TN; i++) {
@@ -348,8 +352,8 @@
   var terrMesh = new THREE.Mesh(terrGeo, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
   terrMesh.receiveShadow = true; terrMesh.castShadow = true; scene.add(terrMesh);
   var C = function (h) { return new THREE.Color(h); };
-  var GRASS = { primavera: [C("#8FD06A"), C("#74C063")], estate: [C("#7DC45C"), C("#62B257")], autunno: [C("#C2B85A"), C("#A7A84E")], inverno: [C("#F4F7F9"), C("#DCE6EA")] };
-  var cSandA = C("#EAD8A4"), cSandB = C("#F4E7BD"), cWet = C("#D8C48C"), cRockA = C("#8E8676"), cRockB = C("#ABA190"), cPathA = C("#E6CF93"), cPathB = C("#D8BD7C"), cPavA = C("#DCD1BB"), cPavB = C("#CFC3AA");
+  var GRASS = { primavera: [C("#8FD06A"), C("#74C063")], estate: [C("#7DC45C"), C("#62B257")], autunno: [C("#C2B85A"), C("#A7A84E")], inverno: [C("#B9C7A6"), C("#A6B797")] };
+  var cSandA = C("#EAD8A4"), cSandB = C("#F4E7BD"), cWet = C("#D8C48C"), cRockA = C("#8E8676"), cRockB = C("#ABA190"), cPathA = C("#E6CF93"), cPathB = C("#D8BD7C"), cPavA = C("#DCD1BB"), cPavB = C("#CFC3AA"), cCourtA = C("#EBDFB8"), cCourtB = C("#E0D2A4");
   var cBed0 = C("#EFE4B8"), cBed1 = C("#3F9FBF"), cBed2 = C("#12497A"), cReefA = C("#0E3A66"), cReefB = C("#3C4A8E"), cSnow = C("#F4F7F9"), tc = new THREE.Color();
   function paintTerrain(season) {
     var g = GRASS[season], winter = season === "inverno";
@@ -357,9 +361,10 @@
       var k = tKind[n], v = tN[n], h = tH[n];
       if (k === 0) { var dp = -h; tc.copy(cBed0).lerp(cBed1, sm(0, 1.1, dp)).lerp(cBed2, sm(1.0, 2.5, dp)); if (dp > 0.7) tc.lerp(v > 0.74 ? cReefB : cReefA, sm(0.58, 0.68, v) * sm(0.7, 1.2, dp) * 0.7); }
       else if (k === 1) { tc.copy(cSandA).lerp(cSandB, v); if (h < 0.14) tc.lerp(cWet, 0.6); }
-      else if (k === 2) { tc.copy(g[0]).lerp(g[1], v); if (winter && v > 0.74) tc.lerp(C("#C9D3B8"), 0.6); }
-      else if (k === 3) { tc.copy(cRockA).lerp(cRockB, v); if (winter) tc.lerp(cSnow, 0.35); }
-      else if (k === 4) { tc.copy(cPathA).lerp(cPathB, v); if (winter) tc.lerp(cSnow, 0.45); }
+      else if (k === 2) { tc.copy(g[0]).lerp(g[1], v); if (winter) tc.lerp(cSnow, sm(0.5, 0.64, v) * 0.9); }
+      else if (k === 3) { tc.copy(cRockA).lerp(cRockB, v); if (winter) tc.lerp(cSnow, 0.18); }
+      else if (k === 4) { tc.copy(cPathA).lerp(cPathB, v); if (winter) tc.lerp(cSnow, 0.22); }
+      else if (k === 6) { tc.copy(cCourtA).lerp(cCourtB, v); if (winter) tc.lerp(cSnow, 0.25); }
       else { tc.copy(cPavA).lerp(cPavB, v > 0.5 ? 1 : 0); }
       var o = n * 9; for (var q = 0; q < 9; q += 3) { tCol[o + q] = tc.r; tCol[o + q + 1] = tc.g; tCol[o + q + 2] = tc.b; }
     }
@@ -391,9 +396,29 @@
     ribbon(0.55, 0.012, matFoam2, 2); ribbon(0.16, 0.02, matFoam, 3);
   })();
   var ripples = [], matRipple = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0.5, depthWrite: false });
-  for (var ri = 0; ri < 70; ri++) { var ra = sr(0, 6.28), rd = sr(30, 52), rp = add(scene, box(sr(0.5, 1.4), 0.01, 0.06), matRipple, Math.cos(ra) * rd, 0.02, Math.sin(ra) * rd, true); rp.renderOrder = 2; rp.userData.p = sr(0, 6.28); rp.userData.x = rp.position.x; ripples.push(rp); }
+  for (var ri = 0; ri < 0; ri++) { var ra = sr(0, 6.28), rd = sr(30, 52), rp = add(scene, box(sr(0.5, 1.4), 0.01, 0.06), matRipple, Math.cos(ra) * rd, 0.02, Math.sin(ra) * rd, true); rp.renderOrder = 2; rp.userData.p = sr(0, 6.28); rp.userData.x = rp.position.x; ripples.push(rp); }
+  var waveU = { uTime: { value: 0 }, uAmt: { value: 1 } };
+  var waves = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.ShaderMaterial({ transparent: true, depthWrite: false, uniforms: waveU,
+    vertexShader: "varying vec2 vP; void main(){ vec4 w = modelMatrix * vec4(position, 1.0); vP = w.xz; gl_Position = projectionMatrix * viewMatrix * w; }",
+    fragmentShader: "precision highp float; varying vec2 vP; uniform float uTime; uniform float uAmt; float hh(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); } void main(){ vec2 p = vP; float t = uTime; float a = sin(p.x * 0.55 + sin(p.y * 0.31 + t * 0.35) * 1.6 + t * 0.45); float b = sin(p.y * 0.62 - sin(p.x * 0.27 - t * 0.3) * 1.4 - t * 0.38 + 1.7); float c = sin((p.x + p.y) * 0.38 + sin((p.x - p.y) * 0.21 + t * 0.25) * 1.2 + t * 0.3); float line = smoothstep(0.93, 1.0, a) * 0.5 + smoothstep(0.95, 1.0, b) * 0.4 + smoothstep(0.9, 1.0, c) * 0.25; float band = (a * b * 0.5 + 0.5) * 0.07; vec2 g = floor(p * 0.45); vec2 f = fract(p * 0.45) - 0.5; float r = hh(g); vec2 o = (vec2(hh(g + 3.1), hh(g + 7.7)) - 0.5) * 0.6; float tw = pow(max(0.0, sin(t * 1.3 + r * 40.0)), 24.0); vec2 q = f - o; float sp = tw * step(0.7, r) * (smoothstep(0.07, 0.0, length(q)) + smoothstep(0.2, 0.0, abs(q.x)) * smoothstep(0.02, 0.0, abs(q.y)) + smoothstep(0.2, 0.0, abs(q.y)) * smoothstep(0.02, 0.0, abs(q.x))); float al = (line * 0.24 + band + sp * 0.9) * uAmt; gl_FragColor = vec4(1.0, 1.0, 1.0, clamp(al, 0.0, 1.0)); }" }));
+  waves.rotation.x = -Math.PI / 2; waves.position.y = 0.014; waves.renderOrder = 2; scene.add(waves); anim.push(function (t) { waveU.uTime.value = t; });
+  // onde che arrivano a riva: due linee di schiuma più al largo che compaiono e svaniscono a turno
+  function foamLine(L, w, m) {
+    var segs = [], r = TN + 1, i, j;
+    function cr(x0, z0, v0, x1, z1, v1, out) { if ((v0 > 0) !== (v1 > 0)) { var t = v0 / (v0 - v1); out.push([x0 + (x1 - x0) * t, z0 + (z1 - z0) * t]); } }
+    for (j = 0; j < TN; j++) for (i = 0; i < TN; i++) { var x0 = -TS / 2 + i * CELL, z0 = -TS / 2 + j * CELL, x1 = x0 + CELL, z1 = z0 + CELL, p = [], a = HG[j * r + i] - L, b = HG[j * r + i + 1] - L, c = HG[(j + 1) * r + i] - L, d = HG[(j + 1) * r + i + 1] - L;
+      cr(x0, z0, a, x1, z0, b, p); cr(x1, z0, b, x1, z1, d, p); cr(x1, z1, d, x0, z1, c, p); cr(x0, z1, c, x0, z0, a, p); if (p.length >= 2) segs.push([p[0], p[1]]); if (p.length === 4) segs.push([p[2], p[3]]); }
+    var pos = new Float32Array(segs.length * 18);
+    segs.forEach(function (sg, n) { var dx = sg[1][0] - sg[0][0], dz = sg[1][1] - sg[0][1], l = Math.sqrt(dx * dx + dz * dz) || 1, nx = -dz / l * w, nz = dx / l * w, o = n * 18, ex = dx / l * 0.08, ez = dz / l * 0.08;
+      [[sg[0][0] - ex - nx, sg[0][1] - ez - nz], [sg[0][0] - ex + nx, sg[0][1] - ez + nz], [sg[1][0] + ex + nx, sg[1][1] + ez + nz], [sg[0][0] - ex - nx, sg[0][1] - ez - nz], [sg[1][0] + ex + nx, sg[1][1] + ez + nz], [sg[1][0] + ex - nx, sg[1][1] + ez - nz]].forEach(function (q, e) { pos[o + e * 3] = q[0]; pos[o + e * 3 + 1] = 0.017; pos[o + e * 3 + 2] = q[1]; }); });
+    var g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3)); var me = new THREE.Mesh(g, m); me.renderOrder = 3; scene.add(me);
+  }
+  var foamA = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide }), foamB = foamA.clone();
+  foamLine(-0.08, 0.1, foamA); foamLine(-0.19, 0.08, foamB);
+  anim.push(function (t) { foamA.opacity = Math.max(0, Math.sin(t * 0.9)) * 0.6 * waveU.uAmt.value; foamB.opacity = Math.max(0, Math.sin(t * 0.9 + 1.7)) * 0.45 * waveU.uAmt.value; });
   var pondMat = new THREE.MeshStandardMaterial({ color: "#58C3D6", roughness: 0.15, transparent: true, opacity: 0.85 });
-  [POND, POOL].forEach(function (Q) { var w = add(scene, cyl(Q.r + 0.25, Q.r + 0.25, 0.02, 20), pondMat, Q.x, Q.level, Q.z, true); w.receiveShadow = true; });
+  pondMat.side = THREE.DoubleSide;
+  PONDS.forEach(function (Q) { var w = add(scene, cyl(Q.r + 0.25, Q.r + 0.25, 0.02, 20), pondMat, Q.x, Q.level, Q.z, true); w.receiveShadow = true; });
 
   // ===================== DETTAGLI A ISTANZE: bosco, rocce, erba, fiori =====================
   var world = new THREE.Group(); scene.add(world);
@@ -405,7 +430,7 @@
   }
   var white = function (flat) { return new THREE.MeshStandardMaterial({ color: "#FFFFFF", roughness: 0.9, flatShading: !!flat }); };
   var trunks = [], blobs = [], tiers = [], rocksI = [], tufts = [], flowers = [], stems = [], bushes = [], leafPiles = [], treeSpots = [], mStems = [], mFlowers = [];
-  var KEEP = [[POND.x, POND.z, 3.2], [POOL.x, POOL.z, 2.4], [MEADOW.x, MEADOW.z, 2.2], [CAMP.x, CAMP.z, 2.3], [MILL.x, MILL.z, 1.8]];
+  var KEEP = [[LAKE.x, LAKE.z, 4.0], [PAD.x, PAD.z, 2.2], [POND.x, POND.z, 3.2], [POOL.x, POOL.z, 2.4], [MEADOW.x, MEADOW.z, 2.2], [CAMP.x, CAMP.z, 2.3], [MILL.x, MILL.z, 1.8]];
   function freeSpot(x, z, pad) {
     var info = {}, h = terrain(x, z, info);
     if (h < 0.6 || info.zone > 0.02 || info.path > 0.02 || info.pond > 0) return null;
@@ -419,6 +444,9 @@
     if (kind === "pine") {
       trunks.push({ x: x, y: h + 0.3 * s, z: z, s: s * 0.9, sy: s * 0.7, c: WOOD_D });
       [[0.95, 0.75, 1.0], [1.55, 0.6, 0.9], [2.1, 0.42, 0.8]].forEach(function (t, i) { tiers.push({ x: x, y: h + t[0] * s, z: z, s: s * t[1], sy: s * t[2], ry: k * 6, k: k, top: i === 2 }); });
+    } else if (kind === "birch") {
+      trunks.push({ x: x, y: h + 0.6 * s, z: z, s: s * 0.6, sy: s * 1.4, c: "#EDE8DC" });
+      blobs.push({ x: x, y: h + 1.7 * s, z: z, s: s * 0.5, sy: s * 0.62, ry: k * 6, k: k }); blobs.push({ x: x + 0.3 * s, y: h + 1.35 * s, z: z + 0.1 * s, s: s * 0.36, sy: s * 0.4, ry: k * 3, k: (k + 0.3) % 1 });
     } else if (kind === "poplar") {
       trunks.push({ x: x, y: h + 0.4 * s, z: z, s: s * 0.8, sy: s, c: WOOD_D });
       blobs.push({ x: x, y: h + 1.75 * s, z: z, s: s * 0.55, sy: s * 1.35, ry: k * 6, k: k });
@@ -431,12 +459,11 @@
   }
   (function () {
     var tries = 0, placed = 0;
-    while (placed < 170 && tries < 6000) { tries++; var x = sr(-27, 27), z = sr(-27, 27), h = freeSpot(x, z, 1.25); if (h == null) continue; var kd = rnd(); tree(x, z, kd < 0.3 ? "pine" : kd < 0.45 ? "poplar" : "leaf", sr(0.8, 1.35), h); placed++; }
-    AGENTS.forEach(function (a) { if (a.build === "treehouse" || a.build === "stadium") return; var f = Math.atan2(PLAZA.x - a.x, PLAZA.z - a.z), bf = a.bface != null ? a.bface : f, ac = f + (a.arcC || 0); [bf + Math.PI - 0.55, bf + Math.PI + 0.55].forEach(function (an) { if (Math.abs(Math.atan2(Math.sin(an - f), Math.cos(an - f))) < 0.5 || Math.abs(Math.atan2(Math.sin(an - ac), Math.cos(an - ac))) < (a.arcH || 1.2) + 0.25) return; var kd = rnd(); tree(a.x + Math.sin(an) * (a.r - 0.25), a.z + Math.cos(an) * (a.r - 0.25), kd < 0.4 ? "pine" : "leaf", sr(0.9, 1.2), a.h); }); });
+    while (placed < 100 && tries < 6000) { tries++; var x = sr(-27, 27), z = sr(-27, 27), h = freeSpot(x, z, 1.25); if (h == null) continue; var kd = rnd(); tree(x, z, kd < 0.28 ? "pine" : kd < 0.4 ? "poplar" : kd < 0.54 ? "birch" : "leaf", sr(0.8, 1.35), h); placed++; }
     for (var i = 0; i < 46; i++) { x = sr(-27, 27); z = sr(-27, 27); h = freeSpot(x, z, 0.8); if (h == null) continue; var n = 2 + Math.floor(rnd() * 3); for (var j = 0; j < n; j++) rocksI.push({ x: x + sr(-0.5, 0.5), y: h + 0.12, z: z + sr(-0.5, 0.5), s: sr(0.5, 1.4), sy: sr(0.4, 0.9), ry: sr(0, 6), c: pickOf(["#9A9284", "#B3A998", "#857D70", "#C4B9A6"]) }); }
     for (i = 0; i < 16; i++) { var a = i / 16 * 6.28 + sr(-0.1, 0.1), dd = coast(a) + sr(0.3, 3.5); rocksI.push({ x: Math.cos(a) * dd, y: -0.15, z: Math.sin(a) * dd, s: sr(1.2, 2.6), sy: sr(0.7, 1.3), ry: sr(0, 6), c: pickOf(["#8C8478", "#A39A8B", "#7B7468"]) }); }
     var info = {};
-    for (i = 0; i < 2600; i++) { x = sr(-27, 27); z = sr(-27, 27); h = terrain(x, z, info); if (h < 0.5 || info.path > 0.15 || info.pond > 0 || info.plaza > 0.3) continue;
+    for (i = 0; i < 2600; i++) { x = sr(-27, 27); z = sr(-27, 27); h = terrain(x, z, info); if (h < 0.5 || info.path > 0.15 || info.pond > 0 || info.plaza > 0.3 || info.zone > 0.9) continue;
       var q = rnd(); if (q < 0.62) tufts.push({ x: x, y: h + 0.08, z: z, s: sr(0.8, 1.6), ry: sr(0, 6), k: rnd() });
       else if (q < 0.82) { var fc = pickOf(["#FFFFFF", "#FFD35A", "#F2A7C0", "#FF8A73", "#C9B9FF", "#8FD3FF"]); stems.push({ x: x, y: h + 0.09, z: z, s: 1, c: "#4F9A4E" }); flowers.push({ x: x, y: h + 0.2, z: z, s: sr(0.8, 1.4), c: fc }); }
       else if (q < 0.9 && info.zone < 0.02) bushes.push({ x: x, y: h + 0.16, z: z, s: sr(0.7, 1.4), sy: 0.8, ry: sr(0, 6), k: rnd() });
@@ -446,8 +473,8 @@
   var imTrunk = instances(cyl(0.11, 0.16, 1, 6), white(true), trunks, true), imBlob = instances(rock(1, 1), white(true), blobs, true), imTier = instances(cone(1, 1, 7), white(true), tiers, true);
   instances(rock(0.4), white(true), rocksI, true);
   var imTuft = instances(cone(0.08, 0.26, 4), white(true), tufts), imStem = instances(cyl(0.01, 0.01, 0.2, 4), white(), stems), imFlower = instances(rock(0.06, 0), white(true), flowers), imBush = instances(rock(0.3, 1), white(true), bushes, true), imLeaf = instances(rock(0.3, 0), white(true), leafPiles), imMS = instances(cyl(0.01, 0.01, 0.2, 4), white(), mStems), imMF = instances(rock(0.06, 0), white(true), mFlowers);
-  var LEAF = { primavera: ["#7FCB6A", "#9AD67A", "#F4B6C8", "#6DC272", "#F9C9D6"], estate: ["#4FAE5E", "#3F9B55", "#66BE62", "#58B36A", "#7CC96B"], autunno: ["#E8A23A", "#D9772B", "#C9502A", "#E2C044", "#B8B04A", "#D2603A"], inverno: ["#EEF3F6", "#E3EBF0", "#F7FAFB"] };
-  var PINE = ["#2F7F5A", "#3A8C62", "#2A7350"], TUFT = { primavera: ["#5FA856", "#77BC5F"], estate: ["#4F9A4E", "#69B35A"], autunno: ["#A9A64A", "#C2A14A"], inverno: ["#E6EEF2", "#D5DFE4"] };
+  var LEAF = { primavera: ["#7FCB6A", "#9AD67A", "#F4B6C8", "#6DC272", "#F9C9D6"], estate: ["#4FAE5E", "#3F9B55", "#66BE62", "#58B36A", "#7CC96B"], autunno: ["#E8A23A", "#D9772B", "#C9502A", "#E2C044", "#B8B04A", "#D2603A"], inverno: ["#EEF3F6", "#B9C6B4", "#A9B8A6", "#DCE6E0", "#C7B9A0"] };
+  var PINE = ["#2F7F5A", "#3A8C62", "#2A7350"], TUFT = { primavera: ["#5FA856", "#77BC5F"], estate: ["#4F9A4E", "#69B35A"], autunno: ["#A9A64A", "#C2A14A"], inverno: ["#B7C4A8", "#DCE6EA"] };
   var seasonMats = {}; ["cherry", "mayor", "hedge"].forEach(function (k) { seasonMats[k] = new THREE.MeshStandardMaterial({ color: "#FFFFFF", roughness: 0.9, flatShading: true }); });
   var seasonGroups = { primavera: [], estate: [], autunno: [], inverno: [] };
   function inSeason(obj, list) { list.forEach(function (s) { seasonGroups[s].push(obj); }); return obj; }
@@ -457,11 +484,11 @@
     paintTerrain(s);
     recolor(imBlob, function (it) { return L[Math.floor(it.k * L.length) % L.length]; });
     recolor(imTier, function (it) { return s === "inverno" && it.top ? "#F4F7F9" : PINE[Math.floor(it.k * 3) % 3]; });
-    recolor(imTuft, function (it) { return T[it.k > 0.5 ? 1 : 0]; }); recolor(imBush, function (it) { return s === "inverno" ? "#E9EFF2" : s === "autunno" ? (it.k > 0.5 ? "#B7A64A" : "#7FA85A") : (it.k > 0.5 ? "#4BA067" : "#5DB56C"); });
+    recolor(imTuft, function (it) { return T[it.k > 0.5 ? 1 : 0]; }); recolor(imBush, function (it) { return s === "inverno" ? "#BFCDBD" : s === "autunno" ? (it.k > 0.5 ? "#B7A64A" : "#7FA85A") : (it.k > 0.5 ? "#4BA067" : "#5DB56C"); });
     if (imFlower) imFlower.visible = imStem.visible = s === "primavera" || s === "estate"; if (imLeaf) imLeaf.visible = s === "autunno"; if (imMF) imMF.visible = imMS.visible = s !== "inverno";
     seasonMats.cherry.color.set(s === "primavera" ? "#F7A8C4" : s === "estate" ? "#6DC272" : s === "autunno" ? "#E0603A" : "#F4F7F9");
-    seasonMats.mayor.color.set(s === "primavera" ? "#8FD06A" : s === "estate" ? "#58B36A" : s === "autunno" ? "#E2A03A" : "#EEF3F6");
-    seasonMats.hedge.color.set(s === "inverno" ? "#E9EFF2" : s === "autunno" ? "#9AAE4E" : "#4BA067");
+    seasonMats.mayor.color.set(s === "primavera" ? "#8FD06A" : s === "estate" ? "#58B36A" : s === "autunno" ? "#E2A03A" : "#D5DED2");
+    seasonMats.hedge.color.set(s === "inverno" ? "#BFCDBD" : s === "autunno" ? "#9AAE4E" : "#4BA067");
     pondMat.color.set(s === "inverno" ? "#DDEFF5" : "#58C3D6"); pondMat.opacity = s === "inverno" ? 1 : 0.85;
     Object.keys(seasonGroups).forEach(function (k) { seasonGroups[k].forEach(function (o) { o.visible = false; }); }); seasonGroups[s].forEach(function (o) { o.visible = true; });
     setStatus();
@@ -471,8 +498,8 @@
   var pick = [], clockHands = [];
   AGENTS.forEach(function (a) { a.home = { x: a.x, z: a.z }; a.face = Math.atan2(PLAZA.x - a.x, PLAZA.z - a.z); a.arc = a.face + (a.arcC || 0); a.arcH = a.arcH || 1.2; });
   function zone(a) {
-    var g = G(world, a.x, a.h, a.z, a.bface != null ? a.bface : a.face); g.userData.agent = a; pick.push(g);
-    var s = G(g, -1.15, 0, a.r - 0.75, 0.35); add(s, cyl(0.035, 0.045, 0.9, 6), mat(WOOD_D), 0, 0.45, 0); add(s, cyl(0.26, 0.26, 0.04, 16), mat("#FFFFFF", { flatShading: false }), 0, 1.0, -0.01).rotation.x = Math.PI / 2; add(s, cyl(0.21, 0.21, 0.06, 16), smat(a.color), 0, 1.0, 0).rotation.x = Math.PI / 2;
+    var g = G(world, a.x, a.h, a.z, a.bface != null ? a.bface : a.face); g.userData.agent = a; pick.push(g); a.bs = a.bs || 1.18; g.scale.setScalar(a.bs);
+    var s = G(g, -1.15, 0, (a.r - 0.75) / a.bs, 0.35); add(s, cyl(0.035, 0.045, 0.9, 6), mat(WOOD_D), 0, 0.45, 0); add(s, cyl(0.26, 0.26, 0.04, 16), mat("#FFFFFF", { flatShading: false }), 0, 1.0, -0.01).rotation.x = Math.PI / 2; add(s, cyl(0.21, 0.21, 0.06, 16), smat(a.color), 0, 1.0, 0).rotation.x = Math.PI / 2;
     return g;
   }
   function steam(parent, x, y, z, n, size) { for (var i = 0; i < n; i++) (function (i) { var m = new THREE.MeshStandardMaterial({ color: "#FFFFFF", transparent: true, opacity: 0.8 }), s = add(parent, rock(size, 1), m, x, y, z, true); anim.push(function (t) { var u = (t * 0.22 + i / n) % 1; s.position.set(x + u * 0.5 + Math.sin(t + i) * 0.08, y + u * 1.6, z); s.scale.setScalar(0.5 + u * 1.1); m.opacity = 0.8 * (1 - u); }); })(i); }
@@ -617,6 +644,29 @@
   };
   AGENTS.forEach(function (a) { BUILD[a.build](zone(a)); });
 
+  // ---------- mestieri: dove lavora ogni agente e con che cosa ----------
+  var WORK = { sindaco: "speech", warren: "type", piggy: "coin", study: "read", gym: "lift", kitchen: "cook", fuoricampo: "ball", okyko: "water" };
+  AGENTS.forEach(function (a) {
+    var type = WORK[a.id], bf = a.bface != null ? a.bface : a.face, ang = a.arc + (a.arcH > 1 ? 0.75 : 0.3), spot, look, i;
+    function loc(x, z) { return { x: a.x + (Math.cos(bf) * x + Math.sin(bf) * z) * a.bs, z: a.z + (-Math.sin(bf) * x + Math.cos(bf) * z) * a.bs }; }
+    if (type === "ball") { spot = loc(0.7, 0.5); look = bf + 0.4; }
+    else if (type === "water") { spot = loc(-1.25, 0.45); var bz = loc(-2.0, -0.5); look = Math.atan2(bz.x - spot.x, bz.z - spot.z); }
+    else { spot = ringPoint(a.home, ang, a.r - 1.35); look = ang; }
+    a.work = { type: type, x: spot.x, z: spot.z, look: look };
+    if (type === "ball" || type === "water") return;
+    var pp = ringPoint(a.home, ang, a.r - 0.5), pg = G(world, pp.x, a.h, pp.z, ang + Math.PI);
+    if (type === "cook") { for (i = 0; i < 7; i++) { var an = i / 7 * 6.28; add(pg, rock(0.1), mat(STONE_D), Math.cos(an) * 0.34, 0.05, Math.sin(an) * 0.34); } add(pg, cone(0.16, 0.36, 5), matFire, 0, 0.2, 0, true); [0, 2.1, 4.2].forEach(function (an) { seg(pg, [Math.cos(an) * 0.42, 0, Math.sin(an) * 0.42], [0, 0.95, 0], 0.02, mat(INK)); });
+      add(pg, ball(0.3, 12), smat("#3A3F4A"), 0, 0.55, 0).scale.y = 0.8; add(pg, torus(0.26, 0.03, 6, 16), smat(INK), 0, 0.68, 0).rotation.x = Math.PI / 2; add(pg, cyl(0.24, 0.24, 0.02, 12), smat("#F2A03A"), 0, 0.68, 0, true); steam(pg, 0, 0.8, 0, 3, 0.1);
+      add(pg, box(0.4, 0.3, 0.3), mat(WOOD), 0.75, 0.15, 0.1); [["#D8482F", -0.1], ["#6FBF73", 0.05], ["#F58B2B", 0.14]].forEach(function (v) { add(pg, ball(0.07, 8), smat(v[0]), 0.75 + v[1], 0.36, 0.1); }); }
+    else if (type === "lift") { add(world, box(1.1, 0.04, 0.8), mat("#22406B"), spot.x, a.h + 0.02, spot.z).rotation.y = ang; [-0.3, 0.3].forEach(function (x) { add(pg, cyl(0.03, 0.03, 0.8, 6), mat("#5A5F66"), x, 0.4, 0); }); add(pg, box(0.7, 0.04, 0.06), mat("#5A5F66"), 0, 0.78, 0);
+      [0.25, 0.5].forEach(function (y, k) { add(pg, cyl(0.16 - k * 0.03, 0.16 - k * 0.03, 0.06, 12), smat(k ? "#F2B705" : "#E8506A"), -0.3, y, 0.08).rotation.x = Math.PI / 2; add(pg, cyl(0.16 - k * 0.03, 0.16 - k * 0.03, 0.06, 12), smat(k ? "#6BD6C2" : "#22406B"), 0.3, y, 0.08).rotation.x = Math.PI / 2; }); }
+    else if (type === "type") { add(pg, box(1.0, 0.07, 0.5), mat(WOOD), 0, 0.5, 0.35); [[-0.42, 0.15], [0.42, 0.15], [-0.42, 0.55], [0.42, 0.55]].forEach(function (p) { add(pg, box(0.06, 0.5, 0.06), mat(WOOD_D), p[0], 0.25, p[1]); });
+      add(pg, box(0.4, 0.14, 0.3), mat(INK), 0, 0.6, 0.35); add(pg, box(0.3, 0.26, 0.02), mat("#FBF8EE"), 0, 0.78, 0.26).rotation.x = -0.2; add(pg, box(0.24, 0.1, 0.3), mat("#FBF8EE"), -0.34, 0.58, 0.35); add(pg, box(0.1, 0.16, 0.1), matLamp, 0.38, 0.62, 0.3, true); }
+    else if (type === "coin") { add(pg, box(0.9, 0.45, 0.45), mat(WOOD), 0, 0.22, 0.2); [[-0.28, 4], [-0.05, 6], [0.18, 3]].forEach(function (c) { for (var k = 0; k < c[1]; k++) add(pg, cyl(0.09, 0.09, 0.035, 12), mat(k % 2 ? "#F2B705" : "#E0A800", GOLD), c[0], 0.47 + k * 0.035, 0.2); }); add(pg, box(0.03, 0.3, 0.03), mat(INK), 0.36, 0.6, 0.2); add(pg, box(0.3, 0.02, 0.03), mat(INK), 0.36, 0.75, 0.2); }
+    else if (type === "read") { add(world, ball(0.4, 12), smat("#1E8C93"), spot.x, a.h + 0.05, spot.z).scale.y = 0.25; add(pg, box(0.9, 0.9, 0.3), mat(WOOD), 0, 0.45, 0); [0.2, 0.5, 0.78].forEach(function (y, r) { for (var k = 0; k < 6; k++) add(pg, box(0.1, 0.22, 0.2), mat(["#D8482F", "#22406B", "#F2B705", "#1E8C93", "#7B57C9", "#6FBF73"][(k + r * 2) % 6]), -0.33 + k * 0.13, y, 0.08); }); }
+    else if (type === "speech") { add(pg, box(0.5, 0.9, 0.36), mat(WOOD), 0, 0.45, 0.3); add(pg, box(0.6, 0.05, 0.44), mat(WOOD_D), 0, 0.93, 0.32).rotation.x = -0.25; add(pg, cyl(0.13, 0.13, 0.03, 14), mat("#F2B705", GOLD), 0, 0.55, 0.1, true).rotation.x = Math.PI / 2; add(pg, box(1.6, 0.06, 0.9), mat("#C8452F"), 0, 0.03, 0.75); }
+  });
+
   // ---------- piazza ----------
   var plaza = G(world, PLAZA.x, PLAZA.h, PLAZA.z), notes = {};
   function lum(hex) { var c = new THREE.Color(hex); return 0.3 * c.r + 0.59 * c.g + 0.11 * c.b; }
@@ -698,15 +748,55 @@
     [[-0.9, 0.9, WOOD], [-0.55, 0.9, "#8A5A3C"]].forEach(function (p) { add(bh2, cyl(0.16, 0.16, 0.36, 10), mat(p[2]), p[0], 0.23, p[1]); }); add(bh2, box(0.4, 0.3, 0.4), mat(WOOD), 0.9, 0.2, 0.92);
     [[-0.62, 0.3], [-0.62, 5.5], [0.62, 5.5]].forEach(function (p) { add(dk, cyl(0.03, 0.03, 1.5, 5), mat(INK), p[0], 1.25, p[1]); });
     for (i = 1; i < 12; i++) { var u = i / 12; add(dk, ball(0.06, 6), bulbMats[i % 4], -0.62, 2.0 - Math.sin(Math.PI * u) * 0.4, 0.3 + 5.2 * u, true); }
-    boat = G(dk, -1.4, 0, 4.4, 0.1); add(boat, box(0.9, 0.4, 1.9), mat("#F7F2E4"), 0, 0.12, 0); var bowG = cone(0.636, 0.9, 4); bowG.rotateY(Math.PI / 4); bowG.scale(1, 1, 0.444); add(boat, bowG, mat("#F7F2E4"), 0, 0.12, 1.4).rotation.x = Math.PI / 2;
+    boat = G(dk, -1.5, 0, 6.4, 0); add(boat, box(0.9, 0.4, 1.9), mat("#F7F2E4"), 0, 0.12, 0); var bowG = cone(0.636, 0.9, 4); bowG.rotateY(Math.PI / 4); bowG.scale(1, 1, 0.444); add(boat, bowG, mat("#F7F2E4"), 0, 0.12, 1.4).rotation.x = Math.PI / 2;
     add(boat, box(0.94, 0.1, 1.94), mat("#C8452F"), 0, 0.3, 0); add(boat, box(0.6, 0.5, 0.7), mat("#F2B705"), 0, 0.62, -0.35); add(boat, box(0.7, 0.07, 0.8), mat("#3A3F4A"), 0, 0.9, -0.35); rwin(boat, 0, 0.66, 0.01, 0.13); add(boat, cyl(0.03, 0.03, 0.9, 5), mat(WOOD_D), 0, 0.8, 0.5); [-0.47, 0.47].forEach(function (x) { add(boat, torus(0.13, 0.05, 6, 10), smat(INK), x, 0.15, 0.3).rotation.y = Math.PI / 2; });
-    anim.push(function (t) { boat.position.y = -0.03 + Math.sin(t * 1.2) * 0.04; boat.rotation.z = Math.sin(t * 0.9) * 0.04; });
+    var bx0 = -1.5, bz0 = 6.4, bcx = bx0 - 6, bcz = bz0 + 8, bph = Math.atan2(bz0 - bcz, bx0 - bcx);
+    anim.push(function (t) { var p = (t / 80) % 1, s = p < 0.35 ? 0 : sm(0.35, 1, p), an = bph - s * 6.2832; boat.position.set(bcx + Math.cos(an) * 10, -0.03 + Math.sin(t * 1.2) * 0.04, bcz + Math.sin(an) * 10); boat.rotation.y = Math.atan2(Math.sin(an), -Math.cos(an)); boat.rotation.z = Math.sin(t * 0.9) * 0.04; });
     // spiaggia: ombrelloni, teli e ciambelle (primavera ed estate)
     var bd = inSeason(G(world, 0, 0, 0), ["primavera", "estate"]);
     [[1.25, "#D8482F"], [1.42, "#2F6FDE"], [1.6, "#F2B705"], [1.05, "#6BD6C2"]].forEach(function (p, k) { var d = coast(p[0]) - 2.0 - (k % 2) * 0.5, x = Math.cos(p[0]) * d, z = Math.sin(p[0]) * d, h = heightAt(x, z), u = G(bd, x, h, z, sr(0, 6)); add(u, cyl(0.025, 0.025, 1.3, 5), mat("#FFFFFF"), 0, 0.65, 0); for (var q = 0; q < 8; q++) { var w = add(u, new THREE.ConeGeometry(0.85, 0.36, 8, 1, false, q * Math.PI / 4, Math.PI / 4), mat(q % 2 ? "#FFFFFF" : p[1]), 0, 1.36, 0); } add(u, box(0.5, 0.02, 1.0), mat(k % 2 ? "#F2A7C0" : "#6BD6C2"), 0.75, 0.02, 0.2, true); add(u, box(0.5, 0.021, 0.16), mat("#FFFFFF"), 0.75, 0.021, 0.2, true); });
     [[1.33, "#F58B2B"], [1.52, "#FF9CC2"]].forEach(function (p) { var d = coast(p[0]) + 1.6, r = add(bd, torus(0.28, 0.11, 8, 16), smat(p[1]), Math.cos(p[0]) * d, 0.05, Math.sin(p[0]) * d); r.rotation.x = Math.PI / 2; anim.push(function (t) { r.position.y = 0.05 + Math.sin(t * 1.5 + p[0] * 9) * 0.03; }); });
   })();
   var beam, boat;
+
+  // ---------- lago, ruscello, ponticelli, coralli, relitto, balena ----------
+  (function () {
+    var i, a, lg = G(world, LAKE.x, LAKE.level, LAKE.z);
+    for (i = 0; i < 24; i++) { a = i / 24 * 6.28; if (Math.abs(a - 1.75) < 0.3 || Math.abs(a - 4.6) < 0.3) continue; add(lg, rock(sr(0.22, 0.42)), mat(pickOf(["#C9B99A", "#B3A486", "#D8CBAE", "#9A9284"])), Math.cos(a) * (LAKE.r + 0.35), 0.1, Math.sin(a) * (LAKE.r + 0.35)).scale.y = 0.6; }
+    [[0.8, 0.9, 0.3], [-1.0, 0.4, 0.24], [0.3, -1.3, 0.26], [-0.5, 1.5, 0.2], [1.5, -0.5, 0.22], [-1.6, -0.9, 0.2], [1.2, 1.6, 0.18]].forEach(function (p, k) { add(lg, cyl(p[2], p[2], 0.02, 9), mat(k % 2 ? "#4BA067" : "#5DB56C"), p[0], 0.03, p[1], true); if (k % 3 === 0) add(lg, rock(0.07), mat(k ? "#F2A7C0" : "#FFFFFF"), p[0], 0.08, p[1], true); });
+    [[-2.5, 0.8], [-2.3, 1.5], [2.4, 1.2], [2.2, -1.6], [-1.6, -2.2], [0.4, 2.7]].forEach(function (p) { for (var k = 0; k < 4; k++) { var h = sr(0.8, 1.4), x = p[0] + sr(-0.2, 0.2), z = p[1] + sr(-0.2, 0.2); add(lg, cyl(0.015, 0.02, h, 4), mat("#6FA85A"), x, h / 2, z); add(lg, cyl(0.05, 0.05, 0.22, 6), mat("#7E5534"), x, h, z); } });
+    var isl = G(lg, -0.7, 0, -0.2); add(isl, rock(0.7), mat("#B3A486"), 0, 0.02, 0).scale.y = 0.35; add(isl, cyl(0.05, 0.07, 0.6, 6), mat(WOOD_D), 0, 0.4, 0); add(isl, rock(0.42, 1), seasonMats.hedge, 0, 0.9, 0).scale.y = 0.8;
+    for (i = 0; i < 7; i++) add(lg, box(0.75, 0.06, 0.26), mat(i % 2 ? WOOD : "#B98756"), LAKE.r + 0.5 - i * 0.3, 0.2, 0.6); [[LAKE.r - 0.9, 0.28], [LAKE.r - 0.9, 0.92]].forEach(function (p) { add(lg, cyl(0.05, 0.05, 0.9, 6), mat(WOOD_D), p[0], -0.05, p[1]); });
+    var rb = G(lg, 1.1, 0.02, -0.7, 0.8); add(rb, box(0.5, 0.2, 1.1), mat("#C8452F"), 0, 0.06, 0); add(rb, box(0.4, 0.04, 0.9), mat(WOOD), 0, 0.12, 0); add(rb, box(0.5, 0.05, 0.12), mat(WOOD_D), 0, 0.18, 0.1); seg(rb, [0.28, 0.2, 0], [0.75, 0.12, 0.3], 0.02, mat(WOOD_D), true);
+    anim.push(function (t) { rb.position.y = 0.02 + Math.sin(t * 1.1) * 0.02; rb.rotation.z = Math.sin(t * 0.8) * 0.05; });
+    // acqua del ruscello e scie che scorrono
+    var pts = [], pos = [];
+    for (i = 0; i < STREAM.length - 1; i++) { var A = STREAM[i], B = STREAM[i + 1], L = Math.sqrt((B[0] - A[0]) * (B[0] - A[0]) + (B[1] - A[1]) * (B[1] - A[1])), n = Math.ceil(L / 0.4); for (var j = 0; j < n; j++) { var u = j / n; pts.push([A[0] + (B[0] - A[0]) * u, A[2] + (B[2] - A[2]) * u, A[1] + (B[1] - A[1]) * u]); } }
+    for (i = 0; i < pts.length - 1; i++) { var p = pts[i], q = pts[i + 1], dx = q[0] - p[0], dz = q[2] - p[2], l = Math.sqrt(dx * dx + dz * dz) || 1, nx = -dz / l * 0.45, nz = dx / l * 0.45; pos.push(p[0] - nx, p[1], p[2] - nz, p[0] + nx, p[1], p[2] + nz, q[0] + nx, q[1], q[2] + nz, p[0] - nx, p[1], p[2] - nz, q[0] + nx, q[1], q[2] + nz, q[0] - nx, q[1], q[2] - nz); }
+    var sgeo = new THREE.BufferGeometry(); sgeo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(pos), 3)); sgeo.computeVertexNormals(); var sm2 = new THREE.Mesh(sgeo, pondMat); sm2.receiveShadow = true; scene.add(sm2);
+    for (i = 0; i < 14; i++) (function (i) { var s = add(scene, box(0.06, 0.02, 0.3), mat("#FFFFFF"), 0, 0, 0, true); anim.push(function (t) { var f = (t * 1.6 + i * (pts.length - 1) / 14) % (pts.length - 1), k = Math.floor(f), w = f - k, p = pts[k], q = pts[k + 1]; s.position.set(p[0] + (q[0] - p[0]) * w + Math.sin(i * 2.3) * 0.2, p[1] + (q[1] - p[1]) * w + 0.02, p[2] + (q[2] - p[2]) * w); s.rotation.y = Math.atan2(q[0] - p[0], q[2] - p[2]); s.visible = p[1] > 0.05; }); })(i);
+    function footbridge(x, z, ry, span) {
+      var cx = Math.cos(ry), sx = -Math.sin(ry), y = Math.max(heightAt(x + cx * (span + 0.3), z + sx * (span + 0.3)), heightAt(x - cx * (span + 0.3), z - sx * (span + 0.3))), b = G(world, x, y - 0.06, z, ry);
+      for (var k = 0; k < 7; k++) { var u = (k - 3) / 3; add(b, box(span * 2 / 7 + 0.06, 0.07, 0.95), mat(k % 2 ? WOOD : "#B98756"), u * span, 0.12 + (1 - u * u) * 0.3, 0).rotation.z = -u * 0.38; }
+      [-0.45, 0.45].forEach(function (zz) { for (var k = 0; k < 6; k++) { var u0 = (k - 3) / 3, u1 = (k - 2) / 3; seg(b, [u0 * span, 0.55 + (1 - u0 * u0) * 0.3, zz], [u1 * span, 0.55 + (1 - u1 * u1) * 0.3, zz], 0.028, mat(WOOD_D), true); } [-span, 0, span].forEach(function (xx) { add(b, cyl(0.04, 0.04, 0.5, 6), mat(WOOD_D), xx, 0.32 + (1 - (xx / span) * (xx / span)) * 0.3, zz); }); });
+    }
+    footbridge(1.97, -13.62, 0.442, 1.5); footbridge(0.78, -24.7, 0, 1.4);
+    // coralli e alghe sui fondali, visti attraverso l'acqua
+    var corals = [], weeds = [];
+    for (i = 0; i < 420; i++) { a = sr(0, 6.28); var d = coast(a) + sr(1.3, 7.5), x = Math.cos(a) * d, z = Math.sin(a) * d, h = terrain(x, z), dp = -h; if (dp < 0.5 || dp > 2.3) continue;
+      if (rnd() < 0.62) { var cn = 2 + Math.floor(rnd() * 3), cc = pickOf(["#FF7E8A", "#FF9F5A", "#B58CFF", "#2E6DA4", "#1E4F86", "#3BC1A8", "#FFD35A"]); for (var c2 = 0; c2 < cn; c2++) { var cs = sr(0.25, 0.6), cy = Math.min(cs * sr(0.8, 1.5), dp - 0.18); corals.push({ x: x + sr(-0.5, 0.5), y: h + cy * 0.5, z: z + sr(-0.5, 0.5), s: cs, sy: cy, ry: sr(0, 6), c: cc }); } }
+      else { for (var w2 = 0; w2 < 3; w2++) { var wh2 = Math.min(sr(0.5, 1.3), dp - 0.15); weeds.push({ x: x + sr(-0.3, 0.3), y: h + wh2 / 2, z: z + sr(-0.3, 0.3), s: 1, sy: wh2, ry: sr(0, 6), c: pickOf(["#1F7A5C", "#2A9070", "#176050"]) }); } } }
+    instances(rock(1, 1), white(true), corals); instances(cone(0.12, 1, 5), white(true), weeds);
+    var wa = 3.9, wd = coast(wa) + 5.5, wx = Math.cos(wa) * wd, wz = Math.sin(wa) * wd, wy = terrain(wx, wz), wr = G(scene, wx, wy + 0.35, wz, 0.7); wr.rotation.z = 0.4;
+    add(wr, box(1.3, 0.6, 3.6), mat("#5E4630"), 0, 0, 0, true); var wb = cone(0.92, 1.2, 4); wb.rotateY(Math.PI / 4); wb.scale(1, 1, 0.46); add(wr, wb, mat("#5E4630"), 0, 0, 2.4, true).rotation.x = Math.PI / 2; seg(wr, [0, 0.2, 0.4], [0.5, 1.3, 0.2], 0.07, mat("#4A3626"), true); add(wr, box(1.34, 0.08, 3.64), mat("#3F5C4E"), 0, 0.3, 0, true);
+    // balena: nuota sotto, ogni tanto affiora e sbuffa
+    var wh = G(scene), wm = smat("#2E4A6B"); add(wh, ball(1, 16), wm, 0, 0, 0, true).scale.set(0.95, 0.78, 2.7); add(wh, ball(0.9, 12), smat("#C9D6E0"), 0, -0.28, 0.4, true).scale.set(0.8, 0.5, 2.2);
+    var tail = G(wh, 0, 0.1, -2.6); [-1, 1].forEach(function (s) { add(tail, ball(0.55, 8), wm, s * 0.5, 0, -0.3, true).scale.set(1.1, 0.16, 0.6); add(wh, ball(0.4, 8), wm, s * 0.95, -0.3, 0.9, true).scale.set(1.3, 0.14, 0.6); });
+    var spout = []; for (i = 0; i < 7; i++) spout.push(add(wh, ball(0.1, 6), smat("#FFFFFF"), 0, 0, 1.3, true));
+    anim.push(function (t) { var an = t * 0.035 + 2, cyc = (t / 26) % 1, u = cyc < 0.68 ? 0 : Math.sin(Math.PI * (cyc - 0.68) / 0.32);
+      wh.position.set(Math.cos(an) * 39, -1.25 + u * 1.1, Math.sin(an) * 39); wh.rotation.y = -an; wh.rotation.x = cyc < 0.68 ? 0 : -Math.cos(Math.PI * (cyc - 0.68) / 0.32) * 0.22; tail.rotation.x = Math.sin(t * 1.6) * 0.3;
+      spout.forEach(function (s, i) { var v = (t * 0.9 + i / 7) % 1; s.visible = u > 0.75; s.position.set(Math.sin(i * 2.4) * v * 0.5, 0.75 + v * 1.7 - v * v * 0.6, 1.3 + Math.cos(i * 2.4) * v * 0.5); s.scale.setScalar(1 - v * 0.6); }); });
+  })();
 
   // ---------- cielo e mare: nuvole, mongolfiera, gabbiani, pesci, squali, veliero ----------
   var clouds = [], matCloud = new THREE.MeshStandardMaterial({ color: "#FFFFFF", roughness: 1 });
@@ -716,7 +806,9 @@
     for (var q = 0; q < 10; q++) add(bl, new THREE.SphereGeometry(1.5, 10, 12, q * Math.PI / 5, Math.PI / 5), smat(q % 2 ? cA : cB), 0, 0, 0).scale.y = 1.15;
     add(bl, cyl(0.5, 0.36, 0.3, 10), smat(cA), 0, -1.75, 0); add(bl, box(0.6, 0.45, 0.6), mat(WOOD), 0, -2.9, 0); add(bl, box(0.66, 0.06, 0.66), mat(WOOD_D), 0, -2.66, 0);
     [[-0.28, -0.28], [0.28, -0.28], [-0.28, 0.28], [0.28, 0.28]].forEach(function (p) { seg(bl, [p[0], -2.68, p[1]], [p[0] * 1.5, -1.8, p[1] * 1.5], 0.012, mat(INK), true); });
-    anim.push(function (t) { var a = t * 0.05 + 1; bl.position.set(Math.cos(a) * 17, 13 + Math.sin(t * 0.4) * 0.6, Math.sin(a) * 17 - 3); bl.rotation.y = t * 0.1; });
+    var padY = heightAt(PAD.x, PAD.z); add(world, cyl(1.1, 1.2, 0.08, 14), mat("#E9DDB6"), PAD.x, padY + 0.02, PAD.z); add(world, torus(0.8, 0.05, 5, 22), mat("#D8482F"), PAD.x, padY + 0.07, PAD.z).rotation.x = Math.PI / 2; add(world, cyl(0.04, 0.05, 0.7, 6), mat(WOOD_D), PAD.x + 1.3, padY + 0.35, PAD.z);
+    anim.push(function (t) { var a = t * 0.05 + 1, p = (t / 110) % 1, g = p < 0.5 ? 0 : p < 0.62 ? sm(0.5, 0.62, p) : p < 0.86 ? 1 : 1 - sm(0.86, 0.98, p), ax = Math.cos(a) * 17, ay = 13 + Math.sin(t * 0.4) * 0.6, az = Math.sin(a) * 17 - 3;
+      bl.position.set(ax + (PAD.x - ax) * g, ay + (padY + 3.16 - ay) * g, az + (PAD.z - az) * g); bl.rotation.y = t * 0.1 * (1 - g); });
     for (var i = 0; i < 4; i++) (function (i) { var g = G(scene), wl = G(g), wr = G(g); add(wl, box(0.5, 0.03, 0.16), mat("#FFFFFF"), -0.25, 0, 0); add(wr, box(0.5, 0.03, 0.16), mat("#FFFFFF"), 0.25, 0, 0); add(g, box(0.12, 0.08, 0.34), mat("#FFFFFF"), 0, 0, 0);
       anim.push(function (t) { var a = t * 0.45 + i * 1.7, r = 3 + i * 1.1; g.position.set(LIGHT.x + Math.cos(a) * r, 8 + i * 0.5 + Math.sin(t + i) * 0.3, LIGHT.z + Math.sin(a) * r); g.rotation.y = -a; var f = Math.sin(t * 7 + i) * 0.55; wl.rotation.z = -f; wr.rotation.z = f; }); })(i);
     // squali: corpo scuro sott'acqua, pinna fuori
@@ -777,10 +869,17 @@
     if (L.acc === "chef") { add(head, cyl(0.17, 0.16, 0.16, 14), smat("#FFFFFF"), 0, 0.33, 0); add(head, ball(0.21, 12), smat("#FFFFFF"), 0, 0.5, 0).scale.y = 0.7; add(body, box(0.26, 0.2, 0.03), mat(L.apron), 0, 0.42, 0.262, true); top = 1.55; }
     if (L.acc === "leaf") { var lf = add(head, ball(0.24, 10), smat("#4E9E5E"), 0.02, 0.36, 0); lf.scale.set(1, 0.14, 0.7); lf.rotation.z = 0.2; add(head, cyl(0.012, 0.012, 0.14, 5), smat("#3F8F5B"), -0.2, 0.34, 0).rotation.z = 1.1; top = 1.4; }
     if (k === "rabbit") top = 1.75;
+    var prop = G(g), drops = [], wt = WORK[a.id]; prop.visible = false;
+    if (wt === "lift") { prop.position.set(0, 0.9, 0.3); add(prop, cyl(0.025, 0.025, 1.0, 6), smat("#9AA3A8"), 0, 0, 0).rotation.z = Math.PI / 2; [-0.42, 0.42].forEach(function (x) { add(prop, cyl(0.17, 0.17, 0.07, 14), smat(INK), x, 0, 0).rotation.z = Math.PI / 2; add(prop, cyl(0.11, 0.11, 0.05, 12), smat("#E8506A"), x + (x > 0 ? 0.06 : -0.06), 0, 0).rotation.z = Math.PI / 2; }); }
+    else if (wt === "coin") { prop.position.set(0.3, 1.0, 0.25); add(prop, cyl(0.11, 0.11, 0.03, 14), mat("#F2B705", GOLD), 0, 0, 0); }
+    else if (wt === "read") { prop.position.set(0, 0.5, 0.36); prop.rotation.x = -0.5; [-1, 1].forEach(function (s) { add(prop, box(0.2, 0.26, 0.025), mat("#FBF8EE"), s * 0.1, 0, 0).rotation.y = -s * 0.35; add(prop, box(0.21, 0.28, 0.02), mat("#D8482F"), s * 0.1, 0, -0.02).rotation.y = -s * 0.35; }); }
+    else if (wt === "ball") { add(prop, rock(0.13, 1), mat("#FFFFFF"), 0, 0, 0); add(prop, cyl(0.06, 0.06, 0.02, 5), mat(INK), 0, 0.125, 0, true); add(prop, cyl(0.06, 0.06, 0.02, 5), mat(INK), 0.1, -0.03, 0.07, true).rotation.z = -1.2; }
+    else if (wt === "water") { prop.position.set(0.3, 0.6, 0.38); add(prop, cyl(0.1, 0.11, 0.2, 10), smat("#3F8FB5"), 0, 0, 0); seg(prop, [0, -0.02, 0.09], [0, 0.1, 0.3], 0.025, smat("#3F8FB5"), true); add(prop, torus(0.07, 0.015, 5, 10), smat("#3F8FB5"), 0, 0.03, -0.12, true).rotation.y = Math.PI / 2; for (var dq = 0; dq < 3; dq++) { var dr = add(g, ball(0.03, 6), smat("#8FD3FF"), 0, 0, 0, true); dr.visible = false; drops.push(dr); } }
+    else if (wt === "cook") { add(prop, cyl(0.02, 0.02, 0.5, 5), mat(WOOD), 0, 0.2, 0); add(prop, ball(0.06, 8), mat(WOOD), 0, -0.05, 0).scale.y = 0.5; }
     var puffM = new THREE.MeshStandardMaterial({ color: "#FFFFFF", transparent: true, opacity: 0 }), puff = add(g, ball(0.07, 8), puffM, 0, 0.78, 0.4, true);
     add(g, ball(0.75, 8), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false }), 0, 0.6, 0, true);
     g.userData.agent = a; pick.push(g); var scl = a.kind === "mayor" ? 1.3 : 1.15; g.scale.setScalar(scl); scene.add(g);
-    a.m = { g: g, body: body, head: head, eyes: eyes, arms: arms, legs: legs, top: top * scl, puff: puff, puffM: puffM };
+    a.m = { g: g, body: body, head: head, eyes: eyes, arms: arms, legs: legs, top: top * scl, puff: puff, puffM: puffM, prop: prop, drops: drops };
   }
   function ringPoint(c, ang, rad) { return { x: c.x + Math.sin(ang) * rad, z: c.z + Math.cos(ang) * rad }; }
   function angleOf(c, p) { return Math.atan2(p.x - c.x, p.z - c.z); }
@@ -789,33 +888,46 @@
     var roll = Math.random();
     if (a.at === "home" && roll < 0.2) { ringWalk(a, a.home, a.face, a.r - 0.6); a.queue.push(ringPoint(PLAZA, a.face + Math.PI, PLAZA.r - 0.5)); a.queue.push(ringPoint(PLAZA, a.face + Math.PI + rr(-0.4, 0.4), rr(1.7, 2.3))); a.at = "plaza"; }
     else if (a.at === "plaza" && roll < 0.3) { ringWalk(a, PLAZA, a.face + Math.PI, 2.2); a.queue.push(ringPoint(PLAZA, a.face + Math.PI, PLAZA.r - 0.5)); a.queue.push(ringPoint(a.home, a.face, a.r - 0.5)); a.at = "home"; }
+    else if (a.at === "home" && roll < 0.68) { ringWalk(a, a.home, angleOf(a.home, a.work), a.r - 1.0); a.queue.push({ x: a.work.x, z: a.work.z }); a.goal = "work"; }
     else if (a.at === "home") ringWalk(a, a.home, a.arc + rr(-a.arcH, a.arcH), rr(a.r - 1.05, a.r - 0.5));
     else ringWalk(a, PLAZA, angleOf(PLAZA, a.pos) + rr(-1.3, 1.3), rr(1.6, 2.4));
   }
   AGENTS.forEach(function (a, i) {
     makeMascot(a);
-    a.pos = ringPoint(a.home, a.arc + rr(-a.arcH, a.arcH) * 0.8, a.r - 0.7); a.heading = a.face; a.queue = []; a.at = "home"; a.wait = rr(0.5, 4); a.phase = i * 1.7; a.walk = 0; a.blink = rr(1, 4);
+    a.pos = { x: a.work.x, z: a.work.z }; a.heading = a.target = a.work.look; a.doing = a.work.type; a.queue = []; a.at = "home"; a.wait = rr(5, 14); a.phase = i * 1.7; a.walk = 0; a.blink = rr(1, 4);
     a.m.g.position.set(a.pos.x, heightAt(a.pos.x, a.pos.z), a.pos.z); a.m.g.rotation.y = a.heading;
   });
   var selRing = new THREE.Mesh(torus(0.7, 0.04, 6, 30), new THREE.MeshBasicMaterial({ color: "#FFFFFF" })); selRing.rotation.x = Math.PI / 2; selRing.visible = false; scene.add(selRing);
   var cold = false, waitingCount = 0;
+  // pose di lavoro: restituiscono l'angolo delle braccia (sinistra, destra) e muovono l'attrezzo
+  var ACT = {
+    speech: function (a, m, t) { m.head.rotation.x = Math.sin(t * 3) * 0.08; m.body.rotation.y = Math.sin(t * 0.8) * 0.25; return { l: [1.2 + Math.sin(t * 2.2) * 0.9, 0], r: [1.2 + Math.sin(t * 2.2 + 2) * 0.9, 0] }; },
+    type: function (a, m, t) { m.head.rotation.x = 0.25; return { l: [0.25, -1.15 + Math.sin(t * 17) * 0.22], r: [0.25, -1.15 + Math.sin(t * 17 + 2.4) * 0.22] }; },
+    coin: function (a, m, t) { var u = Math.abs(Math.sin(t * 2.6)); m.prop.position.y = 0.95 + u * 0.75; m.prop.rotation.x = t * 9; m.head.rotation.x = -u * 0.3; return { l: [0.4, 0], r: [0.5, -1.3 - u * 0.5] }; },
+    read: function (a, m, t) { m.body.position.y = -0.1; m.head.rotation.x = 0.3 + Math.sin(t * 0.7) * 0.06; m.head.rotation.y = Math.sin(t * 0.5) * 0.12; return { l: [0.2, -1.05], r: [0.2, -1.05 + (Math.sin(t * 0.9) > 0.96 ? -0.4 : 0)] }; },
+    lift: function (a, m, t) { var u = Math.sin(t * 2.4) * 0.5 + 0.5; m.prop.position.y = 0.72 + u * 0.62; m.body.position.y = -(1 - u) * 0.07; return { l: [1.5 + u * 1.2, 0], r: [1.5 + u * 1.2, 0] }; },
+    cook: function (a, m, t) { m.prop.position.set(0.22 + Math.cos(t * 5) * 0.1, 0.62, 0.52 + Math.sin(t * 5) * 0.1); m.body.rotation.x = 0.1; return { l: [0.4, 0], r: [0.2 + Math.cos(t * 5) * 0.2, -1.2 + Math.sin(t * 5) * 0.2] }; },
+    ball: function (a, m, t) { var u = Math.abs(Math.sin(t * 4)); m.prop.position.set(Math.sin(t * 2) * 0.12, 0.16 + u * 0.95, 0.34); m.prop.rotation.x = t * 6; m.legs[1].position.y = 0.08 + (1 - u) * 0.14; m.legs[1].position.z = 0.02 + (1 - u) * 0.14; m.body.position.y = u * 0.04; return { l: [0.9, 0.3 * Math.sin(t * 4)], r: [0.9, -0.3 * Math.sin(t * 4)] }; },
+    water: function (a, m, t) { var u = Math.sin(t * 1.2) * 0.5 + 0.5; m.prop.rotation.x = 0.25 + u * 0.55; m.drops.forEach(function (d, i) { var v = (t * 1.6 + i * 0.33) % 1; d.visible = u > 0.45; d.position.set(0.3, 0.55 - v * 0.5, 0.66 + v * 0.1); }); return { l: [0.4, 0], r: [0.35, -1.1 - u * 0.25] }; }
+  };
   function updateAgent(a, dt, t) {
     var m = a.m, moving = false, sel = S.selected === a;
     if (!sel && !reduced) {
       if (a.queue.length) { var w = a.queue[0], dx = w.x - a.pos.x, dz = w.z - a.pos.z, d = Math.sqrt(dx * dx + dz * dz), step = (a.kind === "mayor" ? 0.8 : 1.0) * dt;
-        if (d <= step) { a.pos.x = w.x; a.pos.z = w.z; a.queue.shift(); if (!a.queue.length) a.wait = rr(2, 7); } else { a.pos.x += dx / d * step; a.pos.z += dz / d * step; a.target = Math.atan2(dx, dz); moving = true; } }
-      else { a.wait -= dt; if (a.wait <= 0) plan(a); }
+        if (d <= step) { a.pos.x = w.x; a.pos.z = w.z; a.queue.shift(); if (!a.queue.length) { if (a.goal === "work") { a.goal = null; a.doing = a.work.type; a.target = a.work.look; a.wait = rr(10, 18); } else a.wait = rr(2, 7); } } else { a.pos.x += dx / d * step; a.pos.z += dz / d * step; a.target = Math.atan2(dx, dz); moving = true; } }
+      else { a.wait -= dt; if (a.wait <= 0) { a.doing = null; plan(a); } }
     }
     if (sel) { var cp = camera.position; a.target = Math.atan2(cp.x - a.pos.x, cp.z - a.pos.z); }
     if (a.target != null) { var dh = a.target - a.heading; while (dh > Math.PI) dh -= 2 * Math.PI; while (dh < -Math.PI) dh += 2 * Math.PI; a.heading += dh * Math.min(1, dt * 7); }
     a.walk += ((moving ? 1 : 0) - a.walk) * Math.min(1, dt * 8);
     var ph = t * 10 + a.phase, gy = heightAt(a.pos.x, a.pos.z);
     m.g.position.x = a.pos.x; m.g.position.z = a.pos.z; m.g.position.y += (gy - m.g.position.y) * Math.min(1, dt * 12); m.g.rotation.y = a.heading;
-    m.body.position.y = Math.abs(Math.sin(ph)) * 0.05 * a.walk; m.body.rotation.z = Math.sin(ph) * 0.06 * a.walk;
+    m.body.position.y = Math.abs(Math.sin(ph)) * 0.05 * a.walk; m.body.rotation.z = Math.sin(ph) * 0.06 * a.walk; m.body.rotation.x = 0; m.body.rotation.y = 0; m.head.rotation.x = 0;
     var br = 1 + Math.sin(t * 2.2 + a.phase) * 0.015 * (1 - a.walk); m.body.scale.set(1 / br, br, 1 / br); m.head.rotation.z = Math.sin(t * 0.9 + a.phase) * 0.05 * (1 - a.walk); m.head.rotation.y = Math.sin(t * 0.6 + a.phase * 2) * 0.18 * (1 - a.walk);
     m.legs.forEach(function (l, i) { l.position.y = 0.08 + Math.max(0, Math.sin(ph + i * Math.PI)) * 0.09 * a.walk; l.position.z = 0.02 + Math.sin(ph + i * Math.PI) * 0.08 * a.walk; });
     var calling = a.kind === "mayor" ? waitingCount > 0 : a.unread;
-    m.arms.forEach(function (pv) { var s = pv.userData.side, rz = s * 0.4, rx = Math.sin(ph + (s > 0 ? 0 : Math.PI)) * 0.8 * a.walk; if ((sel || (calling && !moving)) && s > 0) { rz = 2.5 + Math.sin(t * 9) * 0.3; rx = 0; } pv.rotation.z += (rz - pv.rotation.z) * Math.min(1, dt * 10); pv.rotation.x = rx; });
+    var D = moving ? null : a.doing, pose = D ? ACT[D](a, m, t) : null; m.prop.visible = !!D; if (!D && m.drops.length) m.drops.forEach(function (d) { d.visible = false; });
+    m.arms.forEach(function (pv) { var s = pv.userData.side, rz = s * 0.4, rx = Math.sin(ph + (s > 0 ? 0 : Math.PI)) * 0.8 * a.walk; if (pose) { var q = s < 0 ? pose.l : pose.r; rz = s * q[0]; rx = q[1]; } else if ((sel || (calling && !moving)) && s > 0) { rz = 2.5 + Math.sin(t * 9) * 0.3; rx = 0; } pv.rotation.z += (rz - pv.rotation.z) * Math.min(1, dt * 10); pv.rotation.x = rx; });
     a.blink -= dt; var by = 1; if (a.blink < 0.12) by = 0.12; if (a.blink < 0) a.blink = rr(2, 5); m.eyes.scale.y = by;
     if (cold) { var u = (t * 0.45 + a.phase) % 1; m.puff.position.set(0, 0.8 + u * 0.25, 0.4 + u * 0.3); m.puff.scale.setScalar(0.6 + u * 1.6); m.puffM.opacity = u < 0.6 ? 0.55 * (1 - u / 0.6) : 0; } else m.puffM.opacity = 0;
   }
@@ -844,7 +956,7 @@
     hemi.intensity = (kd * 0.55 + kk * 0.45 + kn * 0.42) * (1 - grey * 0.22);
     var rad = Math.PI / 180, e = kn > 0.5 ? 50 * rad : Math.max(s.el, 16) * rad, ha = kn > 0.5 ? s.ha + Math.PI : s.ha;
     sun.target.position.copy(cam.target); sun.position.set(cam.target.x - Math.sin(ha) * Math.cos(e) * 70, Math.sin(e) * 70, cam.target.z + Math.cos(ha) * Math.cos(e) * 70 + 8);
-    matCloud.color.copy(WHITE).lerp(CLOUD_D, grey * 0.8).multiplyScalar(1 - kn * 0.55); matRipple.opacity = 0.5 * (1 - kn * 0.6); matFoam.opacity = 0.9 * (1 - kn * 0.45) * (0.85 + Math.sin(t * 1.3) * 0.15); matFoam2.opacity = 0.28 * (1 - kn * 0.5);
+    matCloud.color.copy(WHITE).lerp(CLOUD_D, grey * 0.8).multiplyScalar(1 - kn * 0.55); matRipple.opacity = 0.5 * (1 - kn * 0.6); waveU.uAmt.value = (1 - kn * 0.55) * (1 - grey * 0.3); matFoam.opacity = 0.9 * (1 - kn * 0.45) * (0.85 + Math.sin(t * 1.3) * 0.15); matFoam2.opacity = 0.28 * (1 - kn * 0.5);
     var sat = (1 - grey * 0.42 * (1 - kn)).toFixed(2); if (sat !== lastSat) { lastSat = sat; canvas.style.filter = sat === "1.00" ? "" : "saturate(" + sat + ")"; }
     var glow = Math.max(kn, kk * 0.55, grey > 0.6 ? 0.45 : 0);
     matWindow.emissiveIntensity = glow * 1.5; matLamp.emissiveIntensity = 0.12 + glow * 1.7; bulbMats.forEach(function (b) { b.emissiveIntensity = glow * 1.6; });
