@@ -362,7 +362,7 @@
   var C = function (h) { return new THREE.Color(h); };
   var GRASS = { primavera: [C("#8FD06A"), C("#74C063")], estate: [C("#7DC45C"), C("#62B257")], autunno: [C("#C2B85A"), C("#A7A84E")], inverno: [C("#B9C7A6"), C("#A6B797")] };
   var cSandA = C("#EAD8A4"), cSandB = C("#F4E7BD"), cWet = C("#D8C48C"), cRockA = C("#8E8676"), cRockB = C("#ABA190"), cPathA = C("#E6CF93"), cPathB = C("#D8BD7C"), cPavA = C("#DCD1BB"), cPavB = C("#CFC3AA"), cCourtA = C("#EBDFB8"), cCourtB = C("#E0D2A4");
-  var cBed0 = C("#EFE4B8"), cShal = C("#5FCFC6"), cBed1 = C("#2C8EA6"), cBed2 = C("#1F5F7E"), cReefA = C("#1A4F6B"), cReefB = C("#3C4A8E"), cSnow = C("#F4F7F9"), tc = new THREE.Color();
+  var cBed0 = C("#EFE4B8"), cShal = C("#5FCFC6"), cBed1 = C("#25809C"), cBed2 = C("#184F6C"), cReefA = C("#1A4F6B"), cReefB = C("#3C4A8E"), cSnow = C("#F4F7F9"), tc = new THREE.Color();
   function paintTerrain(season) {
     var g = GRASS[season], winter = season === "inverno";
     for (var n = 0; n < NT; n++) {
@@ -383,7 +383,7 @@
   // mare: acqua trasparente sopra i fondali colorati, schiuma lungo la riva
   var water = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: "#2BB3C7", roughness: 0.2, metalness: 0.05, transparent: true, opacity: 0.5, depthWrite: false }));
   water.rotation.x = -Math.PI / 2; water.receiveShadow = true; water.renderOrder = 1; scene.add(water);
-  var deep = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: "#1F5F7E", roughness: 1 })); deep.rotation.x = -Math.PI / 2; deep.position.y = -2.55; scene.add(deep);
+  var deep = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: "#184F6C", roughness: 1 })); deep.rotation.x = -Math.PI / 2; deep.position.y = -2.55; scene.add(deep);
   var matFoam = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide });
   var matFoam2 = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide });
   (function () {
@@ -955,7 +955,7 @@
 
   // ===================== LUCE, CIELO, METEO =====================
   var PAL = {
-    day: { sky: C("#8FD0D8"), water: C("#1F8FAE"), sun: C("#FFF1D6"), hemi: C("#FFFFFF"), ground: C("#A9C6A0") },
+    day: { sky: C("#8FD0D8"), water: C("#1A7FA0"), sun: C("#FFF1D6"), hemi: C("#FFFFFF"), ground: C("#A9C6A0") },
     dusk: { sky: C("#F0A583"), water: C("#B87F9E"), sun: C("#FF9A5C"), hemi: C("#FFD2B8"), ground: C("#7C6E86") },
     night: { sky: C("#0F1733"), water: C("#1C2F6B"), sun: C("#9FB4FF"), hemi: C("#6377C0"), ground: C("#1B2340") }
   };
