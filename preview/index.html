@@ -690,7 +690,7 @@
     add(plaza, cyl(0.1, 0.16, 0.8, 8), mat(STONE), 0, 0.6, 0); add(plaza, cyl(0.42, 0.16, 0.12, 12), mat(STONE), 0, 1.04, 0); add(plaza, cyl(0.36, 0.36, 0.03, 12), wtr, 0, 1.1, 0, true);
     add(plaza, cyl(0.04, 0.07, 0.9, 6), mat(STONE), 0, 1.5, 0); add(plaza, ball(0.1, 8), mat("#F2B705", GOLD), 0, 2.0, 0);
     for (var i = 0; i < 10; i++) (function (i) { var jd = add(plaza, ball(0.045, 6), mat("#DFF6F8", { flatShading: false }), 0, 1.2, 0, true); anim.push(function (t) { var u = (t * 0.7 + i / 10) % 1, a = i * 2.4; jd.position.set(Math.cos(a) * u * 0.6, 1.15 + Math.sin(u * Math.PI) * 0.35 - u * 0.85, Math.sin(a) * u * 0.6); }); })(i);
-    nightLight(plaza, 0, 2.4, 0, "#FFC66B", 2.0, 12);
+    nightLight(plaza, 0, 2.4, 0, "#FFC66B", 1.4, 11);
     [106, 218, 312].forEach(function (deg, i) { var a = deg * Math.PI / 180, x = Math.sin(a) * 3.0, z = Math.cos(a) * 3.0; lampPost(plaza, x, z, 1.7);
       for (var k = 1; k < 10; k++) { var u = k / 10; add(plaza, ball(0.055, 6), bulbMats[(k + i) % 4], x * (1 - u), 1.75 + 0.2 * u - Math.sin(Math.PI * u) * 0.35, z * (1 - u), true); } });
     [55, 267].forEach(function (deg, i) { var a = deg * Math.PI / 180, st = G(plaza, Math.sin(a) * 2.75, 0, Math.cos(a) * 2.75, a + Math.PI), cA = i ? "#2F6FDE" : "#D8482F";
@@ -989,8 +989,8 @@
 
   // ===================== LUCE, CIELO, METEO =====================
   // fuochi d'artificio per Capodanno
-  var fwPool = [], fwT = 0;
-  for (var fw = 0; fw < 6; fw++) { var fg = new THREE.BufferGeometry(), fp = new Float32Array(48 * 3); fg.setAttribute("position", new THREE.BufferAttribute(fp, 3)); var fpt = new THREE.Points(fg, new THREE.PointsMaterial({ color: "#FFFFFF", size: 5, sizeAttenuation: false, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending })); fpt.frustumCulled = false; fpt.renderOrder = 5; scene.add(fpt);
+  var fwPool = [], fwT = 0, dotTex = (function () { var c = document.createElement("canvas"); c.width = c.height = 32; var x = c.getContext("2d"), g = x.createRadialGradient(16, 16, 0, 16, 16, 16); g.addColorStop(0, "rgba(255,255,255,1)"); g.addColorStop(0.45, "rgba(255,255,255,.85)"); g.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = g; x.fillRect(0, 0, 32, 32); return new THREE.CanvasTexture(c); })();
+  for (var fw = 0; fw < 6; fw++) { var fg = new THREE.BufferGeometry(), fp = new Float32Array(48 * 3); fg.setAttribute("position", new THREE.BufferAttribute(fp, 3)); var fpt = new THREE.Points(fg, new THREE.PointsMaterial({ color: "#FFFFFF", map: dotTex, size: 9, sizeAttenuation: false, transparent: true, opacity: 0, depthWrite: false })); fpt.frustumCulled = false; fpt.renderOrder = 5; scene.add(fpt);
     var dirs = []; for (var fk = 0; fk < 48; fk++) { var u1 = Math.random() * 2 - 1, th = Math.random() * 6.283, rq = Math.sqrt(1 - u1 * u1); dirs.push([rq * Math.cos(th), u1, rq * Math.sin(th)]); } fwPool.push({ p: fpt, pos: fp, dirs: dirs, life: 0, c: new THREE.Vector3() }); }
   anim.push(function (t, dt) { dt = dt || 0.016; var on = festNow() === "capodanno" && (S.festMode !== "auto" || nightK > 0.5);
     if (on) { fwT -= dt; if (fwT < 0) { fwT = rr(0.5, 1.6); var b = fwPool.filter(function (q) { return q.life <= 0; })[0]; if (b) { b.life = 1.8; b.c.set(rr(-16, 16), rr(13, 18), rr(-16, 12)); b.p.material.color.set(pickOf(["#FF6B6B", "#FFD35A", "#6BD6C2", "#B79BFF", "#FF9CC2", "#FFFFFF"])); } } }
@@ -1097,7 +1097,7 @@
     $("mayorText").textContent = w.length === 0 ? "Il Sindaco: tutto tranquillo" : w.length === 1 ? "Il Sindaco: 1 agente ti cerca" : "Il Sindaco: " + w.length + " agenti ti cercano";
   }
   var v3 = new THREE.Vector3();
-  function placeTags() { var ppu = H / viewH, bs = Math.min(1.4, 30 / ppu); AGENTS.forEach(function (a) { v3.set(a.pos.x, a.m.g.position.y - 0.05, a.pos.z).project(camera); a.tag.style.transform = "translate(" + ((v3.x * 0.5 + 0.5) * W).toFixed(1) + "px," + ((-v3.y * 0.5 + 0.5) * H).toFixed(1) + "px) translate(-50%,4px)";
+  function placeTags() { var ppu = H / viewH, bs = Math.min(3, 24 / ppu); AGENTS.forEach(function (a) { v3.set(a.pos.x, a.m.g.position.y - 0.05, a.pos.z).project(camera); a.tag.style.transform = "translate(" + ((v3.x * 0.5 + 0.5) * W).toFixed(1) + "px," + ((-v3.y * 0.5 + 0.5) * H).toFixed(1) + "px) translate(-50%,4px)";
     if (a.bubble.visible) { a.bubble.scale.set(bs, bs * 0.875, 1); a.bubble.position.set(a.pos.x, a.m.g.position.y + a.m.top + 0.15 + bs * 0.45 + Math.sin(performance.now() / 400 + a.phase) * 0.05, a.pos.z); } }); }
   function setStatus() {
     var p = romeParts(new Date()), hh = ("0" + p.hour).slice(-2) + ":" + ("0" + p.minute).slice(-2), live = S.wxMode === "auto" && S.live;
@@ -1179,7 +1179,7 @@
     renderer.render(scene, camera); placeTags(); var far = cam.zoom < 1.9; if (far !== wasFar) { wasFar = far; tagsBox.classList.toggle("far", far); }
     requestAnimationFrame(frame);
   }
-  window.__camworld = { S: S, cam: cam, AGENTS: AGENTS, apply: function () { renderTune(); applyWeather(); applySeason(); }, project: project, resize: resize, info: function () { return renderer.info.render; } };
+  window.__camworld = { S: S, cam: cam, AGENTS: AGENTS, apply: function () { renderTune(); applyWeather(); applySeason(); applyFest(); }, project: project, resize: resize, info: function () { return renderer.info.render; } };
   resize(); placeCamera(0); renderTune(); applyWeather(); applySeason(); applyFest(); refreshTags();
   fetchWeather(); setInterval(fetchWeather, 15 * 60 * 1000);
   requestAnimationFrame(frame);
