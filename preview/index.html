@@ -817,6 +817,7 @@
       if (rnd() < 0.3) corals.push({ x: x + sr(-0.6, 0.6), y: h + 0.15, z: z + sr(-0.6, 0.6), s: sr(0.3, 0.5), sy: 0.35, ry: sr(0, 6), c: pickOf(BRIGHT) }); }
     [[0.35, 8, 8, 16], [2.15, 6, 6, 11], [4.25, 13, 7, 12], [5.45, 5, 9, 15]].forEach(function (f) { var fd = coast(f[0]) + f[1], fx = Math.cos(f[0]) * fd, fz = Math.sin(f[0]) * fd;
       for (var j = 0; j < f[3]; j++) { var a2 = sr(0, 6.28), r2 = Math.sqrt(rnd()) * f[2]; cluster(fx + Math.cos(a2) * r2, fz + Math.sin(a2) * r2, 4 + Math.floor(rnd() * 5), true); } });
+    var x, z, h;
     for (i = 0; i < 9; i++) { a = sr(0, 6.28); var d = coast(a) + sr(6, 24); cluster(Math.cos(a) * d, Math.sin(a) * d, 2 + Math.floor(rnd() * 3), false); }
     for (i = 0; i < 26; i++) { a = 1.2 + sr(-0.28, 0.28); d = coast(a) + sr(1.6, 3.6); x = Math.cos(a) * d; z = Math.sin(a) * d; h = terrain(x, z); if (-h < 0.7) continue; for (var w2 = 0; w2 < 4; w2++) { var wh2 = Math.min(sr(0.4, 0.9), -h - 0.2); weeds.push({ x: x + sr(-0.4, 0.4), y: h + wh2 / 2, z: z + sr(-0.4, 0.4), s: 1, sy: wh2, ry: sr(0, 6), c: pickOf(["#2A7E66", "#24705C", "#3A8E6A"]) }); } }
     instances(rock(1, 1), white(true), corals); instances(cone(0.12, 1, 5), white(true), weeds);
