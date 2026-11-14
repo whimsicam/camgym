@@ -140,7 +140,7 @@
       msg: { text: "Ho una novità pronta su Chronicam. Passa quando vuoi.", src: "esempio" } },
     { id: "piggy", name: "Piggy", app: "CAM Cash", kind: "site", color: "#F2B705", x: 11, z: 5.5, r: 3.3, h: 1.4, build: "piggy", url: CONFIG.sites + "camcash-sito/", rule: "cash",
       look: { kind: "pig", body: "#F4A6BC", belly: "#FBD3DE", acc: "scarf", accColor: "#F2B705" } },
-    { id: "study", name: "Panda", app: "CAM Study", kind: "site", color: "#1E8C93", x: 15, z: -10.5, r: 3.3, h: 1.5, build: "books", url: CONFIG.sites + "camstudy/",
+    { id: "study", name: "Panda", app: "CAM Study", kind: "site", color: "#1E8C93", x: 15, z: -10.5, r: 3.3, h: 1.5, bface: Math.atan2(-15, 10.5) + Math.PI / 2, build: "books", url: CONFIG.sites + "camstudy/",
       look: { kind: "panda", body: "#F7F5EF", belly: "#FFFFFF", dark: "#2B2B2E", acc: "glasses", pack: "#1E8C93" } },
     { id: "gym", name: "Orso", app: "CAM Gym", kind: "site", color: "#E8506A", x: -8, z: 13, r: 3.5, h: 1.3, build: "gym", url: CONFIG.sites + "camgym/",
       look: { kind: "bear", body: "#A9714B", belly: "#E5C9A6", acc: "headband", accColor: "#E8506A" } },
@@ -319,15 +319,15 @@
   AGENTS.forEach(function (a) { DISCS.push({ x: a.x, z: a.z, r: a.r, h: a.h, c: a.color }); });
   var BUMPS = [[MILL.x, MILL.z, 1.7, 2.6], [-20, -3, 1.2, 2.8], [18.5, -4, 1.1, 2.4], [-13, -15, 1.4, 2.6], [14, 16.5, 0.8, 2.2]];
   var PATHS = [], ROUTES = {}, FEATS = [], GARDENS = [];
-  var BEND = { sindaco: 0, warren: 0.24, piggy: -0.22, study: 0.18, gym: -0.26, kitchen: 0.22, fuoricampo: 0, okyko: -0.2 };
+  var BEND = { sindaco: 0, warren: 0.32, piggy: -0.3, study: 0.28, gym: -0.32, kitchen: 0.3, fuoricampo: 0, okyko: -0.28 }, NP = 16;
   function curvePath(A, B, bend, id) {
-    var dx = B.x - A.x, dz = B.z - A.z, L = Math.sqrt(dx * dx + dz * dz), ux = dx / L, uz = dz / L, ax = A.x + ux * (A.r - 0.3), az = A.z + uz * (A.r - 0.3), bx = B.x - ux * (B.r - 0.3), bz = B.z - uz * (B.r - 0.3), l2 = Math.sqrt((bx - ax) * (bx - ax) + (bz - az) * (bz - az)), cx = (ax + bx) / 2 - uz * bend * l2, cz = (az + bz) / 2 + ux * bend * l2, pts = [], k;
-    for (k = 0; k <= 10; k++) { var u = k / 10, iu = 1 - u; pts.push({ x: iu * iu * ax + 2 * iu * u * cx + u * u * bx, z: iu * iu * az + 2 * iu * u * cz + u * u * bz, h: A.h + (B.h - A.h) * u }); }
-    for (k = 0; k < 10; k++) PATHS.push({ ax: pts[k].x, az: pts[k].z, ah: pts[k].h, bx: pts[k + 1].x, bz: pts[k + 1].z, bh: pts[k + 1].h });
+    var dx = B.x - A.x, dz = B.z - A.z, L = Math.sqrt(dx * dx + dz * dz), ux = dx / L, uz = dz / L, ax = A.x + ux * (A.r - 0.3), az = A.z + uz * (A.r - 0.3), bx = B.x - ux * (B.r - 0.3), bz = B.z - uz * (B.r - 0.3), l2 = Math.sqrt((bx - ax) * (bx - ax) + (bz - az) * (bz - az)), c1x = ax + (bx - ax) / 3 - uz * bend * l2, c1z = az + (bz - az) / 3 + ux * bend * l2, c2x = ax + (bx - ax) * 2 / 3 + uz * bend * l2, c2z = az + (bz - az) * 2 / 3 - ux * bend * l2, pts = [], k;
+    for (k = 0; k <= NP; k++) { var u = k / NP, iu = 1 - u, b0 = iu * iu * iu, b1 = 3 * iu * iu * u, b2 = 3 * iu * u * u, b3 = u * u * u; pts.push({ x: b0 * ax + b1 * c1x + b2 * c2x + b3 * bx, z: b0 * az + b1 * c1z + b2 * c2z + b3 * bz, h: A.h + (B.h - A.h) * u }); }
+    for (k = 0; k < NP; k++) PATHS.push({ ax: pts[k].x, az: pts[k].z, ah: pts[k].h, bx: pts[k + 1].x, bz: pts[k + 1].z, bh: pts[k + 1].h });
     if (id) ROUTES[id] = pts;
-    if (bend) { var sd = bend > 0 ? 1 : -1, tx = pts[6].x - pts[4].x, tz = pts[6].z - pts[4].z, tl = Math.sqrt(tx * tx + tz * tz); tx /= tl; tz /= tl; var px = -tz * sd, pz = tx * sd;
-      FEATS.push({ x: pts[5].x + px * 1.35, z: pts[5].z + pz * 1.35, ry: Math.atan2(-px, -pz), lx: pts[7].x + px * 1.15, lz: pts[7].z + pz * 1.15 });
-      if (id === "warren" || id === "gym" || id === "piggy" || id === "study") GARDENS.push({ x: pts[4].x - px * 2.7, z: pts[4].z - pz * 2.7 }); }
+    if (bend) { var sd = bend > 0 ? 1 : -1, px = -uz * sd, pz = ux * sd;
+      FEATS.push({ x: pts[5].x + px * 1.35, z: pts[5].z + pz * 1.35, ry: Math.atan2(-px, -pz), lx: pts[11].x - px * 1.15, lz: pts[11].z - pz * 1.15 });
+      if (id === "warren" || id === "gym" || id === "piggy" || id === "study") GARDENS.push({ x: pts[11].x + px * 2.5, z: pts[11].z + pz * 2.5 }); }
     return pts;
   }
   AGENTS.forEach(function (a) { curvePath(a, PLAZA, BEND[a.id] || 0, a.id); });
@@ -340,11 +340,11 @@
     var land = sm(R0 - 1, R0 - 4.5, d);
     if (land > 0) for (i = 0; i < BUMPS.length; i++) { dx = x - BUMPS[i][0]; dz = z - BUMPS[i][1]; dd = dx * dx + dz * dz; var s2 = BUMPS[i][3] * BUMPS[i][3]; if (dd < s2 * 9) h += BUMPS[i][2] * Math.exp(-dd / (2 * s2)) * land; }
     var zone = 0, plaza = 0, path = 0, pond = 0, zc = null, zr = 0, rk = 0;
-    for (i = 0; i < DISCS.length; i++) { var D = DISCS[i]; dx = x - D.x; dz = z - D.z; dd = dx * dx + dz * dz; var ro = D.r + (D.rock ? 1.3 : 2.0); if (dd < ro * ro) { k = sm(ro, D.r, Math.sqrt(dd)); h += (D.h - h) * k; if (D.rock) { if (k > rk) rk = k; continue; } if (k > zone) { zone = k; zc = D.c || null; zr = Math.sqrt(dd) / D.r; } if (D.plaza && k > plaza) plaza = k; } }
+    for (i = 0; i < DISCS.length; i++) { var D = DISCS[i]; dx = x - D.x; dz = z - D.z; dd = dx * dx + dz * dz; var ro = D.r + (D.rock ? 1.3 : 2.8); if (dd < ro * ro) { k = sm(ro, D.r, Math.sqrt(dd)); h += (D.h - h) * k; if (D.rock) { if (k > rk) rk = k; continue; } if (k > zone) { zone = k; zc = D.c || null; zr = Math.sqrt(dd) / D.r; } if (D.plaza && k > plaza) plaza = k; } }
     for (i = 0; i < PATHS.length; i++) {
       var P = PATHS[i], ex = P.bx - P.ax, ez = P.bz - P.az, u = ((x - P.ax) * ex + (z - P.az) * ez) / (ex * ex + ez * ez); u = u < 0 ? 0 : u > 1 ? 1 : u;
       dx = P.ax + ex * u - x; dz = P.az + ez * u - z; dd = dx * dx + dz * dz;
-      if (dd < 2.6) { k = sm(1.6, 0.8, Math.sqrt(dd)); h += (P.ah + (P.bh - P.ah) * u - h) * k * 0.45; if (k > path) path = k; }
+      if (dd < 2.6) { k = sm(1.6, 0.8, Math.sqrt(dd)); h += (P.ah + (P.bh - P.ah) * u - h) * k * 0.15; if (k > path) path = k; }
     }
     PONDS.forEach(function (Q) { dx = x - Q.x; dz = z - Q.z; dd = Math.sqrt(dx * dx + dz * dz); if (dd < Q.r + 0.7) { k = sm(Q.r + 0.7, Q.r - 0.5, dd); h += (Q.level - 0.5 - h) * k; if (k > pond) pond = k; } });
     for (i = 0; i < STREAM.length - 1; i++) { var A = STREAM[i], B = STREAM[i + 1]; ex = B[0] - A[0]; ez = B[1] - A[1]; u = ((x - A[0]) * ex + (z - A[1]) * ez) / (ex * ex + ez * ez); u = u < 0 ? 0 : u > 1 ? 1 : u; dx = A[0] + ex * u - x; dz = A[1] + ez * u - z; dd = dx * dx + dz * dz; if (dd < 1.0) { k = sm(1.0, 0.35, Math.sqrt(dd)); h += (A[2] + (B[2] - A[2]) * u - 0.22 - h) * k; if (k > pond) pond = k; } }
@@ -362,7 +362,7 @@
       var o = n * 9; tPos[o] = ax; tPos[o + 1] = ah; tPos[o + 2] = az; tPos[o + 3] = bx; tPos[o + 4] = bh; tPos[o + 5] = bz; tPos[o + 6] = cx; tPos[o + 7] = ch; tPos[o + 8] = cz;
       var mx = (ax + bx + cx) / 3, mz = (az + bz + cz) / 3, hC = (ah + bh + ch) / 3; terrain(mx, mz, info);
       var ux = bx - ax, uy = bh - ah, uz = bz - az, vx = cx - ax, vy = ch - ah, vz = cz - az, nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx; ny = ny / Math.sqrt(nx * nx + ny * ny + nz * nz);
-      var kd = hC < -0.02 ? 0 : info.rock > 0.05 ? 3 : info.plaza > 0.75 ? 5 : info.pond > 0.55 ? 1 : info.zone > 0.93 && info.zc ? (info.zr > 0.82 && info.path < 0.5 ? 7 : 6) : (ny < 0.7 && hC > 0.4) ? 3 : hC < 0.36 ? 1 : info.path > 0.5 ? 4 : 2;
+      var kd = hC < -0.02 ? 0 : info.rock > 0.05 ? 3 : info.plaza > 0.75 ? 5 : info.pond > 0.55 ? 1 : info.zone > 0.93 && info.zc ? (info.zr > 0.82 && info.path < 0.5 ? 7 : 6) : (ny < 0.6 && hC > 0.4 && info.path < 0.1 && info.zone < 0.05) ? 3 : hC < 0.36 ? 1 : info.path > 0.5 ? 4 : 2;
       if (info.zc && kd >= 6) tZc[n] = zCols[info.zc] || (zCols[info.zc] = new THREE.Color(info.zc)); tKind[n] = kd; tN[n] = kd === 0 ? noise(mx * 0.2 + 7, mz * 0.2 + 3) : noise(mx * 0.45 + 7, mz * 0.45 + 3) * 0.7 + hash(Math.floor(mx * 2), Math.floor(mz * 2)) * 0.3; tH[n] = hC; n++;
     }
     for (var j = 0; j < TN; j++) for (var i = 0; i < TN; i++) {
@@ -373,11 +373,14 @@
     }
   })();
   var terrGeo = new THREE.BufferGeometry();
-  terrGeo.setAttribute("position", new THREE.BufferAttribute(tPos, 3)); terrGeo.setAttribute("color", new THREE.BufferAttribute(tCol, 3)); terrGeo.computeVertexNormals();
-  var terrMesh = new THREE.Mesh(terrGeo, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 }));
+  terrGeo.setAttribute("position", new THREE.BufferAttribute(tPos, 3)); terrGeo.setAttribute("color", new THREE.BufferAttribute(tCol, 3)); (function () { var nrm = new Float32Array(tPos.length), r = TN + 1;
+    function hg(i, j) { i = i < 0 ? 0 : i > TN ? TN : i; j = j < 0 ? 0 : j > TN ? TN : j; return HG[j * r + i]; }
+    for (var q = 0; q < tPos.length; q += 3) { var i = Math.round((tPos[q] + TS / 2) / CELL), j = Math.round((tPos[q + 2] + TS / 2) / CELL), nx = hg(i - 1, j) - hg(i + 1, j), nz = hg(i, j - 1) - hg(i, j + 1), ny = 2 * CELL, l = Math.sqrt(nx * nx + ny * ny + nz * nz); nrm[q] = nx / l; nrm[q + 1] = ny / l; nrm[q + 2] = nz / l; }
+    terrGeo.setAttribute("normal", new THREE.BufferAttribute(nrm, 3)); })();
+  var terrMesh = new THREE.Mesh(terrGeo, new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: false, roughness: 0.95 }));
   terrMesh.receiveShadow = true; terrMesh.castShadow = true; scene.add(terrMesh);
   var C = function (h) { return new THREE.Color(h); };
-  var GRASS = { primavera: [C("#8FD06A"), C("#74C063")], estate: [C("#7DC45C"), C("#62B257")], autunno: [C("#C2B85A"), C("#A7A84E")], inverno: [C("#B9C7A6"), C("#A6B797")] };
+  var GRASS = { primavera: [C("#8FD06A"), C("#74C063")], estate: [C("#7DC45C"), C("#62B257")], autunno: [C("#C2B85A"), C("#A7A84E")], inverno: [C("#C2B85A"), C("#A7A84E")] };
   var cSandA = C("#EAD8A4"), cSandB = C("#F4E7BD"), cWet = C("#D8C48C"), cRockA = C("#8E8676"), cRockB = C("#ABA190"), cPathA = C("#E6CF93"), cPathB = C("#D8BD7C"), cPavA = C("#DCD1BB"), cPavB = C("#CFC3AA"), cCourtA = C("#EBDFB8"), cCourtB = C("#E0D2A4");
   var cBed0 = C("#EFE4B8"), cShal = C("#5FCFC6"), cBed1 = C("#25809C"), cBed2 = C("#184F6C"), cReefA = C("#1A4F6B"), cReefB = C("#3C4A8E"), cSnow = C("#F4F7F9"), tc = new THREE.Color();
   function paintTerrain(season) {
@@ -386,7 +389,7 @@
       var k = tKind[n], v = tN[n], h = tH[n];
       if (k === 0) { var dp = -h; tc.copy(cBed0).lerp(cShal, sm(0, 0.35, dp)).lerp(cBed1, sm(0.35, 1.3, dp)).lerp(cBed2, sm(1.2, 2.5, dp)); if (dp > 1.4) tc.lerp(cReefA, sm(0.5, 0.8, noise(tPos[n * 9] * 0.08 + 3, tPos[n * 9 + 2] * 0.08 + 9)) * 0.45); }
       else if (k === 1) { tc.copy(cSandA).lerp(cSandB, v); if (h < 0.14) tc.lerp(cWet, 0.6); }
-      else if (k === 2) { tc.copy(g[0]).lerp(g[1], v); if (winter) tc.lerp(cSnow, sm(0.6, 0.74, v) * 0.75); }
+      else if (k === 2) { tc.copy(g[0]).lerp(g[1], v); if (winter) tc.lerp(cSnow, sm(0.46, 0.54, v) * 0.95); }
       else if (k === 3) { tc.copy(cRockA).lerp(cRockB, v); if (winter) tc.lerp(cSnow, 0.1); }
       else if (k === 4) { tc.copy(cPathA).lerp(cPathB, v); if (winter) tc.lerp(cSnow, 0.12); }
       else if (k === 6) { tc.copy(cCourtA).lerp(cCourtB, v); if (tZc[n]) tc.lerp(tZc[n], 0.1); if (winter) tc.lerp(cSnow, 0.12); }
@@ -419,7 +422,7 @@
         P.forEach(function (q, e) { pos[o + e * 3] = q[0]; pos[o + e * 3 + 1] = y; pos[o + e * 3 + 2] = q[1]; }); });
       var g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3)); var me = new THREE.Mesh(g, m); me.renderOrder = order; scene.add(me);
     }
-    ribbon(0.55, 0.012, matFoam2, 2); ribbon(0.16, 0.02, matFoam, 3);
+    ribbon(0.5, 0.012, matFoam2, 2); ribbon(0.12, 0.02, matFoam, 3);
   })();
   var ripples = [], matRipple = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0.5, depthWrite: false });
   for (var ri = 0; ri < 0; ri++) { var ra = sr(0, 6.28), rd = sr(30, 52), rp = add(scene, box(sr(0.5, 1.4), 0.01, 0.06), matRipple, Math.cos(ra) * rd, 0.02, Math.sin(ra) * rd, true); rp.renderOrder = 2; rp.userData.p = sr(0, 6.28); rp.userData.x = rp.position.x; ripples.push(rp); }
@@ -439,9 +442,12 @@
       [[sg[0][0] - ex - nx, sg[0][1] - ez - nz], [sg[0][0] - ex + nx, sg[0][1] - ez + nz], [sg[1][0] + ex + nx, sg[1][1] + ez + nz], [sg[0][0] - ex - nx, sg[0][1] - ez - nz], [sg[1][0] + ex + nx, sg[1][1] + ez + nz], [sg[1][0] + ex - nx, sg[1][1] + ez - nz]].forEach(function (q, e) { pos[o + e * 3] = q[0]; pos[o + e * 3 + 1] = 0.017; pos[o + e * 3 + 2] = q[1]; }); });
     var g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3)); var me = new THREE.Mesh(g, m); me.renderOrder = 3; scene.add(me);
   }
-  var foamA = new THREE.MeshBasicMaterial({ color: "#FFFFFF", transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide }), foamB = foamA.clone();
+  function foamMat(off) { return new THREE.ShaderMaterial({ transparent: true, depthWrite: false, side: THREE.DoubleSide, uniforms: { uTime: { value: 0 }, uOp: { value: 0.5 }, uOff: { value: off } },
+    vertexShader: "varying vec2 vP; void main(){ vec4 w = modelMatrix * vec4(position, 1.0); vP = w.xz; gl_Position = projectionMatrix * viewMatrix * w; }",
+    fragmentShader: "varying vec2 vP; uniform float uTime; uniform float uOp; uniform float uOff; void main(){ float ph = sin(vP.x * 0.23 + vP.y * 0.19) * 2.6 + sin(vP.x * 0.071 - vP.y * 0.093) * 4.1 + uOff; float w = pow(max(0.0, sin(uTime * 0.75 + ph)), 3.0); float dash = smoothstep(0.2, 0.6, sin(vP.x * 0.9 + vP.y * 1.1 + ph * 1.7) * 0.5 + 0.5); gl_FragColor = vec4(1.0, 1.0, 1.0, uOp * w * (0.3 + 0.7 * dash)); }" }); }
+  var foamA = foamMat(0.0), foamB = foamMat(2.2);
   foamLine(-0.08, 0.1, foamA); foamLine(-0.19, 0.08, foamB);
-  anim.push(function (t) { foamA.opacity = Math.max(0, Math.sin(t * 0.9)) * 0.6 * waveU.uAmt.value; foamB.opacity = Math.max(0, Math.sin(t * 0.9 + 1.7)) * 0.45 * waveU.uAmt.value; });
+  anim.push(function (t) { foamA.uniforms.uTime.value = foamB.uniforms.uTime.value = t; foamA.uniforms.uOp.value = 0.55 * waveU.uAmt.value; foamB.uniforms.uOp.value = 0.4 * waveU.uAmt.value; });
   var pondMat = new THREE.MeshStandardMaterial({ color: "#58C3D6", roughness: 0.15, transparent: true, opacity: 0.85 });
   pondMat.side = THREE.DoubleSide;
   PONDS.forEach(function (Q) { var w = add(scene, cyl(Q.r + 0.25, Q.r + 0.25, 0.02, 20), pondMat, Q.x, Q.level, Q.z, true); w.receiveShadow = true; });
@@ -502,8 +508,8 @@
   var imTrunk = instances(cyl(0.11, 0.16, 1, 6), white(true), trunks, true), imBlob = instances(rock(1, 1), white(true), blobs, true), imTier = instances(cone(1, 1, 7), white(true), tiers, true);
   instances(rock(0.4), white(true), rocksI, true);
   var imTuft = instances(cone(0.08, 0.26, 4), white(true), tufts), imStem = instances(cyl(0.01, 0.01, 0.2, 4), white(), stems), imFlower = instances(rock(0.06, 0), white(true), flowers), imBush = instances(rock(0.3, 1), white(true), bushes, true), imLeaf = instances(rock(0.3, 0), white(true), leafPiles), imMS = instances(cyl(0.01, 0.01, 0.2, 4), white(), mStems), imMF = instances(rock(0.06, 0), white(true), mFlowers);
-  var LEAF = { primavera: ["#7FCB6A", "#9AD67A", "#F4B6C8", "#6DC272", "#F9C9D6"], estate: ["#4FAE5E", "#3F9B55", "#66BE62", "#58B36A", "#7CC96B"], autunno: ["#E8A23A", "#D9772B", "#C9502A", "#E2C044", "#B8B04A", "#D2603A"], inverno: ["#B9C6B4", "#A9B8A6", "#C7B9A0", "#9FAE9A", "#B4A894", "#A3B29A"] };
-  var PINE = ["#2F7F5A", "#3A8C62", "#2A7350"], TUFT = { primavera: ["#5FA856", "#77BC5F"], estate: ["#4F9A4E", "#69B35A"], autunno: ["#A9A64A", "#C2A14A"], inverno: ["#B7C4A8", "#DCE6EA"] };
+  var LEAF = { primavera: ["#7FCB6A", "#9AD67A", "#F4B6C8", "#6DC272", "#F9C9D6"], estate: ["#4FAE5E", "#3F9B55", "#66BE62", "#58B36A", "#7CC96B"], autunno: ["#E8A23A", "#D9772B", "#C9502A", "#E2C044", "#B8B04A", "#D2603A"], inverno: ["#E8A23A", "#EEF3F6", "#D9772B", "#F4F7F9", "#C9502A", "#E9EFF2"] };
+  var PINE = ["#2F7F5A", "#3A8C62", "#2A7350"], TUFT = { primavera: ["#5FA856", "#77BC5F"], estate: ["#4F9A4E", "#69B35A"], autunno: ["#A9A64A", "#C2A14A"], inverno: ["#A9A64A", "#E6EEF2"] };
   var seasonMats = {}; ["cherry", "mayor", "hedge"].forEach(function (k) { seasonMats[k] = new THREE.MeshStandardMaterial({ color: "#FFFFFF", roughness: 0.9, flatShading: true }); });
   var seasonGroups = { primavera: [], estate: [], autunno: [], inverno: [] };
   function inSeason(obj, list) { list.forEach(function (s) { seasonGroups[s].push(obj); }); return obj; }
@@ -514,11 +520,11 @@
     paintTerrain(s);
     recolor(imBlob, function (it) { return L[Math.floor(it.k * L.length) % L.length]; });
     recolor(imTier, function (it) { return s === "inverno" && it.top && it.k > 0.55 ? "#F4F7F9" : PINE[Math.floor(it.k * 3) % 3]; });
-    recolor(imTuft, function (it) { return T[it.k > 0.5 ? 1 : 0]; }); recolor(imBush, function (it) { return s === "inverno" ? "#BFCDBD" : s === "autunno" ? (it.k > 0.5 ? "#B7A64A" : "#7FA85A") : (it.k > 0.5 ? "#4BA067" : "#5DB56C"); });
+    recolor(imTuft, function (it) { return T[it.k > 0.5 ? 1 : 0]; }); recolor(imBush, function (it) { return s === "inverno" ? (it.k > 0.5 ? "#E9EFF2" : "#B7A64A") : s === "autunno" ? (it.k > 0.5 ? "#B7A64A" : "#7FA85A") : (it.k > 0.5 ? "#4BA067" : "#5DB56C"); });
     if (imFlower) imFlower.visible = imStem.visible = s === "primavera" || s === "estate"; if (imLeaf) imLeaf.visible = s === "autunno"; if (imMF) imMF.visible = imMS.visible = s !== "inverno";
     seasonMats.cherry.color.set(s === "primavera" ? "#F7A8C4" : s === "estate" ? "#6DC272" : s === "autunno" ? "#E0603A" : "#F4F7F9");
     seasonMats.mayor.color.set(s === "primavera" ? "#8FD06A" : s === "estate" ? "#58B36A" : s === "autunno" ? "#E2A03A" : "#D5DED2");
-    seasonMats.hedge.color.set(s === "inverno" ? "#BFCDBD" : s === "autunno" ? "#9AAE4E" : "#4BA067");
+    seasonMats.hedge.color.set(s === "inverno" ? "#C9CFB8" : s === "autunno" ? "#9AAE4E" : "#4BA067");
     pondMat.color.set(s === "inverno" ? "#DDEFF5" : "#58C3D6"); pondMat.opacity = s === "inverno" ? 1 : 0.85;
     Object.keys(seasonGroups).forEach(function (k) { seasonGroups[k].forEach(function (o) { o.visible = false; }); }); seasonGroups[s].forEach(function (o) { o.visible = true; });
     setStatus();
@@ -624,8 +630,8 @@
       add(b, torus(1.61, 0.09, 8, 30), li, 0, 1.5, 0).rotation.x = Math.PI / 2; add(b, torus(1.33, 0.06, 8, 30), smat("#F2A7C0"), 0, 2.25, 0).rotation.x = Math.PI / 2;
       for (var i = 0; i < 10; i++) { var a = i / 10 * 6.28; add(b, ball(0.09, 8), smat("#F2A7C0"), Math.cos(a) * 1.6, 1.15, Math.sin(a) * 1.6, true); }
       var lid = G(b, 0, 2.78, 0); add(lid, cyl(0.7, 0.85, 0.2, 18), li, 0, 0, 0); add(lid, cyl(0.3, 0.6, 0.2, 14), li, 0, 0.18, 0); add(lid, ball(0.2, 12), smat("#F2B705"), 0, 0.42, 0); anim.push(function (t) { var u = Math.max(0, Math.sin(t * 2.4)); lid.position.y = 2.78 + u * u * 0.12; lid.rotation.z = u * 0.05; });
-      seg(b, [1.35, 1.4, 0], [1.95, 1.75, 0], 0.3, cr, false, 0.22); seg(b, [1.95, 1.75, 0], [2.3, 2.4, 0], 0.22, cr, false, 0.15); add(b, torus(0.16, 0.035, 6, 14), li, 2.31, 2.42, 0).rotation.set(Math.PI / 2, 0.5, 0);
-      steam(b, 2.35, 2.55, 0, 4, 0.18);
+      seg(b, [1.25, 1.25, 0], [2.05, 1.7, 0], 0.46, cr, false, 0.32); seg(b, [2.05, 1.7, 0], [2.6, 2.6, 0], 0.32, cr, false, 0.22); add(b, torus(0.23, 0.05, 6, 16), li, 2.62, 2.63, 0).rotation.set(Math.PI / 2, 0.5, 0);
+      steam(b, 2.66, 2.8, 0, 4, 0.2);
       var hd = add(b, torus(0.62, 0.12, 8, 18, Math.PI), li, -1.55, 1.55, 0); hd.rotation.z = Math.PI / 2;
       door(b, 0, 0.2, 1.38, "#7B57C9", 0.56, 0.7); rwin(b, 0.95, 1.6, 1.32, 0.24, 0.62); rwin(b, -0.95, 1.6, 1.32, 0.24, -0.62); rwin(b, 0, 2.3, 1.22, 0.18, 0, -0.5);
       var ov = G(g, 2.2, 0, -1.2, -0.6); add(ov, box(1.0, 0.4, 0.9), mat(STONE), 0, 0.2, 0); add(ov, new THREE.SphereGeometry(0.5, 12, 8, 0, 6.29, 0, 1.58), mat("#C96F4A"), 0, 0.4, 0); add(ov, box(0.34, 0.26, 0.1), mat(INK), 0, 0.55, 0.45, true); add(ov, box(0.26, 0.16, 0.1), matFire, 0, 0.5, 0.47, true); add(ov, cyl(0.1, 0.12, 0.6, 8), mat("#C96F4A"), 0, 1.05, -0.2);
@@ -659,17 +665,17 @@
       [[-1.3, 1.05], [1.3, 1.05], [-1.3, -1.05], [1.3, -1.05]].forEach(function (p) { add(b, box(0.14, 0.2, 0.14), RD, p[0], 1.05, p[1], true); });
       nightLight(b, 0, 1.0, 1.4, "#FFD9A0", 1.2, 8);
       var tr = G(g, 0, 0, 2.15); seg(tr, [-0.7, 0, 0], [-0.64, 1.5, 0], 0.08, RD); seg(tr, [0.7, 0, 0], [0.64, 1.5, 0], 0.08, RD); add(tr, box(1.9, 0.1, 0.14), RD, 0, 1.55, 0); add(tr, box(2.2, 0.08, 0.2), mat(INK), 0, 1.66, 0); add(tr, box(1.5, 0.08, 0.1), RD, 0, 1.2, 0);
-      var bs = G(g, -2.0, 0, -0.5), TR = mat("#6B4530"); add(bs, rock(0.6), mat(STONE_D), 0, 0.22, 0).scale.set(1.3, 0.6, 1.1); add(bs, cyl(0.42, 0.32, 0.24, 8), mat("#3F5C7A"), 0, 0.56, 0);
+      var bs = G(g, 2.15, 0, -1.35), TR = mat("#6B4530"); bs.scale.setScalar(1.75); add(bs, rock(0.6), mat(STONE_D), 0, 0.22, 0).scale.set(1.3, 0.6, 1.1); add(bs, cyl(0.42, 0.32, 0.24, 8), mat("#3F5C7A"), 0, 0.56, 0);
       seg(bs, [0, 0.66, 0], [0.18, 1.1, 0], 0.11, TR, false, 0.09); seg(bs, [0.18, 1.1, 0], [-0.1, 1.55, 0.05], 0.09, TR, false, 0.07); seg(bs, [-0.1, 1.55, 0.05], [-0.55, 1.78, 0], 0.07, TR, false, 0.04); seg(bs, [0.18, 1.1, 0], [0.65, 1.38, -0.05], 0.06, TR, false, 0.04); seg(bs, [-0.1, 1.55, 0.05], [0.12, 1.98, -0.1], 0.06, TR, false, 0.04);
       [[-0.65, 1.88, 0, 0.5, "#4E9E5E"], [0.72, 1.48, -0.05, 0.4, "#5DB56C"], [0.15, 2.12, -0.12, 0.4, "#4BA067"], [-0.2, 1.8, 0.3, 0.3, "#6FBF73"]].forEach(function (p) { add(bs, rock(p[3], 1), mat(p[4]), p[0], p[1], p[2]).scale.y = 0.5; });
-      var pd = G(g, 1.95, 0, -0.3); add(pd, cyl(0.85, 0.85, 0.04, 14), pondMat, 0, 0.03, 0, true); for (var i = 0; i < 11; i++) { var a = i / 11 * 6.28; add(pd, rock(0.14), mat(i % 2 ? STONE : STONE_D), Math.cos(a) * 0.9, 0.06, Math.sin(a) * 0.9).scale.y = 0.6; }
+      var pd = G(g, -2.0, 0, -0.2); add(pd, cyl(0.85, 0.85, 0.04, 14), pondMat, 0, 0.03, 0, true); for (var i = 0; i < 11; i++) { var a = i / 11 * 6.28; add(pd, rock(0.14), mat(i % 2 ? STONE : STONE_D), Math.cos(a) * 0.9, 0.06, Math.sin(a) * 0.9).scale.y = 0.6; }
       add(pd, cyl(0.14, 0.14, 0.015, 8), mat("#4BA067"), 0.3, 0.06, 0.25, true); add(pd, cyl(0.1, 0.1, 0.015, 8), mat("#5DB56C"), -0.3, 0.06, -0.3, true); add(pd, rock(0.05), mat("#F2A7C0"), 0.3, 0.1, 0.25, true);
       for (i = 0; i < 7; i++) { var u = (i - 3) / 3, pl = add(pd, box(0.5, 0.06, 0.3), RD, 0, 0.1 + (1 - u * u) * 0.34, u * 0.95); pl.rotation.x = u * 0.5; }
       [-0.25, 0.25].forEach(function (x) { for (var i = 0; i < 6; i++) { var u0 = (i - 3) / 3, u1 = (i - 2) / 3; seg(pd, [x, 0.38 + (1 - u0 * u0) * 0.34, u0 * 0.95], [x, 0.38 + (1 - u1 * u1) * 0.34, u1 * 0.95], 0.025, RD, true); } [-0.95, 0.95].forEach(function (z) { add(pd, cyl(0.035, 0.035, 0.45, 6), RD, x, 0.25, z); add(pd, ball(0.05, 6), mat("#F2B705", GOLD), x, 0.5, z, true); }); });
       [[-1.05, 1.25], [1.05, 1.25]].forEach(function (p) { var l = G(g, p[0], 0, p[1]); add(l, box(0.26, 0.14, 0.26), mat(STONE), 0, 0.07, 0); add(l, box(0.12, 0.3, 0.12), mat(STONE), 0, 0.29, 0); add(l, box(0.24, 0.2, 0.24), matLamp, 0, 0.54, 0, true); add(l, cone(0.26, 0.18, 4), mat("#8C8778"), 0, 0.73, 0).rotation.y = Math.PI / 4; });
-      [[-1.5, -2.3, 1.1], [1.6, -2.25, 0.95]].forEach(function (p) { var c = G(g, p[0], 0, p[1]); c.scale.setScalar(p[2]); seg(c, [0, 0, 0], [0.15, 0.9, 0], 0.12, TR, false, 0.09); seg(c, [0.15, 0.9, 0], [-0.4, 1.6, 0.1], 0.08, TR, false, 0.05); seg(c, [0.15, 0.9, 0], [0.6, 1.5, -0.1], 0.07, TR, false, 0.05);
+      [[-1.6, -2.3, 1.1], [-0.2, -2.7, 0.9]].forEach(function (p) { var c = G(g, p[0], 0, p[1]); c.scale.setScalar(p[2]); seg(c, [0, 0, 0], [0.15, 0.9, 0], 0.12, TR, false, 0.09); seg(c, [0.15, 0.9, 0], [-0.4, 1.6, 0.1], 0.08, TR, false, 0.05); seg(c, [0.15, 0.9, 0], [0.6, 1.5, -0.1], 0.07, TR, false, 0.05);
         for (var i = 0; i < 12; i++) { var q = add(c, box(0.36, 0.36, 0.36), seasonMats.cherry, (i % 2 ? -0.45 : 0.55) + sr(-0.4, 0.4), 1.7 + sr(-0.3, 0.45), sr(-0.45, 0.45)); q.rotation.set(sr(0, 1), sr(0, 1), sr(0, 1)); } });
-      [[2.3, -1.6], [2.5, -1.2], [2.15, -1.25], [-2.5, 0.6]].forEach(function (p) { var h = sr(1.3, 2.1); add(g, cyl(0.04, 0.05, h, 5), mat("#7FB36A"), p[0], h / 2, p[1]); add(g, cone(0.16, 0.4, 5), mat("#5DB56C"), p[0], h + 0.1, p[1]); });
+      [[-2.6, -1.4], [-2.8, -1.0], [-2.45, -0.95], [2.7, 0.7]].forEach(function (p) { var h = sr(1.3, 2.1); add(g, cyl(0.04, 0.05, h, 5), mat("#7FB36A"), p[0], h / 2, p[1]); add(g, cone(0.16, 0.4, 5), mat("#5DB56C"), p[0], h + 0.1, p[1]); });
     }
   };
   AGENTS.forEach(function (a) { BUILD[a.build](zone(a)); });
@@ -680,7 +686,7 @@
     var type = WORK[a.id], bf = a.bface != null ? a.bface : a.face, ang = a.arc + (a.arcH > 1 ? 0.75 : 0.3), spot, look, i;
     function loc(x, z) { return { x: a.x + (Math.cos(bf) * x + Math.sin(bf) * z) * a.bs, z: a.z + (-Math.sin(bf) * x + Math.cos(bf) * z) * a.bs }; }
     if (type === "ball") { spot = loc(0.7, 0.5); look = bf + 0.4; }
-    else if (type === "water") { spot = loc(-1.25, 0.45); var bz = loc(-2.0, -0.5); look = Math.atan2(bz.x - spot.x, bz.z - spot.z); }
+    else if (type === "water") { spot = loc(1.05, 0.2); var bz = loc(2.15, -1.35); look = Math.atan2(bz.x - spot.x, bz.z - spot.z); }
     else { spot = ringPoint(a.home, ang, a.r - 1.35); look = ang; }
     a.work = { type: type, x: spot.x, z: spot.z, look: look };
     if (type === "ball" || type === "water") return;
@@ -1095,7 +1101,7 @@
     hemi.intensity = (kd * 0.55 + kk * 0.45 + kn * 0.42) * (1 - grey * 0.22);
     var rad = Math.PI / 180, e = kn > 0.5 ? 50 * rad : Math.max(s.el, 16) * rad, ha = kn > 0.5 ? s.ha + Math.PI : s.ha;
     sun.target.position.copy(cam.target); sun.position.set(cam.target.x - Math.sin(ha) * Math.cos(e) * 70, Math.sin(e) * 70, cam.target.z + Math.cos(ha) * Math.cos(e) * 70 + 8);
-    matCloud.color.copy(WHITE).lerp(CLOUD_D, grey * 0.8).multiplyScalar(1 - kn * 0.55); matRipple.opacity = 0.5 * (1 - kn * 0.6); waveU.uAmt.value = (1 - kn * 0.55) * (1 - grey * 0.3); matFoam.opacity = 0.9 * (1 - kn * 0.45) * (0.85 + Math.sin(t * 1.3) * 0.15); matFoam2.opacity = 0.28 * (1 - kn * 0.5);
+    matCloud.color.copy(WHITE).lerp(CLOUD_D, grey * 0.8).multiplyScalar(1 - kn * 0.55); matRipple.opacity = 0.5 * (1 - kn * 0.6); waveU.uAmt.value = (1 - kn * 0.55) * (1 - grey * 0.3); matFoam.opacity = 0.55 * (1 - kn * 0.45); matFoam2.opacity = 0.16 * (1 - kn * 0.5);
     var sat = (1 - grey * 0.42 * (1 - kn)).toFixed(2); if (sat !== lastSat) { lastSat = sat; canvas.style.filter = sat === "1.00" ? "" : "saturate(" + sat + ")"; }
     var glow = Math.max(kn, kk * 0.55, grey > 0.6 ? 0.45 : 0);
     matWindow.emissiveIntensity = glow * 1.5; matLamp.emissiveIntensity = 0.12 + glow * 1.7; bulbMats.forEach(function (b) { b.emissiveIntensity = glow * 1.6; });
